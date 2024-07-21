@@ -6,15 +6,22 @@
 ```
 app
 ├── page.tsx
+├── admin
+    └── page.tsx
+    └── layout.tsx
 ├── layout.tsx
 ├── global.css
-├── loading.tsx
 ├── global-error.tsx
 ├── form
-│   ├── page.tsx
-│   └── layout.tsx
+    └── page.tsx
+    └── layout.tsx
 └── api
     └── route.ts
+    └── admin
+        └── route.ts
+
+├── components
+    └── Button.tsx
 public
 ├── assets
 │   └── images
