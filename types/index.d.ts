@@ -6,7 +6,7 @@ declare type IWaiikruModel = {
 }
 
 declare type ITray =  {
-  _id:string
+  _id?:string
   name: string;
   message: string;
   selectedTray: string;

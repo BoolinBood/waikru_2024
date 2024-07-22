@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 
 const Page = () => {
   const [connectionStatus, setConnectionStatus] = useState<string>('')
-  const [formData, setFormData] = useState<ITray>({ _id:'',name: '', message: '', selectedTray: '' })
+  const [formData, setFormData] = useState<ITray>({name: '', message: '', selectedTray: '' })
   const [trays, setTrays] = useState<ITray[]>([])
 
   const connectMongoDB = async () => {
@@ -40,7 +40,7 @@ const Page = () => {
       if (response.ok) {
         const result = await response.json()
         console.log('Success:', result)
-        setFormData({ _id:'', name: '', message: '', selectedTray: '' })
+        setFormData({ name: '', message: '', selectedTray: '' })
         fetchTrays()
       } else {
         const errorData = await response.json()
