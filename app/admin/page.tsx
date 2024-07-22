@@ -1,8 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 
-
-
 const AdminPage = () => {
     const [trays, setTrays] = useState<ITray[]>([])
     const [connectionStatus, setConnectionStatus] = useState<string>('')
