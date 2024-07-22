@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import dbConnect from '@/app/lib/db';
 import TrayModel from '@/app/models/TrayModel';
 
 export async function GET() {
