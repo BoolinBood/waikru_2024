@@ -19,12 +19,10 @@ if (!cached) {
 
 async function dbConnect(): Promise<mongoose.Connection> {
   if (cached.conn) {
-    console.log("Connected successfully")
     return cached.conn;
   }
 
   if (!cached.promise) {
-    console.log("Connecting to database failed")
     cached.promise = mongoose.connect(MONGODB_URI!,).then((mongoose) => {
       return mongoose.connection;
     });
