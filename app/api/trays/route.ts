@@ -4,7 +4,6 @@ import TrayModel from '@/app/models/TrayModel';
 
 export async function GET() {
     try {
-        await dbConnect()
         const trays = await TrayModel.find({})
         return NextResponse.json(trays)
     } catch (error) {
@@ -14,7 +13,6 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
     try {
-      await dbConnect()
       const body = await request.json()
       const newTray = new TrayModel(body)
       const savedTray = await newTray.save()
