@@ -4,3 +4,7 @@ declare type ITray =  {
   message: string;
   selectedTray: string;
 }
+
+declare module "node:http" {
+  export * from "http";
+}
