@@ -12,7 +12,6 @@ const port = 3000;
 const app = next({ dev });
 const handler = app.getRequestHandler();
 
-// MongoDB URL
 const mongoUrl = process.env.MONGODB_URI;
 
 if (!mongoUrl) {
