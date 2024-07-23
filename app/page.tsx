@@ -1,64 +1,55 @@
-"use client"
-import React, { useEffect, useState } from 'react'
-
+"use client";
+import React, { useEffect, useState } from "react";
+import { connectMongoDB, fetchTrays } from "./lib/trays";
 
 const Page = () => {
-  const [connectionStatus, setConnectionStatus] = useState<string>('')
-  const [formData, setFormData] = useState<ITray>({name: '', message: '', selectedTray: '' })
-  const [trays, setTrays] = useState<ITray[]>([])
+  const [connectionStatus, setConnectionStatus] = useState<string>("");
+  const [formData, setFormData] = useState<ITray>({
+    name: "",
+    message: "",
+    selectedTray: "",
+  });
+  const [trays, setTrays] = useState<ITray[]>([]);
 
-  const connectMongoDB = async () => {
-    try {
-      const response = await fetch('/api/connect')
-      const data = await response.json()
-      setConnectionStatus(data.message || data.error)
-    } catch (error) {
-      setConnectionStatus('Connect failed')
-    }
-  }
-
-  const fetchTrays = async () => {
-    try {
-      const response = await fetch('/api/trays')
-      const data = await response.json()
-      setTrays(data)
-    } catch (error) {
-      console.error('Failed to fetch trays:', error)
-    }
-  }
+  const getTrays = async () => {
+    const status = await connectMongoDB();
+    setConnectionStatus(status);
+    const fetchedTrays = await fetchTrays();
+    setTrays(fetchedTrays);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-      const response = await fetch('/api/trays', {
-        method: 'POST',
+      const response = await fetch("/api/trays", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
-      })
+      });
       if (response.ok) {
-        const result = await response.json()
-        console.log('Success:', result)
-        setFormData({ name: '', message: '', selectedTray: '' })
-        fetchTrays()
+        const result = await response.json();
+        console.log("Success:", result);
+        setFormData({ name: "", message: "", selectedTray: "" });
       } else {
-        const errorData = await response.json()
-        console.error('Error:', errorData)
+        const errorData = await response.json();
+        console.error("Error:", errorData);
       }
     } catch (error) {
-      console.error('Failed to submit form:', error)
+      console.error("Failed to submit form:", error);
     }
-  }
+  };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   useEffect(() => {
-    connectMongoDB()
-    fetchTrays()
-  }, [])
+    getTrays();
+  }, []);
 
   return (
     <div>
@@ -106,7 +97,7 @@ const Page = () => {
         ))}
       </ul>
     </div>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;

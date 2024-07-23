@@ -1,29 +1,18 @@
 "use client"
 import React, { useEffect, useState } from 'react'
+import { connectMongoDB, fetchTrays } from '../lib/trays'
+
 
 const AdminPage = () => {
     const [trays, setTrays] = useState<ITray[]>([])
     const [connectionStatus, setConnectionStatus] = useState<string>('')
 
-    const connectMongoDB = async () => {
-        try {
-          const response = await fetch('/api/connect')
-          const data = await response.json()
-          setConnectionStatus(data.message || data.error)
-        } catch (error) {
-          setConnectionStatus('Connect failed')
-        }
-    }
-
-    const fetchTrays = async () => {
-        try {
-          const response = await fetch('/api/trays')
-          const data = await response.json()
-          setTrays(data)
-        } catch (error) {
-          console.error('Failed to fetch trays:', error)
-        }
-    }
+    const getTrays = async () => {
+      const status = await connectMongoDB();
+      setConnectionStatus(status);
+      const fetchedTrays = await fetchTrays();
+      setTrays(fetchedTrays);
+    };
 
     const deleteTray = async (id: string) => {
         try {
@@ -41,8 +30,7 @@ const AdminPage = () => {
       }
 
     useEffect(() => {
-        connectMongoDB()
-        fetchTrays()
+      getTrays();
     }, [])
 
     return (
@@ -56,7 +44,7 @@ const AdminPage = () => {
                         {tray._id} - {tray.name} - {tray.message} - {tray.selectedTray}
                         <button 
                             className='p-2 bg-red-500 text-white rounded-md hover:bg-red-400'
-                            onClick={() => deleteTray(tray._id)}
+                            onClick={() => deleteTray(tray._id as string)}
                         >
                             Delete
                         </button>
