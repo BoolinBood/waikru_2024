@@ -9,7 +9,7 @@ declare type AppContextType =  {
   isConnected: boolean;
   dbConnected: boolean;
   transport: string;
-  trays: ITray[];
+  trays: TrayType[];
   saveTray: (name: string, message: string, selectedTray: string, callback?: () => void) => void;
   deleteTray: (id: string) => void;
 }
