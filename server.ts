@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 dotenv.config();
-import { createServer } from "http";
+import { createServer } from "node:http";
 import next from "next";
 import { Server } from "socket.io";
 import mongoose from "mongoose";
@@ -23,7 +23,6 @@ app.prepare().then(() => {
   const io = new Server(httpServer, {
     cors: {
       origin: "*",
-      methods: ["GET", "POST"]
     }
   });
 
@@ -44,14 +43,26 @@ app.prepare().then(() => {
             console.error("Error fetching trays:", error);
           }
         });
-        socket.on("save_tray", async (data: { name: string; message: string; selectedTray: string }) => {
+        socket.on("save_tray", async (data: TrayType, callback) => {
           try {
             const newTray = new TrayModel(data);
             const savedTray = await newTray.save();
             io.emit("tray_update", savedTray);
+            if (callback) callback();
           } catch (error) {
             console.error("Error saving tray:", error);
             socket.emit("save_error", { message: "Error saving tray" });
+            if (callback) callback();
+          }
+        });
+        socket.on("delete_tray", async (id: string) => {
+          try {
+            await TrayModel.deleteOne({ _id: id });
+            io.emit("tray_deleted", id);
+            
+          } catch (error) {
+            console.error("Error deleting tray:", error);
+            socket.emit("delete_error", { message: "Error deleting tray" });
           }
         });
         socket.on("disconnect", () => {
@@ -65,7 +76,7 @@ app.prepare().then(() => {
           process.exit(1);
         })
         .listen(port, () => {
-          console.log(`> Ready on http://${hostname}:${port}`);
+          console.log(`-> Server is running on http://${hostname}:${port}`);
         });
     })
     .catch((err: Error) => {

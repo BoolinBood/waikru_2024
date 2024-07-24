@@ -1,68 +1,27 @@
 "use client";
 
-import { useEffect, useState, FormEvent } from "react";
+import { useState, FormEvent, } from "react";
 import { socket } from "./lib/socket";
+import { useAppContext } from "./context/AppContext";
+import { set } from "mongoose";
 
 export default function Home() {
-  const [isConnected, setIsConnected] = useState(false);
-  const [dbConnected, setDbConnected] = useState(false);
-  const [transport, setTransport] = useState("N/A");
-  const [name, setName] = useState("");
-  const [message, setMessage] = useState("");
-  const [selectedTray, setSelectedTray] = useState("");
-  const [trays, setTrays] = useState<ITray[]>([]);
+  const { isConnected, dbConnected, transport, trays, saveTray } = useAppContext();
+  const [name, setName] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
+  const [selectedTray, setSelectedTray] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  useEffect(() => {
-    function onConnect() {
-      setIsConnected(true);
-      setTransport(socket.io.engine.transport.name);
-      socket.emit("get_trays"); // Request trays on connection
-      socket.io.engine.on("upgrade", (transport) => {
-        setTransport(transport.name);
-      });
-    }
-
-    function onDisconnect() {
-      setIsConnected(false);
-      setDbConnected(false);
-      setTransport("N/A");
-    }
-
-    function onServerStatus(status: { isConnected: boolean; dbConnected: boolean }) {
-      setIsConnected(status.isConnected);
-      setDbConnected(status.dbConnected);
-    }
-
-    function onTrayUpdate(data: ITray | ITray[]) {
-      if (Array.isArray(data)) {
-        setTrays(data);
-      } else {
-        setTrays((prevTrays) => [...prevTrays, data]);
-      }
-    }
-
-    socket.on("connect", onConnect);
-    socket.on("disconnect", onDisconnect);
-    socket.on("server_status", onServerStatus);
-    socket.on("tray_update", onTrayUpdate);
-    if (socket.connected) {
-      socket.emit("get_trays");
-    }
-
-    return () => {
-      socket.off("connect", onConnect);
-      socket.off("disconnect", onDisconnect);
-      socket.off("server_status", onServerStatus);
-      socket.off("tray_update", onTrayUpdate);
-    };
-  }, []);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    socket.emit("save_tray", { name, message, selectedTray });
-    setName("");
-    setMessage("");
-    setSelectedTray("");
+    setIsLoading(true);
+    saveTray(name, message, selectedTray, () => {
+      setIsLoading(false);
+      setName("");
+      setMessage("");
+      setSelectedTray("");
+    });
   };
 
   return (
@@ -99,7 +58,7 @@ export default function Home() {
           <option value="Tray2">Tray 2</option>
           <option value="Tray3">Tray 3</option>
         </select>
-        <button type="submit" className="bg-blue-600 px-4 py-1 text-white rounded-md hover:bg-blue-600/90">Submit</button>
+        <button type="submit" className="bg-blue-600 px-4 py-1 text-white rounded-md hover:bg-blue-600/90" disabled={isLoading}>{isLoading ? "Submitting": "Submit"}</button>
       </form>
 
       <div>
