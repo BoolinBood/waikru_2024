@@ -1,11 +1,12 @@
-"use client"
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { socket } from '../lib/socket';
-
+"use client";
+import { socket } from "@/sockets/socket";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
-export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [isConnected, setIsConnected] = useState(false);
   const [dbConnected, setDbConnected] = useState(false);
   const [transport, setTransport] = useState("?");
@@ -27,7 +28,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       setTransport("?");
     }
 
-    function onServerStatus(status: { isConnected: boolean; dbConnected: boolean }) {
+    function onServerStatus(status: {
+      isConnected: boolean;
+      dbConnected: boolean;
+    }) {
       setIsConnected(status.isConnected);
       setDbConnected(status.dbConnected);
     }
@@ -41,8 +45,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }
 
     function onTrayDeleted(id: string) {
-        setTrays((prevTrays) => prevTrays.filter(tray => tray._id !== id));
-      }
+      setTrays((prevTrays) => prevTrays.filter((tray) => tray._id !== id));
+    }
 
     socket.on("connect", onConnect);
     socket.on("disconnect", onDisconnect);
@@ -63,7 +67,12 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     };
   }, []);
 
-  const saveTray = (name: string, message: string, selectedTray: string, callback?: () => void) => {
+  const saveTray = (
+    name: string,
+    message: string,
+    selectedTray: string,
+    callback?: () => void
+  ) => {
     socket.emit("save_tray", { name, message, selectedTray }, () => {
       if (callback) callback();
     });
@@ -74,7 +83,16 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   };
 
   return (
-    <AppContext.Provider value={{ isConnected, dbConnected, transport, trays, saveTray, deleteTray }}>
+    <AppContext.Provider
+      value={{
+        isConnected,
+        dbConnected,
+        transport,
+        trays,
+        saveTray,
+        deleteTray,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );
@@ -83,7 +101,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 export const useAppContext = () => {
   const context = useContext(AppContext);
   if (context === undefined) {
-    throw new Error('useAppContext must be used within an AppProvider');
+    throw new Error("useAppContext must be used within an AppProvider");
   }
   return context;
 };

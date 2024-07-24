@@ -1,4 +1,13 @@
+// Variables
+@import "./variables/breakpoint.scss";
+
+// Fonts
+@import "./fonts/index.scss";
+
+// Components
 @import "./components/button";
 @import "./components/modal";
 @import "./components/backdrop";
 
+
+@import "./components/loading";

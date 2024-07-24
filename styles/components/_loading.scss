@@ -1,0 +1,416 @@
+.loading {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: rgb(126,86,157);
+  background: linear-gradient(180deg, rgba(126,86,157,1) 0%, rgba(229,155,178,1) 30%, rgba(239,194,175,1) 100%);
+
+  .air {
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+
+    &.air1 {
+      height: 227px;
+      animation: wave 10s linear infinite alternate;
+      z-index: 1010;
+      bottom: -40px;
+      background: url("/assets/loading/sm/wave1.png");
+    }
+
+    &.air2 {
+      height: 165px;
+      animation: wave2 8s linear infinite alternate;
+      z-index: 999;
+      bottom: 35px;
+      background: url("/assets/loading/sm/wave2.png");
+    }
+
+    &.air3 {
+      height: 174px;
+      animation: wave3 10s linear infinite alternate;
+      z-index: 997;
+      bottom: 55px;
+      background: url("/assets/loading/sm/wave3.png");
+    }
+  }
+
+  .-moons {
+    display: none;
+    position: absolute;
+    left: 60%;
+    top: 50%;
+    width: 350px;
+    height: 350px;
+    border-radius: 100;
+    animation: moonInAnimation 1s ease-in-out 0.3s;
+
+    img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+  }
+
+  .-clouds {
+
+    .-left {
+      position: absolute;
+      top: 60%;
+      left: -2rem;
+      width: 261px;
+      height: auto;
+      z-index: 1004;
+      animation: cloudLeftInAnimation 1s ease-in-out 0.12s;
+
+    }
+
+    .-right {
+      position: absolute;
+      top: 20%;
+      right: -2rem;
+      width: 278px;
+      height: auto;
+      z-index: 1005;
+      animation: cloudRightInAnimation 1s ease-in-out 0.12s;
+
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .-boat {
+    position: absolute;
+    width: 266px;
+    height: auto;
+    left: 30%;
+    bottom: 30px;
+    z-index: 1003;
+    animation: boats 2s linear infinite alternate,
+    boatInAnimation 1s ease-in-out 0.14s;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .-stars {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 30vh;
+    z-index: 1002;
+    animation: fadeInAnimation 0.8s ease-in-out 0.25s;
+
+    background-size: cover;
+    background-position: center;
+    background-image: url("/assets/loading/sm/stars.png");
+  }
+
+  .-mountain {
+    .-desktops {
+      display: none;
+    }
+
+    & .-left {
+      position: absolute;
+      bottom: 40px;
+      left: 0;
+      height: 500px;
+
+      @media (min-width: $breakpoint-xs) {
+        height: 667px;
+      }
+
+      @media (min-width: $breakpoint-md) {
+        height: 525px;
+        left: -15rem;
+        bottom: 10px;
+      }
+
+      @media (min-width: $breakpoint-xl) {
+        height: 868px;
+        bottom: -110px;
+      }
+
+      @media (min-width: $breakpoint-xxl) {
+        left: -5rem;
+        bottom: -150px;
+      }
+
+      z-index: 500;
+    }
+
+    & .-right {
+      position: absolute;
+      right: -300px;
+      bottom: -100px;
+      height: 663px;
+      z-index: 499;
+
+      @media (min-width: $breakpoint-md) {
+        right: -6rem;
+      }
+
+      @media (min-width: $breakpoint-xl) {
+        right: -3rem;
+        bottom: -110px;
+      }
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .-contents {
+    position: relative;
+    z-index: 1001;
+    gap: 20px;
+    color: white;
+
+    display: grid;
+    place-items: center;
+    animation: fadeInAnimation 1s ease-in-out 0.23s;
+
+    .-texts {
+      display: grid;
+      place-items: center;
+      text-align: center;
+
+      h1 {
+        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.06);
+        font-family: "PT Sans", sans-serif;
+        font-size: clamp(40px, 5vw, 60px);
+        font-weight: 900;
+      }
+
+      p {
+        font-family: "PT Sans", sans-serif;
+        font-size: clamp(16px, 2vw, 20px);
+        font-weight: 900;
+      }
+    }
+  }
+
+  @keyframes moonInAnimation {
+    0% {
+      transform: translate3d(-800px, 1000px, 0);
+    }
+
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @keyframes cloudLeftInAnimation {
+    0% {
+      transform: translateX(-700px);
+    }
+
+    100% {
+      transform: translateX(0px);
+    }
+  }
+
+  @keyframes cloudRightInAnimation {
+    0% {
+      transform: translateX(700px);
+    }
+
+    100% {
+      transform: translateX(0px);
+    }
+  }
+  @keyframes boatInAnimation {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(10px);
+    }
+  }
+  @keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+        transform: translateY(-200px);
+    }
+    25% {
+        transform: translateY(50px);
+    }
+
+    50% {
+        transform: translateY(-100px);
+    }
+  
+    75% {
+        transform: translateY(50px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+  }
+
+
+  @keyframes wave {
+    0% {
+      background-position-x: 300px;
+    }
+    100% {
+      background-position-x: 1300px;
+    }
+  }
+
+  @keyframes wave2 {
+    0% {
+      background-position-x: -400px;
+      background-position-y: 0px;
+    }
+    100% {
+      background-position-x: -1400px;
+      transform: translateY(5px);
+    }
+  }
+
+  @keyframes wave3 {
+    0% {
+      background-position-x: 800px;
+    }
+    100% {
+      background-position-x: 1100px;
+    }
+  }
+
+  @keyframes boats {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(10px);
+    }
+  }
+
+  @media (min-width: $breakpoint-md) {
+    .-moons {
+      display: block;
+    }
+
+    .-boat {
+      left: 70%;
+    }
+
+    .-stars {
+      background-image: url("/assets/loading/lg/stars.png");
+    }
+    .-mountain {
+      .-desktops {
+        display: block;
+      }
+
+      .-mobiles {
+        display: none;
+      }
+    }
+  }
+}
+
+.lds-spinner,
+.lds-spinner div,
+.lds-spinner div:after {
+  box-sizing: border-box;
+}
+.lds-spinner {
+  color: currentColor;
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-spinner div {
+  transform-origin: 40px 40px;
+  animation: lds-spinner 1.2s linear infinite;
+}
+.lds-spinner div:after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 3.2px;
+  left: 36.8px;
+  width: 6.4px;
+  height: 17.6px;
+  border-radius: 20%;
+  background: currentColor;
+}
+.lds-spinner div:nth-child(1) {
+  transform: rotate(0deg);
+  animation-delay: -1.1s;
+}
+.lds-spinner div:nth-child(2) {
+  transform: rotate(30deg);
+  animation-delay: -1s;
+}
+.lds-spinner div:nth-child(3) {
+  transform: rotate(60deg);
+  animation-delay: -0.9s;
+}
+.lds-spinner div:nth-child(4) {
+  transform: rotate(90deg);
+  animation-delay: -0.8s;
+}
+.lds-spinner div:nth-child(5) {
+  transform: rotate(120deg);
+  animation-delay: -0.7s;
+}
+.lds-spinner div:nth-child(6) {
+  transform: rotate(150deg);
+  animation-delay: -0.6s;
+}
+.lds-spinner div:nth-child(7) {
+  transform: rotate(180deg);
+  animation-delay: -0.5s;
+}
+.lds-spinner div:nth-child(8) {
+  transform: rotate(210deg);
+  animation-delay: -0.4s;
+}
+.lds-spinner div:nth-child(9) {
+  transform: rotate(240deg);
+  animation-delay: -0.3s;
+}
+.lds-spinner div:nth-child(10) {
+  transform: rotate(270deg);
+  animation-delay: -0.2s;
+}
+.lds-spinner div:nth-child(11) {
+  transform: rotate(300deg);
+  animation-delay: -0.1s;
+}
+.lds-spinner div:nth-child(12) {
+  transform: rotate(330deg);
+  animation-delay: 0s;
+}
+@keyframes lds-spinner {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
