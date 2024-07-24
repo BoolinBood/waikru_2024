@@ -40,7 +40,7 @@ app
           });
           socket.on("get_trays", async () => {
             try {
-              const trays = await TrayModel.find().sort({ _id: -1 }).limit(10);
+              const trays = await TrayModel.find().sort({ _id: -1 });
               socket.emit("tray_update", trays);
             } catch (error) {
               console.error("Error fetching trays:", error);
