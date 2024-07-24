@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState, FormEvent } from "react";
-import { socket } from "./lib/socket";
+import { socket } from "../sockets/socket";
+import Modal from "@/components/ui/modal";
+import Loading from "@/components/loading";
 
 export default function Home() {
   const [isConnected, setIsConnected] = useState(false);
@@ -28,7 +30,10 @@ export default function Home() {
       setTransport("N/A");
     }
 
-    function onServerStatus(status: { isConnected: boolean; dbConnected: boolean }) {
+    function onServerStatus(status: {
+      isConnected: boolean;
+      dbConnected: boolean;
+    }) {
       setIsConnected(status.isConnected);
       setDbConnected(status.dbConnected);
     }
@@ -67,9 +72,21 @@ export default function Home() {
 
   return (
     <div className="w-full h-screen bg-gray-200 space-y-2 p-6">
-      <p>Socket Status: <span className="text-green-500 font-bold">{isConnected ? "connected" : "disconnected"}</span></p>
-      <p>Database Status: <span className="text-green-500 font-bold">{dbConnected ? "connected" : "disconnected"}</span></p>
-      <p>Transport: <span className="font-bold">{transport}</span></p>
+      <p>
+        Socket Status:{" "}
+        <span className="text-green-500 font-bold">
+          {isConnected ? "connected" : "disconnected"}
+        </span>
+      </p>
+      <p>
+        Database Status:{" "}
+        <span className="text-green-500 font-bold">
+          {dbConnected ? "connected" : "disconnected"}
+        </span>
+      </p>
+      <p>
+        Transport: <span className="font-bold">{transport}</span>
+      </p>
 
       <form onSubmit={handleSubmit} className="flex gap-3">
         <input
@@ -99,7 +116,12 @@ export default function Home() {
           <option value="Tray2">Tray 2</option>
           <option value="Tray3">Tray 3</option>
         </select>
-        <button type="submit" className="bg-blue-600 px-4 py-1 text-white rounded-md hover:bg-blue-600/90">Submit</button>
+        <button
+          type="submit"
+          className="bg-blue-600 px-4 py-1 text-white rounded-md hover:bg-blue-600/90"
+        >
+          Submit
+        </button>
       </form>
 
       <div>
