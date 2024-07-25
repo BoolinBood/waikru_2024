@@ -25,3 +25,8 @@ declare type AppContextType = {
 declare module "node:http" {
   export * from "http";
 }
+
+declare type ServerStatus = {
+  isConnected: boolean;
+    dbConnected: boolean;
+}

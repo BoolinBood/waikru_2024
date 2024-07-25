@@ -1,5 +1,5 @@
 "use client";
-import { socket } from "@/sockets/socket";
+import { socket } from "@/sockets/socketClient";
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
