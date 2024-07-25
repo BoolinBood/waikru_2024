@@ -18,16 +18,7 @@ declare type AppContextType = {
   dbConnected: boolean;
   transport: string;
   trays: TrayType[];
-<<<<<<< HEAD
   saveTray: (name: string, message: string, selectedTray: string, callback?: () => void) => void;
-=======
-  saveTray: (
-    name: string,
-    message: string,
-    selectedTray: string,
-    callback?: () => void
-  ) => void;
->>>>>>> origin/backup
   deleteTray: (id: string) => void;
 };
 
