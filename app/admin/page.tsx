@@ -1,6 +1,6 @@
 "use client";
 import { useAppContext } from "@/app/context/AppContext";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import StatusInfo from "@/components/trays/StatusInfo";
 
 const AdminPage = () => {
