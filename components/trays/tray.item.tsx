@@ -1,9 +1,5 @@
-import React from 'react'
+const TrayItem = (flowerType: FlowerType) => {
+  return <div>TrayItem</div>;
+};
 
-const TrayItem = () => {
-  return (
-    <div>TrayItem</div>
-  )
-}
-
-export default TrayItem
+export default TrayItem;

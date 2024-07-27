@@ -1,6 +1,6 @@
 "use client";
 import { useState, FormEvent } from "react";
-import { useAppContext } from "@/app/context/AppContext";
+import { useAppContext } from "@/context/AppContext";
 
 const TrayForm = () => {
   const { saveTray } = useAppContext();

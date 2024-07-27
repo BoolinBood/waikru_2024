@@ -2,10 +2,22 @@
 
 .comment-section {
     background: linear-gradient(180deg, rgba(126,86,157,1) 0%, rgba(229,155,178,1) 30%, rgba(239,194,175,1) 100%);
-    border-radius: 28px;
+
+    border-top-left-radius: 28px;
+    border-top-right-radius: 28px;
 
     display: grid;
     place-items: center;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    
+    .-btn {
+        position: fixed;
+        top: 90%;
+    }
+
+    border: 4px solid green;
 }
 
 .comment-list {
@@ -15,7 +27,6 @@
     max-width: 1024px;
     gap: 2.5rem;
     padding: 40px 10px;
-    border: 4px solid green;
 
     @media (min-width: $breakpoint-md) {
         grid-template-columns: repeat(3, minmax(0, 1fr))

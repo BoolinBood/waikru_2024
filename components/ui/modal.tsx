@@ -1,21 +1,23 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { ReactNode } from "react";
 import Backdrop from "./backdrop";
+import { AiOutlineClose } from "react-icons/ai";
+import { useModal } from "@/context/ModalContext";
+import { motion } from "framer-motion";
 
 interface IProps {
   children: ReactNode;
-  handleClose: () => void;
 }
 
 const dropIn = {
   hidden: {
-    y: "-100vh",
+    x: "-100vh",
     opacity: 0,
   },
   visible: {
-    y: "0",
+    x: "0",
     opacity: 1,
     transition: {
       duration: 0.1,
@@ -25,28 +27,38 @@ const dropIn = {
     },
   },
   exit: {
-    y: "100vh",
+    x: "100vh",
     opacity: 0,
   },
 };
 
-const Modal = ({ handleClose, children }: IProps) => {
+const Modal = ({ children }: IProps) => {
+  const { setModalState, modalState } = useModal();
+
+  const handleClose = () => {
+    setModalState("none");
+  };
+
   return (
-    <Backdrop onClick={handleClose}>
-      <motion.div
-        onClick={(e) => {
-          e.stopPropagation();
-        }}
-        className="modal orange-gradient"
-        variants={dropIn}
-        initial="hidden"
-        animate="visible"
-        exit="exit"
-      >
-        {children}
-        <button onClick={handleClose}>Close</button>
-      </motion.div>
-    </Backdrop>
+    <AnimatePresence mode="wait" initial={true}>
+      {modalState !== "none" && (
+        <Backdrop onClick={handleClose}>
+          <motion.div
+            onClick={(e) => e.stopPropagation()}
+            className="modal"
+            variants={dropIn}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
+            {children}
+            <button className="-close" onClick={handleClose}>
+              <AiOutlineClose />
+            </button>
+          </motion.div>
+        </Backdrop>
+      )}
+    </AnimatePresence>
   );
 };
 

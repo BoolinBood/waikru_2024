@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { useAppContext } from "../context/AppContext";
+import { useAppContext } from "../../context/AppContext";
 
 const AdminPage = () => {
   const { isConnected, dbConnected, transport, trays, deleteTray } =
