@@ -7,9 +7,9 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [isConnected, setIsConnected] = useState(false);
-  const [dbConnected, setDbConnected] = useState(false);
-  const [transport, setTransport] = useState("?");
+  const [isConnected, setIsConnected] = useState<boolean>(false);
+  const [dbConnected, setDbConnected] = useState<boolean>(false);
+  const [transport, setTransport] = useState<string>("?");
   const [trays, setTrays] = useState<TrayType[]>([]);
 
   useEffect(() => {
@@ -48,15 +48,16 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
       setTrays((prevTrays) => prevTrays.filter((tray) => tray._id !== id));
     }
 
+    if (socket.connected) {
+      socket.emit("get_trays");
+    }
+
     socket.on("connect", onConnect);
     socket.on("disconnect", onDisconnect);
     socket.on("server_status", onServerStatus);
     socket.on("tray_update", onTrayUpdate);
     socket.on("tray_deleted", onTrayDeleted);
 
-    if (socket.connected) {
-      socket.emit("get_trays");
-    }
 
     return () => {
       socket.off("connect", onConnect);

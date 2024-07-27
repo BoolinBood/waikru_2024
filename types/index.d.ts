@@ -30,3 +30,8 @@ declare type ServerStatus = {
   isConnected: boolean;
     dbConnected: boolean;
 }
+
+declare type TrayPaginatedType = {
+  pages: number;
+  paginatedTrays: TrayType[][];
+}
