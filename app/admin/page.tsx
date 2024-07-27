@@ -5,14 +5,23 @@ import StatusInfo from "@/components/trays/StatusInfo";
 
 const AdminPage = () => {
   const { trays, deleteTray } = useAppContext();
+  const [searchTerm, setSearchTerm] = useState("");
 
-
-
+  const filteredTrays = trays.filter(tray =>
+    tray.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
   return (
     <div className="w-full h-screen bg-gray-200 p-8">
       <h1 className="text-2xl font-semibold">Role: Admin</h1>
       <StatusInfo />
-      <h1 className="text-lg text-orange-600 font-bold mt-4">Amount: {trays.length} {trays.length === 1 ? "tray" : "trays"}</h1>
+      <input
+        type="text"
+        placeholder="Search by Name"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className="mt-4 p-2 border rounded"
+      />
+      <h1 className="text-lg text-orange-600 font-bold mt-4">Amount: {filteredTrays.length} {filteredTrays.length === 1 ? "tray" : "trays"}</h1>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-2">
         <table className="w-full text-sm text-left rtl:text-right text-white">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
@@ -32,14 +41,9 @@ const AdminPage = () => {
             </tr>
           </thead>
           <tbody>
-              {trays.map((tray: TrayType,i) => (
+              {filteredTrays.map((tray: TrayType,i) => (
                 <tr className={`${i % 2 !== 0 ? "bg-slate-600" :"bg-slate-800" }`} key={tray._id}>
-                <th
-                  scope="row"
-                  className="px-6 py-4"
-                >
-                  {tray.name}
-                </th>
+                <th scope="row" className="px-6 py-4">{tray.name}</th>
                 <td className="px-6 py-4">{tray.message}</td>
                 <td className="px-6 py-4">{tray.selectedTray}</td>
                 <td className="px-6 py-4">

@@ -13,6 +13,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   const [trays, setTrays] = useState<TrayType[]>([]);
 
   useEffect(() => {
+
     function onConnect() {
       setIsConnected(true);
       setTransport(socket.io.engine.transport.name);
