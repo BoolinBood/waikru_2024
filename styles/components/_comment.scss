@@ -9,15 +9,21 @@
 }
 
 .comment-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     
     max-width: 1024px;
-    gap: 25px;
+    gap: 2.5rem;
     padding: 40px 10px;
     border: 4px solid green;
 
+    @media (min-width: $breakpoint-md) {
+        grid-template-columns: repeat(3, minmax(0, 1fr))
+    }
+
+    @media (min-width: $breakpoint-lg) {
+        grid-template-columns: repeat(4, minmax(0, 1fr))
+    }
 }
 
 .comment {

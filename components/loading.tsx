@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React from "react";
+import { Spinner } from "./ui/spinner";
 
 interface IAirProps {
   className: string;
@@ -45,14 +46,6 @@ const Mountains: React.FC = () => (
         <Mountain src="/assets/loading/lg/mountain2.png" alt="mountain2" />
       </div>
     </div>
-  </div>
-);
-
-const Spinner: React.FC = () => (
-  <div className="lds-spinner">
-    {Array.from({ length: 12 }).map((_, index) => (
-      <div key={index}></div>
-    ))}
   </div>
 );
 

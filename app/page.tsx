@@ -1,5 +1,5 @@
 import StatusInfo from "@/components/trays/StatusInfo";
-import TrayForm from "@/components/trays/TrayForm";
+import TrayForm from "@/components/trays/tray.form";
 import TrayList from "@/components/trays/TrayList";
 
 export default function Home() {

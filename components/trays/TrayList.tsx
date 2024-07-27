@@ -1,8 +1,9 @@
-"use client"
-import { useAppContext } from "@/app/context/AppContext"
+"use client";
+
+import { useAppContext } from "@/app/context/AppContext";
 
 const TrayList = () => {
-    const { trays } = useAppContext();
+  const { trays } = useAppContext();
   return (
     <div>
       <h2>Trays:</h2>
@@ -14,7 +15,7 @@ const TrayList = () => {
         ))}
       </ul>
     </div>
-  )
-}
+  );
+};
 
-export default TrayList
+export default TrayList;

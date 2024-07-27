@@ -1,9 +1,7 @@
-"use client";
-
 import { getFlowerPath } from "@/utils/flower.utils";
-import { motion } from "framer-motion";
 import Image from "next/image";
 import React from "react";
+import { MotionDiv } from "../motion.div";
 
 interface ICommentItem {
   index: number;
@@ -14,7 +12,7 @@ const CommentItem = ({ index, tray }: ICommentItem) => {
   const { name, message, selectedTray } = tray;
 
   return (
-    <motion.div
+    <MotionDiv
       className="comment"
       animate={{ x: [0, 3, 0], y: [0, -3, 0] }}
       transition={{
@@ -39,7 +37,7 @@ const CommentItem = ({ index, tray }: ICommentItem) => {
           height={50}
         />
       </div>
-    </motion.div>
+    </MotionDiv>
   );
 };
 
