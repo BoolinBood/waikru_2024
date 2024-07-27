@@ -41,7 +41,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
       if (Array.isArray(data)) {
         setTrays(data);
       } else {
-        setTrays((prevTrays) => [...prevTrays, data]);
+        setTrays((prevTrays) => [data, ...prevTrays]);
       }
     }
 
