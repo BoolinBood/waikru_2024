@@ -2,21 +2,28 @@
 import { useState, FormEvent } from "react";
 import { useAppContext } from "@/app/context/AppContext";
 
+
 const TrayForm = () => {
   const { saveTray } = useAppContext();
   const [name, setName] = useState<string>("");
   const [message, setMessage] = useState<string>("");
   const [selectedTray, setSelectedTray] = useState<string>("");
+  const [dept, setDept] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    if (!dept.length) {
+      alert("Please select at least one tray and one department");
+      return;
+    }
     setIsLoading(true);
-    saveTray(name, message, selectedTray, () => {
+    saveTray(name, message, selectedTray, dept, () => {
       setIsLoading(false);
       setName("");
       setMessage("");
       setSelectedTray("");
+      setDept("");
     });
   };
 
@@ -30,6 +37,22 @@ const TrayForm = () => {
         required
         className="rounded-sm px-2"
       />
+      
+      <div className="flex flex-wrap gap-3">
+        {["IT", "CS", "DSI"].map(d => (
+          <label key={d}>
+            <input
+              type="radio"
+              name="dept"
+              value={d}
+              checked={dept === d}
+              onChange={() => setDept(d)}
+            />
+            {d}
+          </label>
+        ))}
+      </div>
+
       <input
         type="text"
         value={message}

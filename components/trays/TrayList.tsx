@@ -26,6 +26,9 @@ const TrayList = () => {
                 Name
               </th>
               <th scope="col" className="px-6 py-3">
+                Dept
+              </th>
+              <th scope="col" className="px-6 py-3">
                 Message
               </th>
               <th scope="col" className="px-6 py-3">
@@ -42,6 +45,7 @@ const TrayList = () => {
                 <th scope="row" className="px-6 py-4">
                   {tray.name}
                 </th>
+                <td className="px-6 py-4">{tray.dept}</td>
                 <td className="px-6 py-4">{tray.message}</td>
                 <td className="px-6 py-4">{tray.selectedTray}</td>
               </tr>

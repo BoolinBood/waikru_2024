@@ -80,9 +80,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
     name: string,
     message: string,
     selectedTray: string,
+    dept: string,
     callback?: () => void
   ) => {
-    socket.emit("save_tray", { name, message, selectedTray }, () => {
+    socket.emit("save_tray", { name, message, selectedTray, dept }, () => {
       socket.emit("get_trays", 1);
       setCurrentPage(1);
       setTrays([]); // Clear existing trays

@@ -3,7 +3,10 @@ declare type TrayType = {
   name: string;
   message: string;
   selectedTray: FlowerType;
+  dept: string;
 };
+
+declare type Dept = "IT" | "CS" | "DSI" ;
 
 declare type FlowerType =
   | "ixora"
@@ -18,7 +21,7 @@ declare type AppContextType = {
   dbConnected: boolean;
   transport: string;
   trays: TrayType[];
-  saveTray: (name: string, message: string, selectedTray: string, callback?: () => void) => void;
+  saveTray: (name: string, message: string, selectedTray: string, dept: string, callback?: () => void) => void;
   deleteTray: (id: string) => void;
   loadMoreTrays: () => void;
   hasMore: boolean;
