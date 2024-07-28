@@ -2,6 +2,7 @@
 import { useInView } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
 import CommentItem from "./comment.item";
+import Skeleton from "../skeleton";
 
 const LoadMoreComments = () => {
   const ref = useRef(null);
@@ -18,12 +19,9 @@ const LoadMoreComments = () => {
         <CommentItem key={index} tray={item} index={index} />
       ))}
 
-      <div
-        ref={ref}
-        className="grid place-items-center w-full border-4 border-solid border-red-500"
-      >
-        {/* <Spinner /> */}
-      </div>
+      {Array.from({ length: 8 }).map((_, index) => (
+        <Skeleton key={index} />
+      ))}
     </>
   );
 };

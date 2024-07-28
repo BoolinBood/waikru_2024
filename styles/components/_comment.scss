@@ -33,8 +33,8 @@
         grid-template-columns: repeat(3, minmax(0, 1fr))
     }
 
-    @media (min-width: $breakpoint-lg) {
-        grid-template-columns: repeat(4, minmax(0, 1fr))
+    @media (min-width: $breakpoint-xxl) {
+        grid-template-columns: repeat(3, minmax(0, 1fr))
     }
 }
 
@@ -53,10 +53,24 @@
 
 
     @media (min-width: $breakpoint-md) {
+        padding: 20px;
         width: 200px;
         height: 100px;
-        
     }
+
+    @media (min-width: $breakpoint-xl) {
+        width: 250px;
+        height: 150px;
+    }
+
+
+    @media (min-width: $breakpoint-xxl) {
+        width: 320px;
+        height: 187px;
+        border-radius: 60px;
+        padding: 30px;
+    } 
+      
 
     .-message {
         color: #000;
@@ -64,6 +78,18 @@
         font-family: Inter;
         font-size: 10px;
         font-weight: 400;
+
+        @media (min-width: $breakpoint-md) {
+            font-size: 12px;
+        }
+
+        @media (min-width: $breakpoint-xl) {
+            font-size: 16px;
+        }
+
+        @media (min-width: $breakpoint-xxl) {
+            font-size: 20px;
+        }
     }
     
     .-author {
@@ -74,6 +100,18 @@
         font-family: Inter;
         font-size: 8px;
         font-weight: 700;
+
+        @media (min-width: $breakpoint-md) {
+            font-size: 10px;
+        }
+
+        @media (min-width: $breakpoint-xl) {
+            font-size: 13px;
+        }
+
+        @media (min-width: $breakpoint-xxl) {
+            font-size: 16px;
+        }
     }
 
     .-tray {
@@ -89,6 +127,16 @@
             height: 100%;
             object-fit: cover;
             transform: rotate(-25deg);
+        }
+
+        @media (min-width: $breakpoint-md) {
+            width: 50px;
+            height: 85px;
+        }
+
+        @media (min-width: $breakpoint-xxl) {
+            width: 80px;
+            height: 136px;
         }
     }
 }

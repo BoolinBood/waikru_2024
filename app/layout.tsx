@@ -7,6 +7,8 @@ import "@/styles/index.scss";
 import "@/styles/globals.css";
 import { ModalProvider } from "../context/ModalContext";
 import ModalWrapper from "@/components/modals/modal.wrapper";
+import { Suspense } from "react";
+import Loading from "@/components/loading/loading";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,7 +25,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <AppProvider>
           <ModalProvider>
-            {children}
+            <Suspense fallback={<Loading />}>{children}</Suspense>
             <ModalWrapper />
           </ModalProvider>
         </AppProvider>

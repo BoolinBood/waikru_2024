@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/image";
+
 import dynamic from "next/dynamic";
 import React from "react";
 import { useMediaQuery } from "react-responsive";
@@ -14,8 +14,6 @@ const SmallHeroBanner = dynamic(() => import("./hero-banner.sm"), {
 
 const HeroBanner = () => {
   const isTablet = useMediaQuery({ query: "(min-width: 768px)" });
-
-  console.log("isTablet", isTablet);
 
   return (
     <div className="hero-banner">

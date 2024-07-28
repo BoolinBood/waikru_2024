@@ -1,0 +1,59 @@
+import Image from "next/image";
+import { Spinner } from "../ui/spinner";
+
+const LargeLoading = () => {
+  return (
+    <div className="-lg">
+      <div className="-top">
+        <div className="-particles">
+          <Image
+            src="/assets/loading/lg/particle.png"
+            alt="particle1"
+            width={50}
+            height={50}
+            layout="responsive"
+          />
+        </div>
+        <div className="-flowers">
+          <div className="-flower">
+            <Image
+              src="/assets/loading/lg/flowers.png"
+              alt="flower1"
+              width={50}
+              height={50}
+              layout="responsive"
+            />
+          </div>
+          <div className="-bg">
+            <Image
+              src="/assets/loading/lg/background.png"
+              alt="bg"
+              width={100}
+              height={100}
+              layout="responsive"
+            />
+          </div>
+        </div>
+        <div className="-avatars">
+          <Image
+            src="/assets/loading/lg/teacher.png"
+            alt="avatar1"
+            width={100}
+            height={100}
+            layout="responsive"
+          />
+        </div>
+        <div className="-texts">
+          <div className="-headers">
+            <h1>SIT Waikru</h1>
+            <Spinner />
+          </div>
+          <p>Show your appreciation to the SIT professors here</p>
+        </div>
+      </div>
+      <div className="-bottom"></div>
+    </div>
+  );
+};
+
+export default LargeLoading;

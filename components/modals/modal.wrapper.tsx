@@ -3,7 +3,7 @@
 import { useModal } from "@/context/ModalContext";
 import Modal from "./modal";
 import SelectTray from "../trays/tray.select";
-import Loading from "../loading";
+import Loading from "../loading/loading";
 
 const ModalWrapper = () => {
   const { modalState } = useModal();
