@@ -1,5 +1,5 @@
 import CommentList from "@/components/comments/comment.list";
-import HeroBanner from "@/components/hero-banner";
+import HeroBanner from "@/components/hero-banner/hero-banner";
 import { generateMockData } from "@/utils/mockup.utils";
 import Image from "next/image";
 

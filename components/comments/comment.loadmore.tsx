@@ -2,7 +2,6 @@
 import { useInView } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
 import CommentItem from "./comment.item";
-import { Spinner } from "../ui/spinner";
 
 const LoadMoreComments = () => {
   const ref = useRef(null);
@@ -23,7 +22,7 @@ const LoadMoreComments = () => {
         ref={ref}
         className="grid place-items-center w-full border-4 border-solid border-red-500"
       >
-        <Spinner />
+        {/* <Spinner /> */}
       </div>
     </>
   );
