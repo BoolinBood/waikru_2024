@@ -52,6 +52,16 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
       }
     }
 
+    function onNewTray(newTray: TrayType) {
+      setTrays(prevTrays => [newTray, ...prevTrays]);
+    }
+  
+    function onUpdateTotalCount(count: number) {
+      setTotalCount(count);
+      setHasMore(trays.length < count);
+    }
+
+
     function onTrayDeleted(id: string) {
       setTrays((prevTrays) => prevTrays.filter((tray) => tray._id !== id));
     }
@@ -65,6 +75,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
     socket.on("server_status", onServerStatus);
     socket.on("tray_update", onTrayUpdate);
     socket.on("tray_deleted", onTrayDeleted);
+    socket.on("new_tray", onNewTray);
+    socket.on("update_total_count", onUpdateTotalCount);
 
 
     return () => {
@@ -73,23 +85,20 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
       socket.off("server_status", onServerStatus);
       socket.off("tray_update", onTrayUpdate);
       socket.off("tray_deleted", onTrayDeleted);
+      socket.off("new_tray", onNewTray);
+      socket.off("update_total_count", onUpdateTotalCount);
     };
   }, []);
 
   const saveTray = (
-    name: string,
-    message: string,
-    selectedTray: string,
-    dept: string,
-    callback?: () => void
-  ) => {
-    socket.emit("save_tray", { name, message, selectedTray, dept }, () => {
-      socket.emit("get_trays", 1);
-      setCurrentPage(1);
-      setTrays([]); // Clear existing trays
-      if (callback) callback();
-    });
-  };
+  name: string,
+  message: string,
+  selectedTray: string,
+  dept: string,
+  callback?: () => void
+) => {
+  socket.emit("save_tray", { name, message, selectedTray, dept }, callback);
+};
 
   const deleteTray = (id: string) => {
     socket.emit("delete_tray", id);

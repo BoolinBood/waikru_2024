@@ -29,9 +29,12 @@ const setupSocketEvents = (io: Server) => {
     socket.on("save_tray", async (data: TrayType, callback) => {
       try {
         const newTray = new TrayModel(data);
-        await newTray.save();
-        const updatedTrays = await TrayModel.find().sort({ _id: -1 });
-        io.emit("tray_update", updatedTrays);
+        await newTray.save();        
+        const savedTray = await TrayModel.findById(newTray._id);        
+        io.emit("new_tray", savedTray);
+        const totalCount = await TrayModel.countDocuments();
+        io.emit("update_total_count", totalCount);
+    
         if (callback) callback();
       } catch (error) {
         console.error("Error saving tray:", error);

@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import { useAppContext } from "@/app/context/AppContext";
 import { useInView } from "framer-motion";
 import React, { useEffect, useRef } from "react";
@@ -17,11 +17,14 @@ const TrayList = () => {
 
   return (
     <div className="w-full bg-gray-200 p-8">
-      <h1 className="text-2xl font-semibold">All Trays</h1>
+      <h1 className="text-2xl font-semibold">All Trays ({trays.length})</h1>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-2">
         <table className="w-full text-sm text-left rtl:text-right text-white">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
             <tr>
+            <th scope="col" className="px-6 py-3">
+                No.
+              </th>
               <th scope="col" className="px-6 py-3">
                 Name
               </th>
@@ -42,9 +45,10 @@ const TrayList = () => {
                 className={`${i % 2 !== 0 ? "bg-slate-600" : "bg-slate-800"}`}
                 key={tray._id}
               >
-                <th scope="row" className="px-6 py-4">
+                <td className="px-6 py-4">{i + 1}</td>
+                <td scope="row" className="px-6 py-4">
                   {tray.name}
-                </th>
+                </td>
                 <td className="px-6 py-4">{tray.dept}</td>
                 <td className="px-6 py-4">{tray.message}</td>
                 <td className="px-6 py-4">{tray.selectedTray}</td>
