@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CgClose, CgChevronLeft } from "react-icons/cg";
 import { Inter } from "next/font/google";
 import { getFlowerName, getFlowerPath } from "@/utils/flower.utils";
@@ -9,6 +9,7 @@ import Button from "../ui/button";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { LoadingSpinner, Spinner } from "../ui/spinner";
 
 interface Props {
   selectedFlower: FlowerType;
@@ -23,7 +24,10 @@ enum Faculty {
 // Schema validation with Zod
 const CreateTraySchema = z.object({
   name: z.string().min(1, "Name is required"),
-  message: z.string().min(1, "Message is required"),
+  message: z
+    .string()
+    .min(8, "Message must be at least 8 characters")
+    .max(140, "Message must be at most 140 characters"),
   tag: z.nativeEnum(Faculty),
 });
 
@@ -38,6 +42,7 @@ const CreateTray: React.FC<Props> = ({ selectedFlower }) => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<CreateTrayInputs>({
     resolver: zodResolver(CreateTraySchema),
@@ -45,6 +50,10 @@ const CreateTray: React.FC<Props> = ({ selectedFlower }) => {
 
   const [selectedTag, setSelectedTag] = useState<Faculty>(Faculty.IT);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setValue("tag", selectedTag);
+  }, [selectedTag, setValue]);
 
   const handleTagClick = (tag: Faculty) => {
     setSelectedTag(tag);
@@ -60,16 +69,13 @@ const CreateTray: React.FC<Props> = ({ selectedFlower }) => {
 
   const onSubmit: SubmitHandler<CreateTrayInputs> = (data) => {
     console.log(data);
-    console.log("Submitting...");
-
     setLoading(true);
 
-    saveTray(data.name, data.message, selectedFlower, selectedTag, () => {
+    saveTray(data.name, data.message, selectedFlower, data.tag, () => {
       setLoading(false);
       console.log("Tray saved");
+      setModalState("none");
     });
-
-    setModalState("none");
   };
 
   return (
@@ -145,16 +151,28 @@ const CreateTray: React.FC<Props> = ({ selectedFlower }) => {
         {/* Textarea section */}
         <textarea
           placeholder="Write your message here"
-          className="h-[148px] p-2 rounded-md w-full outline outline-[2px] outline-slate-300 resize-none"
+          className="h-[148px] p-2 mt-4 rounded-md w-full outline outline-[2px] outline-slate-300 resize-none"
           {...register("message")}
         />
         {errors.message && (
           <p className="text-red-500">{errors.message.message}</p>
         )}
 
+        {/* Hidden input for tag */}
+        <input type="hidden" {...register("tag")} value={selectedTag} />
+
         {/* Submit button */}
-        <div className="component-bottom">
-          <Button>Submit</Button>
+        <div className="flex justify-center mt-4">
+          <Button htmlType="submit" disabled={isLoading}>
+            <div className="flex items-center">
+              <h1>Submit</h1>
+              {loading && (
+                <div className="ml-[8px]">
+                  <LoadingSpinner />
+                </div>
+              )}
+            </div>
+          </Button>
         </div>
       </form>
     </div>

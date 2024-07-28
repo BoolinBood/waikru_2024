@@ -12,7 +12,7 @@
 
     .-texts {
         position: absolute;
-        top: 15%;
+        top: 20%;
         left: 40%;
         transform: translate(-50%, -50%);
         width: 60%;
@@ -31,8 +31,12 @@
 
         z-index: 1000;
 
+        @media (min-width: $breakpoint-xs) {
+          left: 35%;
+        }
+
         @media (min-width: $breakpoint-lg) {
-          top: 20%;
+          top: 23%;
         }
 
         @media (min-width: $breakpoint-xxl) {
@@ -46,11 +50,12 @@
         
         @media (min-width: $breakpoint-xxxl)  {
           left: 40%;
+          top: 17%;
         }
     
         h1 {
           text-shadow: 0px 4.324px 4.324px rgba(0, 0, 0, 0.06);
-          font-size: clamp(32px, 5vw, 82px);
+          font-size: clamp(48px, 9vw, 82px);
           text-transform: uppercase;
           z-index: 1000 !important;
         }
@@ -58,6 +63,10 @@
         p {
           font-size: 12px;
           z-index: 1000 !important;
+
+          @media (min-width: $breakpoint-xs)  {
+            font-size: 14px;
+          }  
 
           @media (min-width: $breakpoint-md)  {
             font-size: 16px;
@@ -181,6 +190,12 @@
               right: -50px;
               z-index: 500;
 
+              @media (min-width: $breakpoint-md) {
+                  top: 110px;
+                  width: 100%;
+                  right: -38%;       
+              }
+
               @media (min-width: $breakpoint-xl) {
                   width: 100%;
                   right: -40%;       
@@ -210,6 +225,13 @@
               right: -60px;
               z-index: 400;
 
+              @media (min-width: $breakpoint-md) {
+                top: 100px;
+                width: 100%;
+                right: -40%;       
+             }
+
+
                @media (min-width: $breakpoint-xl) {
                   width: 100%;
                   right: -42%;       
@@ -237,6 +259,14 @@
           bottom: 10%;
           left: 0;
           width: 390px;
+
+          @media (min-width: 820px) {
+              width: 450px;
+          }
+
+          @media (min-width: $breakpoint-xl) {
+              width: 500px;
+          }
 
           @media (min-width: $breakpoint-xxl) {
             width: 375px;

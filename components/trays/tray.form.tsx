@@ -12,12 +12,12 @@ const TrayForm = () => {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    saveTray(name, message, selectedTray, () => {
-      setIsLoading(false);
-      setName("");
-      setMessage("");
-      setSelectedTray("");
-    });
+    // saveTray(name, message, selectedTray, () => {
+    //   setIsLoading(false);
+    //   setName("");
+    //   setMessage("");
+    //   setSelectedTray("");
+    // });
   };
 
   return (
