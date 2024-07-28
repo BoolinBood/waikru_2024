@@ -21,7 +21,8 @@ declare type AppContextType = {
   saveTray: (
     name: string,
     message: string,
-    selectedTray: string,
+    flower: FlowerType,
+    tag: "IT" | "CS" | "DSI",
     callback?: () => void
   ) => void;
   deleteTray: (id: string) => void;

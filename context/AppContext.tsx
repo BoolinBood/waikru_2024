@@ -70,10 +70,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   const saveTray = (
     name: string,
     message: string,
-    selectedTray: string,
+    flower: FlowerType,
+    dept: "IT" | "CS" | "DSI",
     callback?: () => void
   ) => {
-    socket.emit("save_tray", { name, message, selectedTray }, () => {
+    socket.emit("save_tray", { name, message, flower, dept }, () => {
       if (callback) callback();
     });
   };
