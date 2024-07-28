@@ -5,11 +5,14 @@
 @import "./fonts/index.scss";
 
 // Components
-@import "./components/button";
-@import "./components/modal";
-@import "./components/backdrop";
+@import "./components/ui/button";
+@import "./components/ui/modal";
+@import "./components/ui/backdrop";
 @import "./components/comment";
 @import "./components/tray";
 @import "./components/root";
+@import "./components/success";
+@import "./components/error";
+
 
 @import "./components/loading";

@@ -1,8 +1,8 @@
-import Loading from "@/components/loading/loading";
+import SelectTray from "@/components/trays/tray.select";
 import React from "react";
 
 const page = () => {
-  return <Loading />;
+  return <SelectTray />;
 };
 
 export default page;

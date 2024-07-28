@@ -40,25 +40,21 @@ const Modal = ({ children }: IProps) => {
   };
 
   return (
-    <AnimatePresence mode="wait" initial={true}>
-      {modalState !== "none" && (
-        <Backdrop onClick={handleClose}>
-          <motion.div
-            onClick={(e) => e.stopPropagation()}
-            className="modal"
-            variants={dropIn}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-          >
-            {children}
-            <button className="-close" onClick={handleClose}>
-              <AiOutlineClose />
-            </button>
-          </motion.div>
-        </Backdrop>
-      )}
-    </AnimatePresence>
+    <Backdrop onClick={handleClose}>
+      <motion.div
+        onClick={(e) => e.stopPropagation()}
+        className="modal"
+        variants={dropIn}
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+      >
+        {children}
+        <button className="-close" onClick={handleClose}>
+          <AiOutlineClose />
+        </button>
+      </motion.div>
+    </Backdrop>
   );
 };
 

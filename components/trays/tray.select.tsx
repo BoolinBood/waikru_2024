@@ -13,12 +13,12 @@ import { useModal } from "@/context/ModalContext";
 
 const SelectTray = () => {
   const flowers = getFlowers();
-  const { setSelectedFlower } = useModal();
+  const { setSelectedFlower, setModalState } = useModal();
   const [tray, setTray] = useState<FlowerType>("ixora");
 
   const handleClick = () => {
     setSelectedFlower(tray);
-    console.log("Selected Flower: ", tray);
+    setModalState("createTray");
   };
 
   return (
@@ -32,7 +32,8 @@ const SelectTray = () => {
         pagination={{ clickable: true }}
         scrollbar={{ draggable: true }}
         onSlideChange={(swiper) => {
-          const flower = flowers[swiper.activeIndex] as FlowerType;
+          const index = swiper.activeIndex - 1 < 0 ? 5 : swiper.activeIndex - 1;
+          const flower = flowers[index] as FlowerType;
           setTray(flower);
         }}
       >

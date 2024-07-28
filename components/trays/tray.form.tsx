@@ -24,6 +24,7 @@ const TrayForm = () => {
     <form onSubmit={handleSubmit} className="flex gap-3">
       <input
         type="text"
+        name="username"
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="Name"
@@ -31,6 +32,7 @@ const TrayForm = () => {
         className="rounded-sm px-2"
       />
       <input
+        name="messge"
         type="text"
         value={message}
         onChange={(e) => setMessage(e.target.value)}

@@ -1,7 +1,10 @@
+"use client";
+
 import { getFlowerPath } from "@/utils/flower.utils";
 import Image from "next/image";
 import React from "react";
 import { MotionDiv } from "../motion.div";
+import { useModal } from "@/context/ModalContext";
 
 interface ICommentItem {
   index: number;
@@ -10,6 +13,12 @@ interface ICommentItem {
 
 const CommentItem = ({ index, tray }: ICommentItem) => {
   const { name, message, selectedTray } = tray;
+  const { setSelectedTray, setModalState } = useModal();
+
+  const handleClick = () => {
+    setSelectedTray(tray);
+    setModalState("viewTray");
+  };
 
   return (
     <MotionDiv
@@ -22,6 +31,7 @@ const CommentItem = ({ index, tray }: ICommentItem) => {
         repeatType: "loop",
         delay: index * 0.1,
       }}
+      onClick={handleClick}
     >
       <div className="-message">
         <p>{message}</p>

@@ -3,6 +3,7 @@ import CommentItem from "./comment.item";
 import LoadMoreComments from "./comment.loadmore";
 import Button from "../ui/button";
 import { AiOutlinePlus } from "react-icons/ai";
+import CommentFloatButton from "./comment.button";
 
 export interface ICommentListProps {
   comments: TrayType[];
@@ -10,6 +11,7 @@ export interface ICommentListProps {
 
 const CommentList = ({ comments }: ICommentListProps) => {
   // Todo: Fetch only 4-8 comments on initial load
+
   return (
     <div className="comment-section">
       <div className="comment-list">
@@ -21,10 +23,7 @@ const CommentList = ({ comments }: ICommentListProps) => {
         <LoadMoreComments />
       </div>
       <div className="-btn">
-        <Button>
-          <h1>Create pedestal tray</h1>
-          <AiOutlinePlus />
-        </Button>
+        <CommentFloatButton />
       </div>
     </div>
   );
