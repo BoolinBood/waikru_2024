@@ -1,6 +1,9 @@
+import { Inter } from "next/font/google";
 import React, { useState } from "react";
-import Image from "next/image";
-const success = () => {
+
+const inter = Inter({subsets: ["latin"], weight: ["400", "700"]})
+
+const Success = () => {
     const [isVisible,setIsVisible] = useState(true);
 
     const handleClose = () =>{
@@ -10,22 +13,22 @@ const success = () => {
         return null;
     }
   return (
-    <div className="-success">
+    <div className={`-success p-3`}>
       {/* <button type="button" className="close" onClick={handleClose}>
         <img src="/assets/success/vector_close.svg" alt="close" />
       </button> */}
-      <div className="success-icon">
+      <div className={`success-icon ${inter.className}`}>
         <img
           src="/assets/success/check-one.svg"
           alt="icon-close"
           width={36}
           height={36}
         />
-        <h1 className="upload-success">Upload Successful</h1>
+        <h1 className="upload-success font-bold">Upload Successful</h1>
         <p className="subtext">your message has already been posted.</p>
       </div>
     </div>
   );
 };
 
-export default success;
+export default Success;

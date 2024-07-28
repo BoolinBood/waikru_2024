@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Modal from "@/components/ui/modal";
-import Success from "@/components/success";
+import Success from "@/components/Success";
 const page = () => {
   return (
     <div>

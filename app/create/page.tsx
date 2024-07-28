@@ -1,27 +1,19 @@
-'use client'
-import React from 'react'
-import Modal from '@/components/ui/modal'
-import Create from '@/components/create'
+"use client";
+import React, { useContext } from "react";
+import Create from "@/components/create";
+import Modal from "@/components/modals/modal";
+import { useModal } from "@/context/ModalContext";
 
-const data:TrayType = {
-    _id: '',
-    name: '',
-    message: '',
-    selectedTray: ''
-}
 
 const page = () => {
+  const modalContext = useModal();
+
+  modalContext.setModalState("createTray");
+
   return (
     <div>
-        <Modal handleClose={() => {
-            console.log('success')
-        }}>
-           <div className="w-full h-full grid place-items-center">
-         <Create trayData={data} />
-        </div>
-        </Modal>
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

@@ -22,7 +22,7 @@ const ModalContext = createContext<ModalContextProps | undefined>(undefined);
 export const ModalProvider = ({ children }: { children: ReactNode }) => {
   const [modalState, setModalState] = useState<ModalState>("none");
   const [selectedFlower, setSelectedFlower] = useState<string>("");
-
+  
   return (
     <ModalContext.Provider
       value={{ modalState, setModalState, selectedFlower, setSelectedFlower }}
