@@ -1,0 +1,200 @@
+.container {
+  background: #ffffff;
+  border-radius: 34px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+}
+.information {
+  display: block;
+  width: 5em;
+  align-items: flex-start;
+}
+
+.component-top {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  //   margin: 20px 20px;
+  gap: 15px;
+  position: relative;
+  right: 2em;
+}
+
+.name {
+  color: #000;
+  font-family: PT Sans, "PT Sans";
+  font-size: 18px;
+  font-style: normal;
+  line-height: normal;
+  text-align: left !important;
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+
+.enter-name {
+  width: 18em;
+  font-size: 12px;
+  margin-bottom: 10px;
+  resize: none;
+  outline: none;
+  border-bottom: 1.4px solid #c5c5c5;
+}
+.tag {
+  display: flex;
+  gap: 5px;
+  text-align: center;
+  color: white;
+  margin-bottom: 10px;
+  .it {
+    background: #ffc7d4;
+    width: 2.5em;
+    height: 1.5;
+    border-radius: 9px;
+  }
+  .cs {
+    background: #d1c9e7;
+    width: 2.5em;
+    height: 1.5;
+    border-radius: 9px;
+  }
+  .dsi {
+    background: #bfd8e6;
+    width: 2.5em;
+    height: 1.5;
+    border-radius: 9px;
+  }
+  .it,
+  .cs,
+  .dsi {
+    :hover {
+      transform: scale3d(1.1, 1.1, 1.1);
+        transition: transform 0.5s;
+    }
+  }
+  .it:hover{
+    border-radius: 9px;
+    background: #89AA97;
+}
+    .cs:hover{
+        border-radius: 9px;
+     background: #C6A9A3;
+    }
+    .dsi:hover{
+        border-radius: 9px;
+        background: #99BBAD;
+    }
+}
+.tag-header {
+  font-size: larger;
+}
+.tag button {
+    background-color: #f4b744; 
+    color: white; 
+    border: none;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .tag button.active {
+    background-color: #ff9800; 
+    color: white; 
+  }
+
+.component-middle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 1.4px solid #c5c5c5;
+  border-radius: 5px;
+  width: 250px;
+  height: 250px;
+}
+.message {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  text-align: left;
+  vertical-align: middle;
+  font-family: PT Sans, "PT Sans";
+  font-size: 14px;
+  white-space: pre-wrap;
+  overflow-y: auto;
+  padding: 0;
+  margin-top: auto;
+}
+
+.component-bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 130px;
+  height: 50px;
+  flex-shrink: 0;
+  border-radius: 50px;
+  background: #f4b744;
+  margin-top: 20px;
+  align-self: center; /* Center the button horizontally */
+}
+
+.btn {
+  text-align: center;
+  color: white;
+  font-family: PT Sans, "PT Sans";
+  font-size: 16px;
+  font-weight: 700;
+  margin-top: 0;
+}
+
+/* Responsive styles */
+@media (max-width: 390px) {
+  .container {
+    width: 100%;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    width: 100%;
+    padding: 25px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+    padding: 30px;
+  }
+}
+
+@media (max-width: 992px) {
+  .container {
+    width: 100%;
+    padding: 35px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .container {
+    width: 100%;
+    padding: 40px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .container {
+    width: 100%;
+    padding: 45px;
+  }
+}
+
+@media (max-width: 1600px) {
+  .container {
+    width: 100%;
+    padding: 50px;
+  }
+}

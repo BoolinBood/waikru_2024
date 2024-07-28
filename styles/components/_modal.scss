@@ -1,41 +1,16 @@
 .modal {
-    width: clamp(50%, 700px, 90%);
-
-  
     margin: auto;
+    position: relative;
     border-radius: 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
-    z-index: 500;
-
-    background-color: #FFF;
-
-    & .-close {
+    border: 4px solid red;
+}
+      .close-icon {
         position: absolute;
         top: 10px;
         right: 10px;
-        z-index: 1000;
-        transition: all 0.3s ease-in-out;
-
-        &:hover {
-            cursor: pointer;
-            transform: rotate(90deg) scale(1.1);
-        }
-        svg {
-            width: 20px;
-            height: 20px;
-
-            @media (min-width: $breakpoint-md) {
-                width: 30px;
-                height: 30px;
-             }
-
-             @media (min-width: $breakpoint-lg) {
-                width: 40px;
-                height: 40px;
-             }
-        }
-    }
-}
+        cursor: pointer;
+      }
