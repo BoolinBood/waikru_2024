@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { CgClose, CgChevronLeft } from "react-icons/cg";
 import { Inter } from "next/font/google";
+import { getFlowerName } from "@/utils/flower.utils";
 
 interface Props {
   trayData: TrayType;
@@ -47,11 +48,11 @@ const Create: React.FC<Props> = ({ trayData }) => {
           />
         </div>
         <div>
-          <div className="text-bold text-xl">{trayData.selectedTray}</div>
+          <div className={`font-bold text-xl ${inter.className}`}>{getFlowerName(trayData.selectedTray)}</div>
           <input
             type="text"
             placeholder="Enter your name"
-            className="w-full  border-b-[1px] border-b-slate-200 placeholder:text-sm"
+            className="w-full outline-none border-b-[1px] border-b-slate-200 placeholder:text-sm"
           />
         </div>
       </div>

@@ -4,7 +4,7 @@ import { useModal } from "@/context/ModalContext";
 import Modal from "./modal";
 import SelectTray from "../trays/tray.select";
 import Loading from "../loading";
-import Create from "../create";
+import Create from "../Create";
 import Success from "../Success";
 
 const data: TrayType = {
@@ -13,7 +13,6 @@ const data: TrayType = {
   message: "",
   selectedTray: "ixora",
 };
-
 
 const ModalWrapper = () => {
   const { modalState } = useModal();
@@ -28,7 +27,11 @@ const ModalWrapper = () => {
     case "error":
       return <Modal>Error</Modal>;
     case "success":
-      return <Modal><Success /></Modal>;
+      return (
+        <Modal>
+          <Success />
+        </Modal>
+      );
     case "selectTray":
       return (
         <Modal>
@@ -38,7 +41,7 @@ const ModalWrapper = () => {
     case "createTray":
       return (
         <Modal>
-          <Create trayData={data}/>
+          <Create trayData={data} />
         </Modal>
       );
     default:
