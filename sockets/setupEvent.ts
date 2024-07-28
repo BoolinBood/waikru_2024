@@ -25,7 +25,7 @@ const setupSocketEvents = (io: Server) => {
         socket.emit("fetch_error", { message: "Error fetching trays" });
       }
     });
-
+ 
     socket.on("save_tray", async (data: TrayType, callback) => {
       try {
         const newTray = new TrayModel(data);

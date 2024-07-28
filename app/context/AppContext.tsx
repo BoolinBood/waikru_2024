@@ -46,7 +46,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
         setTotalCount(data.totalCount);
         setHasMore(trays.length < data.totalCount);
       } else {
+<<<<<<< HEAD
         console.error("Received unexpected data structure:", data);
+=======
+        setTrays((prevTrays) => [data, ...prevTrays]);
+>>>>>>> 0ca6a026e7d9500ae0b5ead9a73be323710cd5ca
       }
     }
 
