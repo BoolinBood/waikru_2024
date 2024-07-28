@@ -38,7 +38,7 @@ const Create: React.FC<Props> = ({ trayData }) => {
           <CgClose size={24} />
         </div>
       </div>
-      <div className="w-full flex items-center justify-between gap-4">
+      <div className="pl-2 w-full flex items-center justify-between gap-4">
         <div>
           <img
             src="/assets/seemore/flower.svg"
