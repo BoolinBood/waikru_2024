@@ -6,7 +6,7 @@ import { AppProvider } from "../context/AppContext";
 import "@/styles/index.scss";
 import "@/styles/globals.css";
 import { ModalProvider } from "../context/ModalContext";
-import ModalWrapper from "@/components/modals/ModalWrapper";
+import ModalWrapper from "@/components/modals/modal.wrapper";
 
 export const metadata: Metadata = {
   title: "Create Next App",

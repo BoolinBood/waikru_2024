@@ -14,7 +14,7 @@ const CommentItem = ({ index, tray }: ICommentItem) => {
   return (
     <MotionDiv
       className="comment"
-      animate={{ x: [0, 3, 0], y: [0, -3, 0] }}
+      // animate={{ x: [0, 3, 0], y: [0, -3, 0] }}
       transition={{
         duration: 2,
         ease: "easeInOut",

@@ -2,7 +2,7 @@
 
 import { AnimatePresence } from "framer-motion";
 import { ReactNode } from "react";
-import Backdrop from "./backdrop";
+import Backdrop from "../ui/backdrop";
 import { AiOutlineClose } from "react-icons/ai";
 import { useModal } from "@/context/ModalContext";
 import { motion } from "framer-motion";

@@ -1,0 +1,225 @@
+.root {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+
+  & .-comments {
+    position: absolute;
+    width: 100%;
+    top: 25%;
+    height: 75%;
+    z-index: 10;
+  }
+}
+
+
+
+.hero-banner {
+    height: 36%;
+    max-height: 270px;
+    z-index: 5;
+
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(0deg, #EFC2AF 0%, #E59BB2 29%, #7E569D 100%);
+
+    @media (min-width: $breakpoint-xs) {
+      height: 38%;
+      max-height: 100%;
+    }
+
+    .-lg {
+      display: none;
+    }
+
+    .-opacity {
+      z-index: 999;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+
+    @media (min-width: $breakpoint-md) {
+      .-lg {
+        display: block;
+
+      }
+
+      .-sm {
+        display: none;
+      }
+    }
+
+    
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+  .-lg {
+
+    .-mountains {
+      position: relative;
+      top: 5rem;
+      left: -2rem;
+      width: 105%;
+    }
+  
+    .-clouds {
+      position: relative;
+      
+      .-left {
+        position: absolute;
+        top: 0px;
+        left: -1.5rem;
+        width: 210px;
+        z-index: 100;
+        // animation: cloudLeftInAnimation 1s ease-in-out 0.12s;
+      }
+  
+      .-right {
+        position: absolute;
+        top: 50px;
+        right: -2rem;
+        width: 178px;
+        height: auto;
+        z-index: 100;
+        // animation: cloudRightInAnimation 1s ease-in-out 0.12s;
+      }
+    }
+  
+    .-waves {
+      position: absolute;
+      bottom: 30px;
+      width: 100%;
+      height: 250px;
+      z-index: 2;
+    }
+  
+  
+    .-flowers {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      z-index: 300;
+  
+    }
+  }
+  .-sm {
+
+    .-mountains {
+      position: relative;
+  
+      .-left {
+        position: absolute;
+        top: 60px;
+        left: -2rem;
+        width: 310px;
+        z-index: 1;
+  
+        @media (min-width: $breakpoint-xs) {
+          top: 100px;
+        }
+      }
+  
+      .-right {
+        position: absolute;
+        top: 60px;
+        right: -5px;
+        width: 195px;
+        z-index: 1;
+  
+        @media (min-width: $breakpoint-xs) {
+          top: 100px;
+          right: -10px;
+        }
+      }
+    }
+  
+    .-clouds {
+      position: relative;
+      
+      .-left {
+        position: absolute;
+        top: 60px;
+        left: -1.5rem;
+        width: 210px;
+        z-index: 100;
+        // animation: cloudLeftInAnimation 1s ease-in-out 0.12s;
+      }
+  
+      .-right {
+        position: absolute;
+        top: 50px;
+        right: -2rem;
+        width: 178px;
+        height: auto;
+        z-index: 100;
+        // animation: cloudRightInAnimation 1s ease-in-out 0.12s;
+      }
+    }
+  
+    .-waves {
+      position: absolute;
+      bottom: 30px;
+      width: 445px;
+      height: 100px;
+      z-index: 2;
+  
+      @media (min-width: $breakpoint-xs) {
+        bottom: 60px;
+      }
+  
+      @media (min-width: 400px) {
+        bottom: 90px;
+      }
+    }
+  
+  
+    .-flowers {
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      width: 100%;
+      height: 210px;
+      z-index: 300;
+  
+      @media (min-width: $breakpoint-xs) {
+        bottom: 100px;
+      }
+    }
+  }
+
+  .-texts { 
+    margin: 10%;
+
+    display: grid;
+    place-items: center;
+    text-align: center;
+
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-family: "PT Sans", sans-serif;
+    font-weight: 900;
+    color: #FFF;
+
+    @media (min-width: $breakpoint-xs) {
+      margin: 15%;
+    }
+
+    h1 {
+      font-size: clamp(32px, 4vw, 40px);
+      z-index: 1000 !important;
+    }
+
+    p {
+      font-size: clamp(16px, 2vw, 20px);
+      z-index: 1000 !important;
+    }
+  }
+    
+}

@@ -1,9 +1,9 @@
 "use client";
 
 import { useModal } from "@/context/ModalContext";
-import Modal from "../ui/modal";
-import Loading from "../loading.loykratong";
+import Modal from "./modal";
 import SelectTray from "../trays/tray.select";
+import Loading from "../loading";
 
 const ModalWrapper = () => {
   const { modalState } = useModal();

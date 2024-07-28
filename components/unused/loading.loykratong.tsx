@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import { Spinner } from "./ui/spinner";
+import { Spinner } from "../ui/spinner";
 
 interface IAirProps {
   className: string;
@@ -49,7 +49,7 @@ const Mountains: React.FC = () => (
   </div>
 );
 
-const Loading: React.FC = () => (
+const LoadingLoyKratong: React.FC = () => (
   <div className="loading">
     <div className="-stars"></div>
     <AirWaves />
@@ -98,4 +98,4 @@ const Loading: React.FC = () => (
   </div>
 );
 
-export default Loading;
+export default LoadingLoyKratong;
