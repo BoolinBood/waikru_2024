@@ -24,8 +24,8 @@ const Success = () => {
           width={36}
           height={36}
         />
-        <h1 className="upload-success font-bold">Upload Successful</h1>
-        <p className="subtext">your message has already been posted.</p>
+        <h1 className="text-xl font-bold">Upload Successful</h1>
+        <p className="text-gray-400">your message has already been posted.</p>
       </div>
     </div>
   );
