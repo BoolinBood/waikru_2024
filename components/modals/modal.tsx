@@ -1,6 +1,5 @@
 "use client";
 
-import { AnimatePresence } from "framer-motion";
 import { ReactNode } from "react";
 import Backdrop from "../ui/backdrop";
 import { AiOutlineClose } from "react-icons/ai";
@@ -21,7 +20,7 @@ const dropIn = {
     x: "0",
     opacity: 1,
     transition: {
-      duration: 0.1,
+      duration: 0.3,
       type: "spring",
       damping: 25,
       stiffness: 500,
@@ -48,6 +47,7 @@ const Modal = ({ children, closeButton = true }: IProps) => {
         variants={dropIn}
         initial="hidden"
         animate="visible"
+        layout
         exit="exit"
       >
         {children}

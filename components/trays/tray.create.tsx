@@ -42,7 +42,6 @@ const CreateTray: React.FC<Props> = ({ selectedFlower }) => {
   const {
     register,
     handleSubmit,
-    setValue,
     formState: { errors },
   } = useForm<CreateTrayInputs>({
     resolver: zodResolver(CreateTraySchema),
@@ -50,10 +49,6 @@ const CreateTray: React.FC<Props> = ({ selectedFlower }) => {
 
   const [selectedTag, setSelectedTag] = useState<Faculty>(Faculty.IT);
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setValue("tag", selectedTag);
-  }, [selectedTag, setValue]);
 
   const handleTagClick = (tag: Faculty) => {
     setSelectedTag(tag);
@@ -68,17 +63,19 @@ const CreateTray: React.FC<Props> = ({ selectedFlower }) => {
   };
 
   const onSubmit: SubmitHandler<CreateTrayInputs> = (data) => {
-    console.log(data);
     setLoading(true);
 
     saveTray(data.name, data.message, selectedFlower, data.tag, () => {
       setLoading(false);
-      console.log("Tray saved");
-      setModalState("success");
+      setModalState("none");
+
+      setTimeout(() => {
+        setModalState("success");
+      }, 500);
 
       setTimeout(() => {
         setModalState("none");
-      }, 1000);
+      }, 2000);
     });
   };
 

@@ -19,8 +19,12 @@ const SelectTray = () => {
   const [tray, setTray] = useState<FlowerType>("ixora");
 
   const handleClick = () => {
-    setSelectedFlower(tray);
-    setModalState("createTray");
+    setModalState("none");
+
+    setTimeout(() => {
+      setSelectedFlower(tray);
+      setModalState("createTray");
+    }, 500);
   };
 
   return (
