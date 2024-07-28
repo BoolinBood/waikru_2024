@@ -2,11 +2,11 @@ declare type TrayType = {
   _id?: string;
   name: string;
   message: string;
-  selectedTray: FlowerType;
-  dept: string;
+  flower: FlowerType;
+  dept: Dept;
 };
 
-declare type Dept = "IT" | "CS" | "DSI" ;
+declare type Dept = "IT" | "CS" | "DSI" | ""; ;
 
 declare type FlowerType =
   | "ixora"
@@ -14,14 +14,15 @@ declare type FlowerType =
   | "cherry-blossoms"
   | "marigold"
   | "orchid"
-  | "zinnia";
+  | "zinnia"
+  | "";
 
 declare type AppContextType = {
   isConnected: boolean;
   dbConnected: boolean;
   transport: string;
   trays: TrayType[];
-  saveTray: (name: string, message: string, selectedTray: string, dept: string, callback?: () => void) => void;
+  saveTray: (name: string, message: string, flower: FlowerType, dept: Dept, callback?: () => void) => void;
   deleteTray: (id: string) => void;
   loadMoreTrays: () => void;
   hasMore: boolean;

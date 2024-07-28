@@ -93,11 +93,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   const saveTray = (
   name: string,
   message: string,
-  selectedTray: string,
-  dept: string,
+  flower: FlowerType,
+  dept: Dept,
   callback?: () => void
 ) => {
-  socket.emit("save_tray", { name, message, selectedTray, dept }, callback);
+  socket.emit("save_tray", { name, message, flower, dept }, callback);
 };
 
   const deleteTray = (id: string) => {
