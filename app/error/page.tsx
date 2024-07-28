@@ -1,18 +1,15 @@
 'use client'
-import Error from "@/components/error";
-import Modal from "@/components/ui/modal";
+import { useModal } from "@/context/ModalContext";
 import React from "react";
 
 const page = () => {
+
+  const modalContext = useModal();
+
+  modalContext.setModalState("error");
+  
   return (
     <div>
-      <Modal handleClose={() => {
-        console.log('Error!')
-      } }>
-        <div className="w-full h-full grid place-items-center">
-        <Error />
-        </div>
-      </Modal>
     </div>
   );
 };

@@ -1,56 +1,32 @@
-import React, { useState } from 'react';
-import Image from 'next/image';
+import React from "react";
+import { Inter } from "next/font/google";
+import { CgClose } from "react-icons/cg";
+
+const inter = Inter({ subsets: ["latin"], weight: ["400", "700"] });
 
 const Error = () => {
-  const [isVisible, setIsVisible] = useState(true);
-
-  const handleClose = () => {
-    setIsVisible(false);
-  };
-
-  const handleRetry = () => {
-    console.log('Retrying...');
-
-    retryUpload()
-      .then(() => {
-        console.log('Upload successful');
-        setIsVisible(false); 
-      })
-      .catch((error) => {
-        console.error('Upload failed', error);
-      });
-  };
-
-  const retryUpload = () => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        const isSuccess = Math.random() > 0.5;
-        if (isSuccess) {
-          resolve();
-        } else {
-          reject(new Error('Failed to upload'));
-        }
-      }, 2000);
-    });
-  };
-
-  if (!isVisible) return null;
-
   return (
-    <div className='error'>
-        <div className='-box'>
-          <div className='box-toper'>
-              <Image src="/assets/error/icon-cross.png" alt="icon-cross" width={24} height={24} />
-              <p className='upload-failed'>Upload failed</p>
-          </div>
+    <div className="m-6 p-3 min-w-[200px] max-w-[400px] bg-white rounded-xl flex">
+      <img src="/assets/error/alert-error.svg" alt="" width={48} height={48}/>
+      <div>
+        <h1 className={`${inter.className} font-bold text-xl tracking-wide`}>
+          Upload failed
+        </h1>
+        <div className="text-gray-400 mt-2">
+          Something went wrong. Please try sending your response again
         </div>
-        <p className="-text">
-          Something went wrong. Please try <br />
-          sending your response again
-        </p>
-        <button className='btn' onClick={handleRetry}>Try again</button>
+        <button
+          type="button"
+          className="mt-4 w-full font-bold text-white py-3 bg-[#FF3D63] rounded-md"
+        >
+          Try again
+        </button>
+      </div>
+      <div>
+        <CgClose size={24} />
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default Error;

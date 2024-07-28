@@ -38,6 +38,7 @@ const Create: React.FC<Props> = ({ trayData }) => {
           <CgClose size={24} />
         </div>
       </div>
+
       <div className="pl-2 w-full flex items-center justify-between gap-4">
         <div>
           <img
@@ -60,24 +61,24 @@ const Create: React.FC<Props> = ({ trayData }) => {
       {/* Tag section */}
       <div className="self-start">
         <div className="mb-2">Tag</div>
-        <div className="flex gap-4">
+        <div className="flex gap-2">
           <button
             type="button"
-            className={`rounded-full bg-[#FC6C8D] px-3 py[2px] text-white font-bold ${selectedTag == Faculty.IT ? "" : "opacity-40"}`}
+            className={`rounded-full bg-[#FC6C8D] px-3 py-[4px] text-xs text-white font-bold ${selectedTag == Faculty.IT ? "" : "opacity-40"}`}
             onClick={() => handleTagClick(Faculty.IT)}
           >
             <h1>IT</h1>
           </button>
           <button
             type="button"
-            className={`rounded-full bg-[#A297C0] px-3 py[2px] text-white font-bold ${selectedTag == Faculty.CS ? "" : "opacity-40"}`}
+            className={`rounded-full bg-[#A297C0] px-3 py-[4px] text-xs text-white font-bold ${selectedTag == Faculty.CS ? "" : "opacity-40"}`}
             onClick={() => handleTagClick(Faculty.CS)}
           >
             <h1>CS</h1>
           </button>
           <button
             type="button"
-            className={`rounded-full bg-[#8DB0C4] px-3 py[2px] text-white font-bold ${selectedTag == Faculty.DSI ? "" : "opacity-40"}`}
+            className={`rounded-full bg-[#8DB0C4] px-3 py-[4px] text-xs text-white font-bold ${selectedTag == Faculty.DSI ? "" : "opacity-40"}`}
             onClick={() => handleTagClick(Faculty.DSI)}
           >
             <h1>DSI</h1>

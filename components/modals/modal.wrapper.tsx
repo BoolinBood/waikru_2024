@@ -6,6 +6,8 @@ import SelectTray from "../trays/tray.select";
 import Loading from "../loading";
 import Create from "../Create";
 import Success from "../Success";
+import Error from "../Error";
+
 
 const data: TrayType = {
   _id: "",
@@ -15,9 +17,9 @@ const data: TrayType = {
 };
 
 const ModalWrapper = () => {
-  const { modalState } = useModal();
+  const modalContext = useModal();
 
-  switch (modalState) {
+  switch (modalContext.modalState) {
     case "loading":
       return (
         <Modal>
@@ -25,7 +27,7 @@ const ModalWrapper = () => {
         </Modal>
       );
     case "error":
-      return <Modal>Error</Modal>;
+      return <Modal><Error /></Modal>;
     case "success":
       return (
         <Modal>
