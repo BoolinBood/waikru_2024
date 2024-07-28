@@ -9,7 +9,7 @@ import Button from "../ui/button";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { LoadingSpinner, Spinner } from "../ui/spinner";
+import { LoadingSpinner } from "../ui/spinner";
 
 interface Props {
   selectedFlower: FlowerType;
@@ -74,7 +74,11 @@ const CreateTray: React.FC<Props> = ({ selectedFlower }) => {
     saveTray(data.name, data.message, selectedFlower, data.tag, () => {
       setLoading(false);
       console.log("Tray saved");
-      setModalState("none");
+      setModalState("success");
+
+      setTimeout(() => {
+        setModalState("none");
+      }, 1000);
     });
   };
 
@@ -163,7 +167,7 @@ const CreateTray: React.FC<Props> = ({ selectedFlower }) => {
 
         {/* Submit button */}
         <div className="flex justify-center mt-4">
-          <Button htmlType="submit" disabled={isLoading}>
+          <Button htmlType="submit" disabled={loading}>
             <div className="flex items-center">
               <h1>Submit</h1>
               {loading && (

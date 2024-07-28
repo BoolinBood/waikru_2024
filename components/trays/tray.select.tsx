@@ -3,13 +3,15 @@
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
+
 import { getFlowerName, getFlowerPath, getFlowers } from "@/utils/flower.utils";
 import Button from "../ui/button";
 import Image from "next/image";
 import { useModal } from "@/context/ModalContext";
+
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 const SelectTray = () => {
   const flowers = getFlowers();

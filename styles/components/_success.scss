@@ -1,121 +1,123 @@
-.-success {
-  padding: 5px;
-  border-radius: 5.363px;
-  border: 0.67px solid #e4e4e4;
+.success {
+  padding: 10px;
+  border-radius: 11px;
+
   background: #fff;
   box-shadow: 0px 0px 8.045px 0px rgba(0, 0, 0, 0.05);
+
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  width: 100%;
+  
+  max-width: 90%;
 
-  .success-icon {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-bottom: 10px;
+
+  .-icon {
+    display: grid;
+    place-items: center;    
+    margin-bottom: 8px;
+
+    width: 32px;
+    height: 32px;
   }
 
-  .upload-success {
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+
+  h1, p {
     text-align: center;
   }
 
-  .subtext {
-    text-align: center;
+  h1 {
+    color: #141414;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  p {
     font-size: 12px;
-    padding-bottom: 20px;
     color: #54595e99;
     opacity: 60%;
   }
 
   // Media Queries for responsiveness
   @media (min-width: $breakpoint-xs) { 
-    .upload-success{
+    h1 {
       font-size: 14px;
     }
-    .success-icon {
-      margin-top: 15px;
-      margin-bottom: 8px;
-    }
 
-    .subtext {
+    p {
       font-size: 11px;
-      padding-bottom: 15px;
     }
   }
 
   @media (min-width: $breakpoint-md) { // Tablets
-    .upload-success{
-      font-size: 16px;
-    }
-    .success-icon {
-      margin-top: 25px;
-      margin-bottom: 12px;
+    max-width: 100%;
+    width: 350px;
+
+    .-icon {
+      margin-bottom: 16px;
+
+      width: 40px;
+      height: 40px;
     }
 
-    .subtext {
+
+    h1 {
+      font-size: 16px;
+    }
+
+    p {
       font-size: 13px;
-      padding-bottom: 25px;
     }
   }
 
   @media (min-width: $breakpoint-lg) { // Small Desktops
-    .upload-success{
-      font-size: 18px;
+    width: 500px;
+    padding: 30px;
+
+
+    .-icon {
+      margin-bottom: 16px;
+
+      width: 48px;
+      height: 48px;
     }
-    .success-icon {
-      margin-top: 30px;
-      margin-bottom: 15px;
+    h1 {
+      font-size: 18px;
+      margin-bottom: 12px;
     }
 
-    .subtext {
+    p {
       font-size: 14px;
-      padding-bottom: 30px;
     }
   }
 
   @media (min-width: $breakpoint-xl) { // Large Desktops
-    .upload-success{
+    h1{
       font-size: 20px;
     }
-    .success-icon {
-      margin-top: 35px;
-      margin-bottom: 20px;
-    }
 
-    .subtext {
+    p {
       font-size: 16px;
-      padding-bottom: 35px;
     }
   }
 
-  @media (min-width:$breakpoint-xxl) {
-    .upload-success{
+  @media (min-width: $breakpoint-xxl) { // Extra Large Desktops
+    h1 {
       font-size: 22px;
     }
-    .success-icon{
-        margin-top: 40px;
-        margin-bottom: 25px;
-    }
-    .subtext{
-        font-size: 18px;
-        padding-bottom: 40px;
+
+    p {
+      font-size: 18px;
     }
   }
-  @media (min-width:$breakpoint-xxxl) {
-    .upload-success{
-      font-size: 24px;
-    }
-    .success-icon{
-        margin-top: 45px;
-        margin-bottom: 30px;
-    }
-    .subtext{
-        font-size: 20px;
-        padding-bottom: 45px;
-    }
-  }
+
+  
 }

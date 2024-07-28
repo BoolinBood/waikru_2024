@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 
 interface IProps {
   children: ReactNode;
+  closeButton?: boolean;
 }
 
 const dropIn = {
@@ -32,8 +33,8 @@ const dropIn = {
   },
 };
 
-const Modal = ({ children }: IProps) => {
-  const { setModalState, modalState } = useModal();
+const Modal = ({ children, closeButton = true }: IProps) => {
+  const { setModalState } = useModal();
 
   const handleClose = () => {
     setModalState("none");
@@ -50,9 +51,11 @@ const Modal = ({ children }: IProps) => {
         exit="exit"
       >
         {children}
-        <button className="-close" onClick={handleClose}>
-          <AiOutlineClose />
-        </button>
+        {closeButton && (
+          <button className="-close" onClick={handleClose}>
+            <AiOutlineClose />
+          </button>
+        )}
       </motion.div>
     </Backdrop>
   );

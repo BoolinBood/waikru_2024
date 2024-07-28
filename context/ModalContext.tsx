@@ -23,7 +23,7 @@ interface ModalContextProps {
 const ModalContext = createContext<ModalContextProps | undefined>(undefined);
 
 export const ModalProvider = ({ children }: { children: ReactNode }) => {
-  const [modalState, setModalState] = useState<ModalState>("none");
+  const [modalState, setModalState] = useState<ModalState>("success");
   const [selectedFlower, setSelectedFlower] = useState<string>("");
   const [selectedTray, setSelectedTray] = useState<TrayType | undefined>(
     undefined

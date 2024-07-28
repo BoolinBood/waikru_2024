@@ -12,7 +12,7 @@ interface ICommentItem {
 }
 
 const CommentItem = ({ index, tray }: ICommentItem) => {
-  const { name, message, selectedTray } = tray;
+  const { name, message, flower } = tray;
   const { setSelectedTray, setModalState } = useModal();
 
   const handleClick = () => {
@@ -20,19 +20,23 @@ const CommentItem = ({ index, tray }: ICommentItem) => {
     setModalState("viewTray");
   };
 
+  //TODO: Pop up animation when user submits a comment
   return (
     <MotionDiv
       className="comment"
       // animate={{ x: [0, 3, 0], y: [0, -3, 0] }}
-      transition={{
-        duration: 2,
-        ease: "easeInOut",
-        repeat: Infinity,
-        repeatType: "loop",
-        delay: index * 0.1,
-      }}
+      // transition={{
+      //   duration: 2,
+      //   ease: "easeInOut",
+      //   repeat: Infinity,
+      //   repeatType: "loop",
+      //   delay: index * 0.1,
+      // }}
       onClick={handleClick}
     >
+      <div className="-tag">
+        <span className={`-${tray.dept}`}>{tray.dept}</span>
+      </div>
       <div className="-message">
         <p>{message}</p>
       </div>
@@ -41,8 +45,8 @@ const CommentItem = ({ index, tray }: ICommentItem) => {
       </div>
       <div className="-tray">
         <Image
-          src={getFlowerPath(selectedTray)}
-          alt="tray"
+          src={getFlowerPath(flower)}
+          alt={flower}
           width={50}
           height={50}
         />

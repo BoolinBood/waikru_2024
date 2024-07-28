@@ -12,9 +12,8 @@ const CommentView: React.FC<IProps> = ({ tray }) => {
       <div className="-box">
         <div className="-flower">
           <Image
-            src={getFlowerPath(tray.selectedTray)}
+            src={getFlowerPath(tray.flower)}
             alt="flower"
-            // layout="responsive"
             width={150}
             height={150}
           />

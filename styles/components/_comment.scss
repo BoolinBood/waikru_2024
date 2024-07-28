@@ -41,10 +41,12 @@
 .comment {
     width: 150px;
     height: 85px;
-    padding: 10px;
+    padding: 16px;
 
-    display: grid;
-    place-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
     position: relative;
 
     border-radius: 28px;
@@ -70,9 +72,39 @@
         border-radius: 60px;
         padding: 30px;
     } 
+
+    .-tag {
+        position: absolute;
+        top: 0px;
+        left: 16px;
+
+        span {
+            border-radius: 9px;
+            padding: 2px 4px;
+
+            color: white;
+            font-weight: 700;
+            font-family: "Inter";
+            font-size: clamp(5px, 10px, 15px);
+        }
+
+        & .-IT {
+            background-color: #FC6C8D;
+        }
+
+        & .-CS {
+            background-color: #A297C0;
+        }
+
+        & .-DSI {
+            background-color: #8DB0C4;
+        }
+    }
       
 
     .-message {
+        margin-top: 11px;
+        text-align: start;
         color: #000;
 
         font-family: Inter;
@@ -140,21 +172,20 @@
         }
     }
 }
-
 .comment-view {
     background: white;
-    width: 400px;
-    height: 450px;
-  
+    width: 90%;
+    height: auto;
+    padding: 40px;
+    box-sizing: border-box;
     flex-shrink: 0;
-    border-radius: 12px;
+    border-radius: 45px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    
     display: flex;
     flex-direction: column;
     justify-content: center;
   
-    .-flower{
+    .-flower {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -163,6 +194,8 @@
       img {
         object-fit: cover;
         border-radius: 10px;
+        max-width: 100%;
+        height: auto;
       }
     }
   
@@ -177,11 +210,48 @@
     }
   
     .-message {
-      margin-bottom: 10px;
+      margin: 16px;
       white-space: pre-wrap;
       word-wrap: break-word;
-      text-align: center; 
-     
+      text-align: start;
+    }
+  
+    @media (min-width: $breakpoint-md) {
+      width: 500px;
+      .img{
+          max-width: 100%;
+      }
+      .-name{
+          font-size: 24px;
+      }
+      .-message{
+          font-size: 16px;
+      }
+    }
+  
+    @media (min-width: $breakpoint-xl) {
+      width: 720px;
+      .img{
+          max-width: 100%;
+      }
+      .-name{
+          font-size: 28px;
+      }
+      .-message{
+          font-size: 24px;
+      }
+    }
+  
+    @media (min-width: $breakpoint-xxl) {
+      width: 800px;
+      .img{
+          max-width: 100%;
+      }
+      .-name{
+          font-size: 32px;
+      }
+      .-message{
+          font-size: 28px;
+      }
     }
   }
-  

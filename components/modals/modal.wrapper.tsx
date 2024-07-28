@@ -28,7 +28,7 @@ const ModalWrapper = () => {
             </Modal>
           )}
           {modalState === "success" && (
-            <Modal>
+            <Modal closeButton={false}>
               <Success />
             </Modal>
           )}
@@ -43,7 +43,7 @@ const ModalWrapper = () => {
             </Modal>
           )}
           {modalState === "createTray" && selectedFlower && (
-            <Modal>
+            <Modal closeButton={false}>
               <CreateComment selectedFlower={selectedFlower as FlowerType} />
             </Modal>
           )}

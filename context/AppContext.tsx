@@ -1,5 +1,5 @@
 "use client";
-import { socket } from "@/sockets/socket";
+import { socket } from "@/sockets/socketClient";
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -7,12 +7,16 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [isConnected, setIsConnected] = useState(false);
-  const [dbConnected, setDbConnected] = useState(false);
-  const [transport, setTransport] = useState("?");
+  const [isConnected, setIsConnected] = useState<boolean>(false);
+  const [dbConnected, setDbConnected] = useState<boolean>(false);
+  const [transport, setTransport] = useState<string>("?");
   const [trays, setTrays] = useState<TrayType[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
+
     function onConnect() {
       setIsConnected(true);
       setTransport(socket.io.engine.transport.name);
@@ -36,16 +40,34 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
       setDbConnected(status.dbConnected);
     }
 
-    function onTrayUpdate(data: TrayType | TrayType[]) {
-      if (Array.isArray(data)) {
-        setTrays(data);
+    function onTrayUpdate(data: { trays: TrayType[], totalCount: number }) {
+      if (Array.isArray(data.trays)) {
+        setTrays(prevTrays => [...prevTrays, ...data.trays]);
+        setTotalCount(data.totalCount);
+        setHasMore(trays.length < data.totalCount);
       } else {
-        setTrays((prevTrays) => [...prevTrays, data]);
+        setTrays([]);
+        setTotalCount(0);
+        setHasMore(false);
       }
     }
 
+    function onNewTray(newTray: TrayType) {
+      setTrays(prevTrays => [newTray, ...prevTrays]);
+    }
+  
+    function onUpdateTotalCount(count: number) {
+      setTotalCount(count);
+      setHasMore(trays.length < count);
+    }
+
+
     function onTrayDeleted(id: string) {
       setTrays((prevTrays) => prevTrays.filter((tray) => tray._id !== id));
+    }
+
+    if (socket.connected) {
+      socket.emit("get_trays");
     }
 
     socket.on("connect", onConnect);
@@ -53,10 +75,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
     socket.on("server_status", onServerStatus);
     socket.on("tray_update", onTrayUpdate);
     socket.on("tray_deleted", onTrayDeleted);
+    socket.on("new_tray", onNewTray);
+    socket.on("update_total_count", onUpdateTotalCount);
 
-    if (socket.connected) {
-      socket.emit("get_trays");
-    }
 
     return () => {
       socket.off("connect", onConnect);
@@ -64,23 +85,31 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
       socket.off("server_status", onServerStatus);
       socket.off("tray_update", onTrayUpdate);
       socket.off("tray_deleted", onTrayDeleted);
+      socket.off("new_tray", onNewTray);
+      socket.off("update_total_count", onUpdateTotalCount);
     };
   }, []);
 
   const saveTray = (
-    name: string,
-    message: string,
-    flower: FlowerType,
-    dept: "IT" | "CS" | "DSI",
-    callback?: () => void
-  ) => {
-    socket.emit("save_tray", { name, message, flower, dept }, () => {
-      if (callback) callback();
-    });
-  };
+  name: string,
+  message: string,
+  flower: FlowerType,
+  dept: Dept,
+  callback?: () => void
+) => {
+  socket.emit("save_tray", { name, message, flower, dept }, callback);
+};
 
   const deleteTray = (id: string) => {
     socket.emit("delete_tray", id);
+  };
+
+  const loadMoreTrays = () => {
+    if (hasMore) {
+      const nextPage = currentPage + 1;
+      socket.emit("get_trays", nextPage);
+      setCurrentPage(nextPage);
+    }
   };
 
   return (
@@ -92,6 +121,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
         trays,
         saveTray,
         deleteTray,
+        loadMoreTrays,
+        hasMore,
       }}
     >
       {children}

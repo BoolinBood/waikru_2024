@@ -1,16 +1,14 @@
+"use client";
+
 import React from "react";
 import CommentItem from "./comment.item";
 import LoadMoreComments from "./comment.loadmore";
-import Button from "../ui/button";
-import { AiOutlinePlus } from "react-icons/ai";
 import CommentFloatButton from "./comment.button";
+import { useAppContext } from "@/context/AppContext";
 
-export interface ICommentListProps {
-  comments: TrayType[];
-}
-
-const CommentList = ({ comments }: ICommentListProps) => {
+const CommentList = () => {
   // Todo: Fetch only 4-8 comments on initial load
+  const { trays: comments } = useAppContext();
 
   return (
     <div className="comment-section">

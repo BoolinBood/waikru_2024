@@ -1,8 +1,5 @@
 import CommentList from "@/components/comments/comment.list";
 import HeroBanner from "@/components/hero-banner/hero-banner";
-import { generateMockData } from "@/utils/mockup.utils";
-
-const data = generateMockData(8); // Change the number to generate a different amount of data
 
 export default async function Home() {
   async function handleLoading() {
@@ -10,13 +7,13 @@ export default async function Home() {
   }
 
   await handleLoading();
-  
+
   return (
     <div className="root">
       <HeroBanner />
 
       <div className="-comments">
-        <CommentList comments={data} />
+        <CommentList />
       </div>
     </div>
   );
