@@ -2,6 +2,8 @@
 import { Server } from "socket.io";
 import TrayModel from "@/app/models/TrayModel";
 
+const itemsPerPage = 4;
+
 const setupSocketEvents = (io: Server) => {
   io.on("connection", (socket) => {
     console.log(`A client connected with ID: ${socket.id}`);
@@ -9,10 +11,15 @@ const setupSocketEvents = (io: Server) => {
       isConnected: true,
       dbConnected: true,
     });
-    socket.on("get_trays", async () => {
+    socket.on("get_trays", async (page: number = 1) => {
       try {
-        const trays = await TrayModel.find().sort({ _id: -1 });
-        socket.emit("tray_update", trays);
+        const skip = (page - 1) * itemsPerPage;
+        const trays = await TrayModel.find()
+          .sort({ _id: -1 })
+          .skip(skip)
+          .limit(itemsPerPage);
+        const totalCount = await TrayModel.countDocuments();
+        socket.emit("tray_update", { trays, totalCount });
       } catch (error) {
         console.error("Error fetching trays:", error);
         socket.emit("fetch_error", { message: "Error fetching trays" });
@@ -22,8 +29,9 @@ const setupSocketEvents = (io: Server) => {
     socket.on("save_tray", async (data: TrayType, callback) => {
       try {
         const newTray = new TrayModel(data);
-        const savedTray = await newTray.save();
-        io.emit("tray_update", savedTray);
+        await newTray.save();
+        const updatedTrays = await TrayModel.find().sort({ _id: -1 });
+        io.emit("tray_update", updatedTrays);
         if (callback) callback();
       } catch (error) {
         console.error("Error saving tray:", error);

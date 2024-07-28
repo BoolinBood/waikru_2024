@@ -11,6 +11,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   const [dbConnected, setDbConnected] = useState<boolean>(false);
   const [transport, setTransport] = useState<string>("?");
   const [trays, setTrays] = useState<TrayType[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
 
@@ -37,11 +40,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
       setDbConnected(status.dbConnected);
     }
 
-    function onTrayUpdate(data: TrayType | TrayType[]) {
-      if (Array.isArray(data)) {
-        setTrays(data);
+    function onTrayUpdate(data: { trays: TrayType[], totalCount: number }) {
+      if (Array.isArray(data.trays)) {
+        setTrays(prevTrays => [...prevTrays, ...data.trays]);
+        setTotalCount(data.totalCount);
+        setHasMore(trays.length < data.totalCount);
       } else {
-        setTrays((prevTrays) => [...prevTrays, data]);
+        console.error("Received unexpected data structure:", data);
       }
     }
 
@@ -76,12 +81,23 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
     callback?: () => void
   ) => {
     socket.emit("save_tray", { name, message, selectedTray }, () => {
+      socket.emit("get_trays", 1);
+      setCurrentPage(1);
+      setTrays([]); // Clear existing trays
       if (callback) callback();
     });
   };
 
   const deleteTray = (id: string) => {
     socket.emit("delete_tray", id);
+  };
+
+  const loadMoreTrays = () => {
+    if (hasMore) {
+      const nextPage = currentPage + 1;
+      socket.emit("get_trays", nextPage);
+      setCurrentPage(nextPage);
+    }
   };
 
   return (
@@ -93,6 +109,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
         trays,
         saveTray,
         deleteTray,
+        loadMoreTrays,
+        hasMore,
       }}
     >
       {children}

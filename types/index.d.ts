@@ -20,6 +20,8 @@ declare type AppContextType = {
   trays: TrayType[];
   saveTray: (name: string, message: string, selectedTray: string, callback?: () => void) => void;
   deleteTray: (id: string) => void;
+  loadMoreTrays: () => void;
+  hasMore: boolean;
 };
 
 declare module "node:http" {
