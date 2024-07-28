@@ -2,10 +2,22 @@
 import { useAppContext } from "@/app/context/AppContext";
 import { useState } from "react";
 import StatusInfo from "@/components/trays/StatusInfo";
+import { useInView } from "framer-motion";
+import React, { useEffect, useRef } from "react";
+import { Spinner } from "@/components/ui/spinner";
+
 
 const AdminPage = () => {
-  const { trays, deleteTray } = useAppContext();
+  const { trays, loadMoreTrays, hasMore, deleteTray } = useAppContext();
+  const ref = useRef(null);
+  const isInView = useInView(ref);
   const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    if (isInView && hasMore) {
+      loadMoreTrays();
+    }
+  }, [isInView, hasMore]);
 
   const filteredTrays = trays.filter(tray =>
     tray.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -56,8 +68,11 @@ const AdminPage = () => {
           </tbody>
         </table>        
       </div>
-      <div className="mt-8 flex gap-4 items-center justify-center">
-      </div>
+      {hasMore && (
+        <div ref={ref} className="flex justify-center mt-5">
+          <Spinner />
+        </div>
+      )}
     </div>
   );
 };
