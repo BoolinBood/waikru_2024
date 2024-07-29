@@ -14,8 +14,9 @@ const CommentView: React.FC<IProps> = ({ tray }) => {
           <Image
             src={getFlowerPath(tray.flower)}
             alt="flower"
-            width={150}
-            height={150}
+            layout="fixed"
+            width={100}
+            height={100}
           />
         </div>
         <h1 className="-name">{tray.name} คนระยองรักจริงหวังแต่ง</h1>

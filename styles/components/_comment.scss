@@ -1,5 +1,3 @@
-
-
 .comment-section {
     overflow-y: auto; 
     overflow-x: hidden; 
@@ -10,31 +8,26 @@
     border-top-right-radius: 28px;
     padding: 1rem;
 
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
- 
-    background: linear-gradient(180deg, #D1AFDD 0%, #A67BB7 100%);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-    .-btn {
-        position: fixed;
-        top: 90%;
-    }
+  background: linear-gradient(180deg, #d1afdd 0%, #a67bb7 100%);
 
+  .-btn {
+    position: fixed;
+    top: 90%;
+  }
 }
 
 .comment-list {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    
-    max-width: 1024px;
-    gap: 2.5rem;
-    padding: 20px 10px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 
-    @media (min-width: $breakpoint-md) {
-        grid-template-columns: repeat(3, minmax(0, 1fr))
-    }
+  max-width: 1024px;
+  gap: 2.5rem;
+  padding: 20px 10px;
 
     @media (min-width: $breakpoint-xxl) {
         grid-template-columns: repeat(3, minmax(0, 1fr))
@@ -61,22 +54,42 @@
 
     position: relative;
 
-    border-radius: 28px;
-    background: #FFF;
-    box-shadow: 0px 3.689px 0px 0px #A297C0;
+  border-radius: 28px;
+  background: #fff;
+  box-shadow: 0px 3.689px 0px 0px #a297c0;
 
+  @media (min-width: $breakpoint-md) {
+    padding: 20px;
+    width: 200px;
+    height: 100px;
+  }
+
+  @media (min-width: $breakpoint-xl) {
+    width: 250px;
+    height: 150px;
+  }
+
+  @media (min-width: $breakpoint-xxl) {
+    width: 320px;
+    height: 187px;
+    border-radius: 60px;
+    padding: 30px;
+  }
+
+  .-message {
+    color: #000;
+
+    font-family: Inter;
+    font-size: 10px;
+    font-weight: 400;
 
     @media (min-width: $breakpoint-md) {
-        padding: 20px;
-        width: 200px;
-        height: 100px;
+      font-size: 12px;
     }
 
     @media (min-width: $breakpoint-xl) {
-        width: 250px;
-        height: 150px;
+      font-size: 16px;
     }
-
 
     @media (min-width: $breakpoint-xxl) {
         width: 320px;
@@ -146,27 +159,19 @@
             font-size: 20px;
         }
     }
-    
-    .-author {
-        width: 100%;
-        color: #000;
+  }
 
-        text-align: right;
-        font-family: Inter;
-        font-size: 8px;
-        font-weight: 700;
+  .-author {
+    width: 100%;
+    color: #000;
 
-        @media (min-width: $breakpoint-md) {
-            font-size: 10px;
-        }
+    text-align: right;
+    font-family: Inter;
+    font-size: 8px;
+    font-weight: 700;
 
-        @media (min-width: $breakpoint-xl) {
-            font-size: 13px;
-        }
-
-        @media (min-width: $breakpoint-xxl) {
-            font-size: 16px;
-        }
+    @media (min-width: $breakpoint-md) {
+      font-size: 10px;
     }
 
     .-tray {
@@ -198,6 +203,37 @@
             left: -2rem;
         }
     }
+
+    @media (min-width: $breakpoint-xxl) {
+      font-size: 16px;
+    }
+  }
+
+  .-tray {
+    position: absolute;
+    bottom: -1.5rem;
+    left: -1rem;
+
+    width: 37px;
+    height: 63px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: rotate(-25deg);
+    }
+
+    @media (min-width: $breakpoint-md) {
+      width: 50px;
+      height: 85px;
+    }
+
+    @media (min-width: $breakpoint-xxl) {
+      width: 80px;
+      height: 136px;
+    }
+  }
 }
 .comment-view {
     background: white;
@@ -209,7 +245,6 @@
     border-radius: 45px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     display: flex;
-    flex-direction: column;
     justify-content: center;
   
     .-flower {
