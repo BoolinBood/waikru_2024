@@ -5,6 +5,8 @@ import Image from "next/image";
 import React, { useMemo } from "react";
 import { useModal } from "@/context/ModalContext";
 import { MotionDiv } from "../motion.div";
+import { useEffect, useState } from "react";
+import { truncateString } from "@/utils/string.utils";
 
 interface ICommentItem {
   index: number;
@@ -27,6 +29,11 @@ const getRandomAnimationValues = (index: number) => {
 const CommentItem = ({ index, tray }: ICommentItem) => {
   const { name, message, flower } = tray;
   const { setSelectedTray, setModalState } = useModal();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleClick = () => {
     setSelectedTray(tray);
@@ -41,34 +48,45 @@ const CommentItem = ({ index, tray }: ICommentItem) => {
 
   return (
     <MotionDiv
-      animate={{ x, y }}
-      transition={{
-        duration,
-        ease: "easeInOut",
-        repeat: Infinity,
-        repeatType: "loop",
-        delay,
+      initial={{ x: -50, opacity: 0 }}
+      animate={{
+        x: 0,
+        opacity: mounted ? 1 : 0,
+        transition: { delay: 2, duration: 1 },
       }}
-      className="comment"
-      onClick={handleClick}
+      layout
+      className="comment-item-container"
     >
-      <div className="-tag">
-        <span className={`-${tray.dept}`}>{tray.dept}</span>
-      </div>
-      <div className="-message">
-        <p>{message}</p>
-      </div>
-      <div className="-author">
-        <p>{name}</p>
-      </div>
-      <div className="-tray">
-        <Image
-          src={getFlowerPath(flower)}
-          alt={flower}
-          width={50}
-          height={50}
-        />
-      </div>
+      <MotionDiv
+        animate={{ x, y }}
+        transition={{
+          duration,
+          ease: "easeInOut",
+          repeat: Infinity,
+          repeatType: "loop",
+          delay,
+        }}
+        className="comment"
+        onClick={handleClick}
+      >
+        <div className="-tag">
+          <span className={`-${tray.dept}`}>{tray.dept}</span>
+        </div>
+        <div className="-message">
+          <p>{truncateString(message, 70)}</p>
+        </div>
+        <div className="-author">
+          <p>{name}</p>
+        </div>
+        <div className="-tray">
+          <Image
+            src={getFlowerPath(flower)}
+            alt={flower}
+            width={50}
+            height={50}
+          />
+        </div>
+      </MotionDiv>
     </MotionDiv>
   );
 };

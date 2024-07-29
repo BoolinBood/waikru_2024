@@ -4,8 +4,11 @@ import React, { useEffect, useRef } from "react";
 import CommentItem from "./comment.item";
 import CommentFloatButton from "./comment.button";
 import { useAppContext } from "@/context/AppContext";
-import { useInView } from "framer-motion";
-import Skeleton from "../skeleton";
+import { AnimatePresence, useInView } from "framer-motion";
+import dynamic from "next/dynamic";
+
+const Skeleton = dynamic(() => import("@/components/skeleton"));
+const Petal = dynamic(() => import("@/components/petal"));
 
 const CommentList = () => {
   const ref = useRef(null);
@@ -22,12 +25,15 @@ const CommentList = () => {
 
   return (
     <div className="comment-section">
-      <div className="comment-list">
-        {comments.map((item, index) => (
-          <CommentItem key={index} tray={item} index={index} />
-        ))}
-        <div ref={ref} className="none"></div>
-      </div>
+      <AnimatePresence mode="wait">
+        <Petal />
+        <div className="comment-list">
+          {comments.map((item, index) => (
+            <CommentItem key={item._id!} tray={item} index={index} />
+          ))}
+          <div ref={ref} className="none"></div>
+        </div>
+      </AnimatePresence>
 
       {/* Load more comments */}
       {hasMore && (

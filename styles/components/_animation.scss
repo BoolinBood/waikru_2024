@@ -1,0 +1,214 @@
+@-webkit-keyframes bounceY { 
+    0%, 100% {
+      -webkit-transform: translateY(0);
+    } 
+    50% {
+      -webkit-transform: translateY(-50px);
+    } 
+  } 
+    
+  @keyframes bounceY { 
+    0%, 100% {
+      transform: translateY(0);
+    } 
+    50% {
+      transform: translateY(-50px);
+    }
+  }
+    
+  @keyframes bounceX {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(-75px);
+    }
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+    
+  @keyframes float {
+    0%, 100% {
+      transform: translate(-50%, -50%);
+    }
+    50% {
+      transform: translate(-50%, -40%);
+    }
+  }
+
+  @keyframes cloudLeft {
+    0% {
+      transform: translateX(-700px);
+    }
+
+    100% {
+      transform: translateX(0px);
+    }
+  }
+
+  @keyframes cloudRight {
+    0% {
+      transform: translateX(700px);
+    }
+
+    100% {
+      transform: translateX(0px);
+    }
+  }
+
+  .petal {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: absolute;
+    top: 0;
+    @media (min-width: $breakpoint-sm) {
+      width: 50%;
+  }
+      @media (min-width: $breakpoint-md) {
+          width: 60%;
+      }
+      @media (min-width: $breakpoint-lg) {
+          width: 70%;
+      }
+      @media (min-width: $breakpoint-xl) {
+          width: 80%;
+      }
+      @media (min-width: $breakpoint-xxl) {
+          width: 90%;
+      }
+      @media (min-width: $breakpoint-xxl) {
+          width: 100%;
+      }
+  
+  }
+
+  @keyframes fall {
+    0% {
+      transform: translateY(0);
+      opacity: 0;
+    }
+    25% {
+      opacity: 1;
+    }
+  
+    100% {
+      transform: translateY(80vh);
+      opacity: 0;
+    }
+  }
+  
+  .petal img {
+    animation: fall 7s linear infinite;
+  }
+ 
+  .petal img:nth-child(1) {
+    animation-delay: 2s;
+  }
+  .petal img:nth-child(2) {
+    animation-delay: 1s;
+  }
+  .petal img:nth-child(3) {
+    animation-delay: 3s;
+  }
+  .petal img:nth-child(4) {
+    animation-delay: 4s;
+  }
+  .petal img:nth-child(5) {
+    animation-delay: 2s;
+  }
+  .petal img:nth-child(6) {
+    animation-delay: 1s;
+  }
+  .petal img:nth-child(7) {
+    animation-delay: 2s;
+  }
+  .petal img:nth-child(8) {
+    animation-delay: 3s;
+  }
+  .petal img:nth-child(9) {
+    animation-delay: 4s;
+  }
+  .petal img:nth-child(10) {
+    animation-delay: 3s;
+  }
+  .petal img:nth-child(11) {
+    animation-delay: 2s;
+  }
+  .petal img:nth-child(12) {
+    animation-delay: 1s;
+  }
+
+  .loading {
+    .-particles {
+        animation: bounceY 0.8s ease-in-out
+        , fadeIn 0.5s ease-in-out;
+      }
+  
+      .-bg {
+        animation: bounceX 0.8s ease-in-out
+        , fadeIn 0.5s ease-in-out;
+      }
+  
+      .-flowers {
+        animation: bounceX 0.8s ease-in-out
+        , fadeIn 0.8s ease-in-out;
+      }
+  
+      .-avatars {
+        animation: bounceY 0.8s ease-in-out
+        , fadeIn 0.5s ease-in-out;
+      }
+  
+      .-texts {
+        animation: float 3s infinite ease-in-out 1.05s;
+  
+        h1 {
+          animation: bounceY 1s ease-in
+          , fadeIn 1s ease-in-out;
+        }
+  
+        p {
+          animation: bounceY 1s ease-in 0.05s,
+          fadeIn 1s ease-in-out 0.1s;
+        }
+      }
+    }
+
+  .hero-banner {
+    .-mountains {
+        animation: bounceY 0.7s ease-in
+        , fadeIn 0.7s ease-in;
+    }
+
+    // .-waves {
+    //     animation: bounceX 0.8s ease-in-out
+    //     , fadeIn 0.5s ease-in-out;
+    // }
+
+    .-flowers {
+        animation: bounceY 0.8s ease-in-out 0.2s
+        , fadeIn 0.8s ease-in-out;
+    }
+
+    .-clouds {
+        .-left {
+            animation: cloudLeft 0.8s ease-in-out 0.3s
+            , fadeIn 0.5s ease-in-out;
+        }
+
+        .-right {
+            animation: cloudRight 0.8s ease-in-out 0.3s
+            , fadeIn 0.5s ease-in-out;
+        }
+    }
+
+  }

@@ -1,20 +1,48 @@
-import CommentList from "@/components/comments/comment.list";
-import HeroBanner from "@/components/hero-banner/hero-banner";
+"use client";
 
-export default async function Home() {
-  async function handleLoading() {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-  }
+import dynamic from "next/dynamic";
+import Loading from "@/components/loading/loading";
+import { AnimatePresence } from "framer-motion";
+import { useSuspenseLoader } from "@/hooks/suspense.hook";
+import { MotionDiv } from "@/components/motion.div";
 
-  await handleLoading();
+const HeroBanner = dynamic(
+  () => import("@/components/hero-banner/hero-banner"),
+  { suspense: true }
+);
+const CommentList = dynamic(
+  () => import("@/components/comments/comment.list"),
+  { suspense: true }
+);
+
+const motionProps = {
+  initial: { opacity: 0, y: -100 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  exit: { opacity: 0, y: 100, transition: { duration: 0.7 } },
+};
+
+export default function Home() {
+  const loading = useSuspenseLoader(2500);
 
   return (
-    <div className="root">
-      <HeroBanner />
-
-      <div className="-comments">
-        <CommentList />
-      </div>
-    </div>
+    <AnimatePresence mode="wait">
+      {loading ? (
+        <MotionDiv key="loading" {...motionProps} className="loading-container">
+          <Loading />
+        </MotionDiv>
+      ) : (
+        <MotionDiv key="content" {...motionProps} className="root">
+          <HeroBanner />
+          <MotionDiv
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0, transition: { duration: 0.7 } }}
+            className="-comments"
+            layout
+          >
+            <CommentList />
+          </MotionDiv>
+        </MotionDiv>
+      )}
+    </AnimatePresence>
   );
 }
