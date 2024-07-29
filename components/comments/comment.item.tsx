@@ -52,7 +52,7 @@ const CommentItem = ({ index, tray }: ICommentItem) => {
       animate={{
         x: 0,
         opacity: mounted ? 1 : 0,
-        transition: { delay: 2, duration: 1 },
+        transition: { delay: 1.5, duration: 1 },
       }}
       layout
       className="comment-item-container"
@@ -73,7 +73,7 @@ const CommentItem = ({ index, tray }: ICommentItem) => {
           <span className={`-${tray.dept}`}>{tray.dept}</span>
         </div>
         <div className="-message">
-          <p>{truncateString(message, 70)}</p>
+          <p>{truncateString(message, 50, ".....")}</p>
         </div>
         <div className="-author">
           <p>{name}</p>
