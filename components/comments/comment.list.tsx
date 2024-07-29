@@ -1,14 +1,24 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import CommentItem from "./comment.item";
-import LoadMoreComments from "./comment.loadmore";
 import CommentFloatButton from "./comment.button";
 import { useAppContext } from "@/context/AppContext";
+import { useInView } from "framer-motion";
+import Skeleton from "../skeleton";
 
 const CommentList = () => {
-  // Todo: Fetch only 4-8 comments on initial load
-  const { trays: comments } = useAppContext();
+  const ref = useRef(null);
+  const isInView = useInView(ref);
+  const { trays: comments, loadMoreTrays, hasMore } = useAppContext();
+
+  useEffect(() => {
+    if (isInView && hasMore) {
+      loadMoreTrays();
+    }
+
+    console.log("isInView", isInView);
+  }, [isInView, hasMore]);
 
   return (
     <div className="comment-section">
@@ -16,10 +26,18 @@ const CommentList = () => {
         {comments.map((item, index) => (
           <CommentItem key={index} tray={item} index={index} />
         ))}
-
-        {/* Load more comments */}
-        <LoadMoreComments />
+        <div ref={ref} className="none"></div>
       </div>
+
+      {/* Load more comments */}
+      {hasMore && (
+        <div className="comment-list">
+          {Array.from({ length: 5 }).map((_, index) => (
+            <Skeleton key={index} />
+          ))}
+        </div>
+      )}
+
       <div className="-btn">
         <CommentFloatButton />
       </div>

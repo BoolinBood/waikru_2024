@@ -201,28 +201,29 @@
 }
 .comment-view {
     background: white;
-    width: 90%;
+    width: 300px;
     height: auto;
     padding: 40px;
     box-sizing: border-box;
     flex-shrink: 0;
     border-radius: 45px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: center;
   
     .-flower {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 20px;
+      margin: 0 auto;
+      margin-bottom: 120px;
+
+      width: 100px;
+      height: 100px;
   
       img {
+        width: 100%;
+        height: 100%;
         object-fit: cover;
-        border-radius: 10px;
-        max-width: 100%;
-        height: auto;
       }
     }
   
@@ -245,8 +246,11 @@
   
     @media (min-width: $breakpoint-md) {
       width: 500px;
-      .img{
-          max-width: 100%;
+
+      .-flower {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 25%;
       }
       .-name{
           font-size: 24px;
@@ -258,9 +262,6 @@
   
     @media (min-width: $breakpoint-xl) {
       width: 720px;
-      .img{
-          max-width: 100%;
-      }
       .-name{
           font-size: 28px;
       }
@@ -271,9 +272,6 @@
   
     @media (min-width: $breakpoint-xxl) {
       width: 800px;
-      .img{
-          max-width: 100%;
-      }
       .-name{
           font-size: 32px;
       }

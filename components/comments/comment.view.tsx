@@ -14,16 +14,13 @@ const CommentView: React.FC<IProps> = ({ tray }) => {
           <Image
             src={getFlowerPath(tray.flower)}
             alt="flower"
-            width={150}
-            height={150}
+            layout="responsive"
+            width={300}
+            height={300}
           />
         </div>
-        <h1 className="-name">{tray.name} คนระยองรักจริงหวังแต่ง</h1>
-        <p className="-message">
-          {tray.message}
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
-          consequatur id possimus reiciendis tempore asperiores?
-        </p>
+        <h1 className="-name">{tray.name} </h1>
+        <p className="-message">{tray.message}</p>
       </div>
     </div>
   );

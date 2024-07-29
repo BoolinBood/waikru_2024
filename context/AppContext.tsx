@@ -16,7 +16,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
-
     function onConnect() {
       setIsConnected(true);
       setTransport(socket.io.engine.transport.name);
@@ -40,11 +39,14 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
       setDbConnected(status.dbConnected);
     }
 
-    function onTrayUpdate(data: { trays: TrayType[], totalCount: number }) {
+    function onTrayUpdate(data: { trays: TrayType[]; totalCount: number }) {
       if (Array.isArray(data.trays)) {
-        setTrays(prevTrays => [...prevTrays, ...data.trays]);
-        setTotalCount(data.totalCount);
-        setHasMore(trays.length < data.totalCount);
+        setTrays((prevTrays) => {
+          const newTrays = [...prevTrays, ...data.trays];
+          setTotalCount(data.totalCount);
+          setHasMore(newTrays.length < data.totalCount);
+          return newTrays;
+        });
       } else {
         setTrays([]);
         setTotalCount(0);
@@ -53,14 +55,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
     }
 
     function onNewTray(newTray: TrayType) {
-      setTrays(prevTrays => [newTray, ...prevTrays]);
+      setTrays((prevTrays) => [newTray, ...prevTrays]);
     }
-  
+
     function onUpdateTotalCount(count: number) {
       setTotalCount(count);
       setHasMore(trays.length < count);
     }
-
 
     function onTrayDeleted(id: string) {
       setTrays((prevTrays) => prevTrays.filter((tray) => tray._id !== id));
@@ -78,7 +79,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
     socket.on("new_tray", onNewTray);
     socket.on("update_total_count", onUpdateTotalCount);
 
-
     return () => {
       socket.off("connect", onConnect);
       socket.off("disconnect", onDisconnect);
@@ -91,14 +91,14 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   }, []);
 
   const saveTray = (
-  name: string,
-  message: string,
-  flower: FlowerType,
-  dept: Dept,
-  callback?: () => void
-) => {
-  socket.emit("save_tray", { name, message, flower, dept }, callback);
-};
+    name: string,
+    message: string,
+    flower: FlowerType,
+    dept: Dept,
+    callback?: () => void
+  ) => {
+    socket.emit("save_tray", { name, message, flower, dept }, callback);
+  };
 
   const deleteTray = (id: string) => {
     socket.emit("delete_tray", id);

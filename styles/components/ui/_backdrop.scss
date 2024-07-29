@@ -2,9 +2,9 @@
     position: absolute;
     top: 0;
     left: 0;
-    height: 100vh;
+    height: 105vh;
     width: 100%;
-    background: #000000e1;
+    background: rgba(0, 0, 0, 0.25);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -12,6 +12,10 @@
     z-index: 900;
 
     @media (min-width: $breakpoint-md) {
-        height: 105vh;
+        height: 100vh;
+    }
+
+    @media (min-width: $breakpoint-lg) {
+        height: 109vh;
     }
 }

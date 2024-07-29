@@ -25,16 +25,16 @@ const setupSocketEvents = (io: Server) => {
         socket.emit("fetch_error", { message: "Error fetching trays" });
       }
     });
- 
+
     socket.on("save_tray", async (data: TrayType, callback) => {
       try {
         const newTray = new TrayModel(data);
-        await newTray.save();        
-        const savedTray = await TrayModel.findById(newTray._id);        
+        await newTray.save();
+        const savedTray = await TrayModel.findById(newTray._id);
         io.emit("new_tray", savedTray);
         const totalCount = await TrayModel.countDocuments();
         io.emit("update_total_count", totalCount);
-    
+
         if (callback) callback();
       } catch (error) {
         console.error("Error saving tray:", error);
@@ -58,4 +58,3 @@ const setupSocketEvents = (io: Server) => {
 };
 
 export default setupSocketEvents;
-

@@ -2,14 +2,27 @@
 
 import { getFlowerPath } from "@/utils/flower.utils";
 import Image from "next/image";
-import React from "react";
-import { MotionDiv } from "../motion.div";
+import React, { useMemo } from "react";
 import { useModal } from "@/context/ModalContext";
+import { MotionDiv } from "../motion.div";
 
 interface ICommentItem {
   index: number;
   tray: TrayType;
 }
+
+const getRandomAnimationValues = (index: number) => {
+  const randomX = Math.random() * 10 - 5; // Random value between -5 and 5
+  const randomY = Math.random() * 10 - 5; // Random value between -5 and 5
+  const randomDuration = Math.random() * 2 + 5; // Random value between 1 and 3
+
+  return {
+    x: [0, randomX, 0],
+    y: [0, randomY, 0],
+    duration: randomDuration,
+    delay: index * 0.1,
+  };
+};
 
 const CommentItem = ({ index, tray }: ICommentItem) => {
   const { name, message, flower } = tray;
@@ -20,18 +33,23 @@ const CommentItem = ({ index, tray }: ICommentItem) => {
     setModalState("viewTray");
   };
 
-  //TODO: Pop up animation when user submits a comment
+  // Memoize random animation values based on the index
+  const { x, y, duration, delay } = useMemo(
+    () => getRandomAnimationValues(index),
+    [index]
+  );
+
   return (
     <MotionDiv
+      animate={{ x, y }}
+      transition={{
+        duration,
+        ease: "easeInOut",
+        repeat: Infinity,
+        repeatType: "loop",
+        delay,
+      }}
       className="comment"
-      // animate={{ x: [0, 3, 0], y: [0, -3, 0] }}
-      // transition={{
-      //   duration: 2,
-      //   ease: "easeInOut",
-      //   repeat: Infinity,
-      //   repeatType: "loop",
-      //   delay: index * 0.1,
-      // }}
       onClick={handleClick}
     >
       <div className="-tag">
@@ -55,4 +73,4 @@ const CommentItem = ({ index, tray }: ICommentItem) => {
   );
 };
 
-export default CommentItem;
+export default React.memo(CommentItem);

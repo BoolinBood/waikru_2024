@@ -5,6 +5,7 @@ import Backdrop from "../ui/backdrop";
 import { AiOutlineClose } from "react-icons/ai";
 import { useModal } from "@/context/ModalContext";
 import { motion } from "framer-motion";
+import { MotionDiv } from "../motion.div";
 
 interface IProps {
   children: ReactNode;
@@ -41,7 +42,7 @@ const Modal = ({ children, closeButton = true }: IProps) => {
 
   return (
     <Backdrop onClick={handleClose}>
-      <motion.div
+      <MotionDiv
         onClick={(e) => e.stopPropagation()}
         className="modal"
         variants={dropIn}
@@ -56,7 +57,7 @@ const Modal = ({ children, closeButton = true }: IProps) => {
             <AiOutlineClose />
           </button>
         )}
-      </motion.div>
+      </MotionDiv>
     </Backdrop>
   );
 };

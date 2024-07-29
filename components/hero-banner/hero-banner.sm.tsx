@@ -6,7 +6,7 @@ const SmallHeroBanner = () => {
       <div className="-mountains">
         <div className="-left">
           <Image
-            src="/assets/hero-banner/sm/mountain-left.png"
+            src="/assets/hero-banner/sm/mountain-left.svg"
             alt="mountain1"
             layout="responsive"
             width={500}
@@ -15,7 +15,7 @@ const SmallHeroBanner = () => {
         </div>
         <div className="-right">
           <Image
-            src="/assets/hero-banner/sm/mountain-right.png"
+            src="/assets/hero-banner/sm/mountain-right.svg"
             alt="mountain2"
             layout="responsive"
             width={500}
@@ -25,7 +25,7 @@ const SmallHeroBanner = () => {
       </div>
       <div className="-waves">
         <Image
-          src="/assets/hero-banner/sm/waves.png"
+          src="/assets/hero-banner/sm/waves.svg"
           alt="waves"
           width={500}
           height={500}
@@ -34,7 +34,7 @@ const SmallHeroBanner = () => {
       </div>
       <div className="-flowers">
         <Image
-          src="/assets/hero-banner/sm/flowers.png"
+          src="/assets/hero-banner/sm/flowers.svg"
           alt="flowers"
           width={500}
           height={500}
@@ -44,7 +44,7 @@ const SmallHeroBanner = () => {
       <div className="-clouds">
         <div className="-left">
           <Image
-            src="/assets/hero-banner/sm/cloud-left.png"
+            src="/assets/hero-banner/sm/cloud-left.svg"
             alt="cloud-left"
             width={500}
             height={500}
@@ -53,7 +53,7 @@ const SmallHeroBanner = () => {
         </div>
         <div className="-right">
           <Image
-            src="/assets/hero-banner/sm/cloud-right.png"
+            src="/assets/hero-banner/sm/cloud-right.svg"
             alt="cloud-right"
             width={500}
             height={500}
