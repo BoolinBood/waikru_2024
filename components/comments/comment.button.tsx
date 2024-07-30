@@ -10,7 +10,7 @@ const CommentFloatButton = () => {
     setModalState("selectTray");
   };
   return (
-    <Button onClick={handleClick}>
+    <Button onClick={handleClick} shadow>
       <h1>Create pedestal tray</h1>
       <AiOutlinePlus />
     </Button>

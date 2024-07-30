@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 import { CgClose, CgChevronLeft } from "react-icons/cg";
 import { Inter } from "next/font/google";
 import { getFlowerName, getFlowerPath } from "@/utils/flower.utils";
@@ -50,23 +50,22 @@ const CreateTray: React.FC<Props> = ({ selectedFlower }) => {
   const [selectedTag, setSelectedTag] = useState<Faculty>(Faculty.IT);
   const [loading, setLoading] = useState(false);
 
-  const handleTagClick = (tag: Faculty) => {
+  const handleTagClick = useCallback((tag: Faculty) => {
     setSelectedTag(tag);
-  };
+  }, []);
 
-  const handleBack = () => {
+  const handleBack = useCallback(() => {
     setModalState("selectTray");
-  };
+  }, [setModalState]);
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setModalState("none");
-  };
+  }, [setModalState]);
 
-  const onSubmit: SubmitHandler<CreateTrayInputs> = (data) => {
-    setLoading(true);
+  const onSubmit: SubmitHandler<CreateTrayInputs> = useCallback(
+    (data) => {
+      setLoading(true);
 
-    saveTray(data.name, data.message, selectedFlower, data.tag, () => {
-      setLoading(false);
       setModalState("none");
 
       setTimeout(() => {
@@ -74,10 +73,14 @@ const CreateTray: React.FC<Props> = ({ selectedFlower }) => {
       }, 500);
 
       setTimeout(() => {
+        saveTray(data.name, data.message, selectedFlower, data.tag, () => {
+          setLoading(false);
+        });
         setModalState("none");
       }, 2000);
-    });
-  };
+    },
+    [selectedFlower, saveTray, setModalState]
+  );
 
   return (
     <div
@@ -180,4 +183,4 @@ const CreateTray: React.FC<Props> = ({ selectedFlower }) => {
   );
 };
 
-export default CreateTray;
+export default React.memo(CreateTray);

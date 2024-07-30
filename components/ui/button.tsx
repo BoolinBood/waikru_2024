@@ -5,6 +5,7 @@ interface IProps {
   type?: "primary" | "success" | "error";
   htmlType?: "button" | "submit" | "reset";
   disabled?: boolean;
+  shadow?: boolean;
   onClick?: () => void;
 }
 
@@ -13,11 +14,12 @@ const Button = ({
   type = "primary",
   htmlType = "button",
   disabled = false,
+  shadow = false,
   onClick,
 }: IProps) => {
   return (
     <button
-      className={`button -${type}`}
+      className={`button -${type} ${shadow ? "-shadow" : ""}`}
       onClick={onClick}
       type={htmlType}
       disabled={disabled}

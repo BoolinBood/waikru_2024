@@ -27,7 +27,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <AppProvider>
           <ModalProvider>
-            <Suspense fallback={<Loading />}>{children}</Suspense>
+            {children}
             <ModalWrapper />
           </ModalProvider>
         </AppProvider>

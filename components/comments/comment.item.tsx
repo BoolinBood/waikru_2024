@@ -5,7 +5,6 @@ import Image from "next/image";
 import React, { useMemo } from "react";
 import { useModal } from "@/context/ModalContext";
 import { MotionDiv } from "../motion.div";
-import { useEffect, useState } from "react";
 import { truncateString } from "@/utils/string.utils";
 
 interface ICommentItem {
@@ -14,9 +13,9 @@ interface ICommentItem {
 }
 
 const getRandomAnimationValues = (index: number) => {
-  const randomX = Math.random() * 10 - 5; // Random value between -5 and 5
-  const randomY = Math.random() * 10 - 5; // Random value between -5 and 5
-  const randomDuration = Math.random() * 2 + 5; // Random value between 1 and 3
+  const randomX = Math.random() * 10 - 5;
+  const randomY = Math.random() * 10 - 5;
+  const randomDuration = Math.random() * 2 + 5;
 
   return {
     x: [0, randomX, 0],
@@ -26,21 +25,15 @@ const getRandomAnimationValues = (index: number) => {
   };
 };
 
-const CommentItem = ({ index, tray }: ICommentItem) => {
-  const { name, message, flower } = tray;
+const CommentItem: React.FC<ICommentItem> = ({ index, tray }) => {
+  const { name, message, flower, dept } = tray;
   const { setSelectedTray, setModalState } = useModal();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const handleClick = () => {
     setSelectedTray(tray);
     setModalState("viewTray");
   };
 
-  // Memoize random animation values based on the index
   const { x, y, duration, delay } = useMemo(
     () => getRandomAnimationValues(index),
     [index]
@@ -48,11 +41,11 @@ const CommentItem = ({ index, tray }: ICommentItem) => {
 
   return (
     <MotionDiv
-      initial={{ x: -50, opacity: 0 }}
+      initial={{ y: -50, opacity: 0 }}
       animate={{
-        x: 0,
-        opacity: mounted ? 1 : 0,
-        transition: { delay: 1.5, duration: 1 },
+        y: 0,
+        opacity: 1,
+        transition: { duration: 1 },
       }}
       layout
       className="comment-item-container"
@@ -70,13 +63,13 @@ const CommentItem = ({ index, tray }: ICommentItem) => {
         onClick={handleClick}
       >
         <div className="-tag">
-          <span className={`-${tray.dept}`}>{tray.dept}</span>
+          <span className={`-${dept}`}>{dept}</span>
         </div>
         <div className="-message">
-          <p>{truncateString(message, 50, ".....")}</p>
+          <p>{truncateString(message, 50, "...")}</p>
         </div>
         <div className="-author">
-          <p>{name}</p>
+          <p>{truncateString(name, 50, "...")}</p>
         </div>
         <div className="-tray">
           <Image
