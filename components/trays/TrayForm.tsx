@@ -90,7 +90,7 @@ const TrayForm = () => {
             onClick={() => setError(null)}
             className="ml-2 text-blue-500 underline"
           >
-            Dismiss
+            Okay
           </button>
         </div>
       )}

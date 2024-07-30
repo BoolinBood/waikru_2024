@@ -1,6 +1,7 @@
 "use server";
 import { Server } from "socket.io";
 import TrayModel from "@/app/models/TrayModel";
+import { checkDirtyWords } from "@/utils/tray.utils";
 
 const itemsPerPage = 4;
 
@@ -31,8 +32,8 @@ const setupSocketEvents = (io: Server) => {
 
     socket.on("save_tray", async (data: TrayType, callback) => {
       try {
-        if (data.message.includes("ควย") || data.message.includes("เหี้ย")) {
-          throw new Error("Message contains inappropriate language");
+        if (checkDirtyWords(data.message)) {
+          throw new Error("Message must not contain profanity");
         }
         const newTray = new TrayModel(data);
         await newTray.save();
