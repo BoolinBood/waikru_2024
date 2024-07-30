@@ -16,9 +16,9 @@ body {
     bottom: 0;
     z-index: 10;
 
-    @media (min-width: 340px) and (max-height: 882px) {
-        height: 75vh;
-    }
+    // @media (min-width: 340px) and (max-height: 882px) {
+    //     height: 75vh;
+    // }
     @media (min-width: $breakpoint-xs) {
       height: 70vh;
     }

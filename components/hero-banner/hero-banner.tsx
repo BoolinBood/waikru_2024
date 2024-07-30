@@ -4,7 +4,6 @@ import dynamic from "next/dynamic";
 import React from "react";
 import { useMediaQuery } from "react-responsive";
 
-// Dynamically import the components with no SSR
 const LargeHeroBanner = dynamic(() => import("./hero-banner.lg"), {
   ssr: false,
 });
@@ -13,12 +12,12 @@ const SmallHeroBanner = dynamic(() => import("./hero-banner.sm"), {
 });
 
 const HeroBanner = () => {
-  const isTablet = useMediaQuery({ query: "(min-width: 768px)" });
-
+  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+  
   return (
     <div className="hero-banner">
       <div className="-opacity"></div>
-      {!isTablet ? <SmallHeroBanner /> : <LargeHeroBanner />}
+      {!isMobile ? <SmallHeroBanner /> : <LargeHeroBanner />}
       <div className="-texts">
         <h1>SIT WAIKRU</h1>
         <p>Show your appreciation to the SIT professors here</p>
