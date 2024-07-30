@@ -1,11 +1,11 @@
-@-webkit-keyframes bounceY { 
-    0%, 100% {
-      -webkit-transform: translateY(0);
-    } 
-    50% {
-      -webkit-transform: translateY(-50px);
-    } 
-  } 
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+}
     
   @keyframes bounceY { 
     0%, 100% {
@@ -212,5 +212,4 @@
             , fadeIn 0.5s ease-in-out;
         }
     }
-
   }

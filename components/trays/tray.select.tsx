@@ -53,6 +53,7 @@ const SelectTray = () => {
                 alt={flower}
                 width={200}
                 height={200}
+                loading="lazy"
               />
             </div>
           </SwiperSlide>

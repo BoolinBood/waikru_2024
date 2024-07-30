@@ -1,4 +1,4 @@
-const Skeleton = () => {
+const SkeletonComment = () => {
   return (
     <div className="skeleton-comment">
       <div className="skeleton-content">
@@ -10,4 +10,4 @@ const Skeleton = () => {
   );
 };
 
-export default Skeleton;
+export default SkeletonComment;

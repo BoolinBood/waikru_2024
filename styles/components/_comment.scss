@@ -228,7 +228,7 @@
   
     .-flower {
       margin: 0 auto;
-      margin-bottom: 120px;
+      margin-bottom: 100px;
 
       width: 100px;
       height: 100px;
@@ -238,6 +238,7 @@
         height: 100%;
         object-fit: cover;
       }
+
     }
   
     .-name {
@@ -251,7 +252,7 @@
     }
   
     .-message {
-      margin: 16px;
+      margin-top: 10px;
       white-space: pre-wrap;
       word-wrap: break-word;
       text-align: start;

@@ -7,7 +7,10 @@ import { useAppContext } from "@/context/AppContext";
 import { AnimatePresence } from "framer-motion";
 import dynamic from "next/dynamic";
 
-const Skeleton = dynamic(() => import("@/components/skeleton"));
+const Skeleton = dynamic(
+  () => import("@/components/skeleton/skeleton.comment")
+);
+
 const Petal = dynamic(() => import("@/components/petal"));
 
 const CommentList = () => {

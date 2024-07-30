@@ -1,6 +1,5 @@
 import { getFlowerPath } from "@/utils/flower.utils";
 import Image from "next/image";
-import React from "react";
 
 interface IProps {
   tray: TrayType;
@@ -17,6 +16,7 @@ const CommentView: React.FC<IProps> = ({ tray }) => {
             layout="responsive"
             width={300}
             height={300}
+            loading="lazy"
           />
         </div>
         <h1 className="-name">{tray.name} </h1>
