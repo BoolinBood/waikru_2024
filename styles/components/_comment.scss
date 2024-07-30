@@ -31,7 +31,7 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     
-    max-width: 1024px;
+    max-width: 1440px;
     gap: 2.5rem;
     padding: 20px 10px;
 
@@ -184,7 +184,7 @@
     .-tray {
         position: absolute;
         bottom: -1.5rem;
-        left: -1.0rem;
+        left: -1rem;
 
         width: 37px;
         height: 80px;
@@ -202,14 +202,20 @@
             left: -1.5rem;
         }
 
-        @media (min-width: $breakpoint-xxl) {
-            width: 80px;
-            height: 136px;
+        @media (min-width: $breakpoint-xl) {
+            width: 60px;
+            height: 120px;
         }
 
         @media (min-width: $breakpoint-xxl) {
+            width: 80px;
+            height: 150px;
+        }
+
+        @media (min-width: $breakpoint-xxxl) {
             left: -2rem;
         }
+        
     }
 }
 .comment-view {
