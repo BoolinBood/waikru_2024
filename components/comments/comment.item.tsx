@@ -69,7 +69,7 @@ const CommentItem: React.FC<ICommentItem> = ({ index, tray }) => {
           <p>{truncateString(message, 50, "...")}</p>
         </div>
         <div className="-author">
-          <p>{truncateString(name, 24, "...")}</p>
+          <p>{truncateString(name, 20, "...")}</p>
         </div>
         <div className="-tray">
           <Image
