@@ -1,9 +1,10 @@
 "use client";
-import { useAppContext } from "@/app/../context/AppContext";
+
 import { useState } from "react";
 import { useInView } from "framer-motion";
 import React, { useEffect, useRef } from "react";
 import { Spinner } from "@/components/ui/spinner";
+import { useAppContext } from "@/context/AppContext";
 
 const AdminPage = () => {
   const { trays, loadMoreTrays, hasMore, deleteTray } = useAppContext();
