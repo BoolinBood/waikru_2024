@@ -45,7 +45,7 @@ const CommentList = () => {
       <div className="comment-list">
         <AnimatePresence>
           {comments.map((item, index) => (
-            <CommentItem key={item._id! + index} tray={item} index={index} />
+            <CommentItem key={item._id!} tray={item} index={index} />
           ))}
         </AnimatePresence>
         <div ref={ref} className="none"></div>

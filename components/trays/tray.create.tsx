@@ -23,7 +23,10 @@ enum Faculty {
 
 // Schema validation with Zod
 const CreateTraySchema = z.object({
-  name: z.string().min(1, "Name is required"),
+  name: z
+    .string()
+    .min(1, "Name is required")
+    .max(30, "Name must be at most 30 characters"),
   message: z
     .string()
     .min(8, "Message must be at least 8 characters")
@@ -42,6 +45,7 @@ const CreateTray: React.FC<Props> = ({ selectedFlower }) => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<CreateTrayInputs>({
     resolver: zodResolver(CreateTraySchema),
@@ -50,9 +54,10 @@ const CreateTray: React.FC<Props> = ({ selectedFlower }) => {
   const [selectedTag, setSelectedTag] = useState<Faculty>(Faculty.IT);
   const [loading, setLoading] = useState(false);
 
-  const handleTagClick = useCallback((tag: Faculty) => {
+  const handleTagClick = (tag: Faculty) => {
     setSelectedTag(tag);
-  }, []);
+    setValue("tag", tag);
+  };
 
   const handleBack = useCallback(() => {
     setModalState("selectTray");
@@ -183,4 +188,4 @@ const CreateTray: React.FC<Props> = ({ selectedFlower }) => {
   );
 };
 
-export default React.memo(CreateTray);
+export default CreateTray;

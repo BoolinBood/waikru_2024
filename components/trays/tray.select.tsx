@@ -38,7 +38,6 @@ const SelectTray = () => {
         pagination={{ clickable: true }}
         scrollbar={{ draggable: true }}
         onSlideChange={(swiper) => {
-          console.log(swiper.activeIndex);
           const index = swiper.activeIndex - 1 < 0 ? 5 : swiper.activeIndex - 1;
           const flower = flowers[index] as FlowerType;
           setTray(flower);

@@ -15,6 +15,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   const [totalCount, setTotalCount] = useState(0);
   const [hasMore, setHasMore] = useState(true);
 
+  
   useEffect(() => {
     function onConnect() {
       setIsConnected(true);

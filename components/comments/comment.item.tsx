@@ -69,7 +69,7 @@ const CommentItem: React.FC<ICommentItem> = ({ index, tray }) => {
           <p>{truncateString(message, 50, "...")}</p>
         </div>
         <div className="-author">
-          <p>{truncateString(name, 50, "...")}</p>
+          <p>{truncateString(name, 24, "...")}</p>
         </div>
         <div className="-tray">
           <Image
@@ -84,4 +84,4 @@ const CommentItem: React.FC<ICommentItem> = ({ index, tray }) => {
   );
 };
 
-export default React.memo(CommentItem);
+export default CommentItem;
