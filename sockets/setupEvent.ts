@@ -11,7 +11,7 @@ const setupSocketEvents = (io: Server) => {
       isConnected: true,
       dbConnected: true,
     });
-    socket.on("get_trays", async (page: number = 1, dept: Dept | null = null) => {
+    socket.on("get_trays", async (page: number = 1, dept: Dept[] | null = null) => {
       try {
         const skip = (page - 1) * itemsPerPage;
         let query = dept ? { dept } : {};

@@ -15,7 +15,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   const [totalCount, setTotalCount] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [currentDept, setCurrentDept] = useState<Dept | null>(null);
+  const [currentDept, setCurrentDept] = useState<Dept[] | null>(null);
 
   useEffect(() => {
 
@@ -127,12 +127,12 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   };
 
-  const changeDept = (newDept: Dept | null) => {
+  const changeDept = (newDept: Dept[] | null) => {
     setCurrentDept(newDept);
-    setTrays([]); // Clear existing trays
-    setCurrentPage(1); // Reset to first page
-    setHasMore(true); // Reset hasMore
-    socket.emit("get_trays", 1, newDept); // Fetch trays for new department
+    setTrays([]);
+    setCurrentPage(1);
+    setHasMore(true);
+    socket.emit("get_trays", 1, newDept);
   };
 
   return (

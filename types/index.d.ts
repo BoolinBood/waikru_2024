@@ -34,9 +34,9 @@ declare type AppContextType = {
   hasMore: boolean;
   error: string | null;
   setError: (error: string | null) => void;
-  currentDept: Dept | null;
-  setCurrentDept: (dept: Dept | null) => void;
-  changeDept: (newDept: Dept | null) => void;
+  currentDept: Dept[] | null;
+  setCurrentDept: (dept: Dept[] | null) => void;
+  changeDept: (newDept: Dept[] | null) => void;
 };
 
 declare module "node:http" {
@@ -48,10 +48,6 @@ declare type ServerStatus = {
   dbConnected: boolean;
 };
 
-declare type TrayPaginatedType = {
-  pages: number;
-  paginatedTrays: TrayType[][];
-};
 
 declare type resultMessage = {
   success: string;

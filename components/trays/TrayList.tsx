@@ -1,13 +1,14 @@
 "use client"
 import { useAppContext } from "@/app/context/AppContext";
 import { useInView } from "framer-motion";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Spinner } from "../ui/spinner";
 
 const TrayList = () => {
-  const { trays, loadMoreTrays, hasMore, currentDept, changeDept } = useAppContext();
+  const { trays, loadMoreTrays, hasMore, changeDept } = useAppContext();
   const ref = useRef(null);
   const isInView = useInView(ref);
+  const [selectedDepts, setSelectedDepts] = useState<Dept[]>([]);
 
   useEffect(() => {
     if (isInView && hasMore) {
@@ -15,19 +16,37 @@ const TrayList = () => {
     }
   }, [isInView, hasMore]);
 
-  const handleDeptChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const newDept = event.target.value as Dept | "";
-    changeDept(newDept === "" ? null : newDept);
+  const handleDeptChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const dept = event.target.value as Dept;
+    setSelectedDepts(prevDepts => {
+      if (event.target.checked) {
+        return [...prevDepts, dept];
+      } else {
+        return prevDepts.filter(d => d !== dept);
+      }
+    });
+  };
+
+  const applyFilter = () => {
+    changeDept(selectedDepts.length > 0 ? selectedDepts : null);
   };
 
   return (
     <div className="w-full bg-gray-200 p-8">
-      <select onChange={handleDeptChange} value={currentDept || ""}>
-        <option value="">All Departments</option>
-        <option value="IT">IT</option>
-        <option value="CS">CS</option>
-        <option value="DSI">DSI</option>
-      </select>
+      <div className="mb-4">
+        <label className="mr-2">
+          <input type="checkbox" value="IT" onChange={handleDeptChange} /> IT
+        </label>
+        <label className="mr-2">
+          <input type="checkbox" value="CS" onChange={handleDeptChange} /> CS
+        </label>
+        <label className="mr-2">
+          <input type="checkbox" value="DSI" onChange={handleDeptChange} /> DSI
+        </label>
+        <button onClick={applyFilter} className="ml-2 px-4 py-2 bg-blue-500 text-white rounded">
+          Apply Filter
+        </button>
+      </div>
       <h1 className="text-2xl font-semibold">All Trays ({trays.length})</h1>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-2">
         <table className="w-full text-sm text-left rtl:text-right text-white">
