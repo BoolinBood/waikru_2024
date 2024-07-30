@@ -8,7 +8,7 @@ import setupSocketEvents from "./setupEvent";
 
 const dev = process.env.NODE_ENV !== "production";
 const hostname = "localhost";
-const port = 3000;
+const port = 4000;
 const app = next({ dev });
 const handler = app.getRequestHandler();
 

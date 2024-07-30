@@ -14,6 +14,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   const [currentPage, setCurrentPage] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
   const [hasMore, setHasMore] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [currentDept, setCurrentDept] = useState<Dept | null>(null);
 
   useEffect(() => {
 
@@ -52,6 +54,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
       }
     }
 
+    function onSaveError(data: { message: string }) {
+      setError(data.message);
+    }
+
     function onNewTray(newTray: TrayType) {
       setTrays(prevTrays => [newTray, ...prevTrays]);
     }
@@ -67,7 +73,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
     }
 
     if (socket.connected) {
-      socket.emit("get_trays");
+      socket.emit("get_trays", 1, currentDept);
     }
 
     socket.on("connect", onConnect);
@@ -77,6 +83,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
     socket.on("tray_deleted", onTrayDeleted);
     socket.on("new_tray", onNewTray);
     socket.on("update_total_count", onUpdateTotalCount);
+    socket.on("save_error", onSaveError);
 
 
     return () => {
@@ -87,18 +94,26 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
       socket.off("tray_deleted", onTrayDeleted);
       socket.off("new_tray", onNewTray);
       socket.off("update_total_count", onUpdateTotalCount);
+      socket.off("save_error", onSaveError);
     };
-  }, []);
+  }, [currentDept]);
 
   const saveTray = (
-  name: string,
-  message: string,
-  flower: FlowerType,
-  dept: Dept,
-  callback?: () => void
-) => {
-  socket.emit("save_tray", { name, message, flower, dept }, callback);
-};
+    name: string,
+    message: string,
+    flower: FlowerType,
+    dept: Dept,
+    callback?: (result: resultMessage) => void
+  ) => {
+    socket.emit("save_tray", { name, message, flower, dept }, (result: resultMessage) => {
+      if (!result.success) {
+        setError(result.error || "Unknown error occurred");
+      } else {
+        setError(null);
+      }
+      if (callback) callback(result);
+    });
+  };
 
   const deleteTray = (id: string) => {
     socket.emit("delete_tray", id);
@@ -107,9 +122,17 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   const loadMoreTrays = () => {
     if (hasMore) {
       const nextPage = currentPage + 1;
-      socket.emit("get_trays", nextPage);
+      socket.emit("get_trays", nextPage, currentDept);
       setCurrentPage(nextPage);
     }
+  };
+
+  const changeDept = (newDept: Dept | null) => {
+    setCurrentDept(newDept);
+    setTrays([]); // Clear existing trays
+    setCurrentPage(1); // Reset to first page
+    setHasMore(true); // Reset hasMore
+    socket.emit("get_trays", 1, newDept); // Fetch trays for new department
   };
 
   return (
@@ -123,6 +146,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
         deleteTray,
         loadMoreTrays,
         hasMore,
+        error,
+        setError,
+        setCurrentDept,
+        currentDept,
+        changeDept,
       }}
     >
       {children}

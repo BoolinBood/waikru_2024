@@ -5,7 +5,7 @@ import React, { useEffect, useRef } from "react";
 import { Spinner } from "../ui/spinner";
 
 const TrayList = () => {
-  const { trays, loadMoreTrays, hasMore } = useAppContext();
+  const { trays, loadMoreTrays, hasMore, currentDept, changeDept } = useAppContext();
   const ref = useRef(null);
   const isInView = useInView(ref);
 
@@ -15,8 +15,19 @@ const TrayList = () => {
     }
   }, [isInView, hasMore]);
 
+  const handleDeptChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const newDept = event.target.value as Dept | "";
+    changeDept(newDept === "" ? null : newDept);
+  };
+
   return (
     <div className="w-full bg-gray-200 p-8">
+      <select onChange={handleDeptChange} value={currentDept || ""}>
+        <option value="">All Departments</option>
+        <option value="IT">IT</option>
+        <option value="CS">CS</option>
+        <option value="DSI">DSI</option>
+      </select>
       <h1 className="text-2xl font-semibold">All Trays ({trays.length})</h1>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-2">
         <table className="w-full text-sm text-left rtl:text-right text-white">

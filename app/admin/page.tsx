@@ -61,7 +61,7 @@ const AdminPage = () => {
                 <th scope="row" className="px-6 py-4">{tray.name}</th>
                 <td className="px-6 py-4">{tray.dept}</td>
                 <td className="px-6 py-4">{tray.message}</td>
-                <td className="px-6 py-4">{tray.selectedTray}</td>
+                <td className="px-6 py-4">{tray.flower}</td>
                 <td className="px-6 py-4">
                   <button className="font-medium text-red-500 hover:underline" onClick={() => deleteTray(tray._id as string)}>
                     Delete
