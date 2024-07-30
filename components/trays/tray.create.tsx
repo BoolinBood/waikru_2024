@@ -81,7 +81,7 @@ const CreateTray: React.FC<Props> = ({ selectedFlower }) => {
         saveTray(data.name, data.message, selectedFlower, data.tag, () => {
           setLoading(false);
         });
-        
+
         setModalState("none");
       }, 2000);
     },
