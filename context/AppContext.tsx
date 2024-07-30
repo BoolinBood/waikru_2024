@@ -16,13 +16,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   const [totalCount, setTotalCount] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [currentDept, setCurrentDept] = useState<Dept | null>(null);
+  const [currentDept, setCurrentDept] = useState<Dept[]>([]);
 
   useEffect(() => {
     function onConnect() {
       setIsConnected(true);
       setTransport(socket.io.engine.transport.name);
-      socket.emit("get_trays");
+      socket.emit("get_trays", currentDept);
       socket.io.engine.on("upgrade", (transport) => {
         setTransport(transport.name);
       });
@@ -129,12 +129,17 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   };
 
-  const changeDept = (newDept: Dept | null) => {
-    setCurrentDept(newDept);
-    setTrays([]); // Clear existing trays
-    setCurrentPage(1); // Reset to first page
-    setHasMore(true); // Reset hasMore
-    socket.emit("get_trays", 1, newDept); // Fetch trays for new department
+  const changeDept = (dept: Dept, checked: boolean) => {
+    setCurrentDept((prevDepts) => {
+      const updatedDepts = checked
+        ? [...prevDepts, dept]
+        : prevDepts.filter((d) => d !== dept);
+      socket.emit("get_trays", 1, updatedDepts);
+      setCurrentPage(1); // Reset to first page
+      setTrays([]); // Clear existing trays
+      setHasMore(true); // Reset hasMore
+      return updatedDepts;
+    });
   };
 
   return (

@@ -34,9 +34,9 @@ declare type AppContextType = {
   hasMore: boolean;
   error: string | null;
   setError: (error: string | null) => void;
-  currentDept: Dept | null;
-  setCurrentDept: (dept: Dept | null) => void;
-  changeDept: (newDept: Dept | null) => void;
+  currentDept: Dept[];
+  setCurrentDept: (dept: Dept[]) => void;
+  changeDept: (newDept: Dept, checked: boolean) => void;
 };
 
 declare module "node:http" {

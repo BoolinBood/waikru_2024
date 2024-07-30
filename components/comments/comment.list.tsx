@@ -1,21 +1,22 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import CommentItem from "./comment.item";
 import CommentFloatButton from "./comment.button";
 import { useAppContext } from "@/context/AppContext";
 import { AnimatePresence } from "framer-motion";
 import dynamic from "next/dynamic";
+import CommentFiterButton from "./comment.dropdown";
 
 const Skeleton = dynamic(
   () => import("@/components/skeleton/skeleton.comment")
 );
-
 const Petal = dynamic(() => import("@/components/petal"));
 
 const CommentList = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const { trays: comments, loadMoreTrays, hasMore } = useAppContext();
+  const { trays: comments, loadMoreTrays, hasMore, } = useAppContext();
+ 
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -42,12 +43,21 @@ const CommentList = () => {
     };
   }, [hasMore, loadMoreTrays]);
 
+  // Filter out duplicate comments by ID
+  const uniqueComments = comments.reduce<TrayType[]>((acc, comment) => {
+    if (!acc.some((item) => item._id === comment._id)) {
+      acc.push(comment);
+    }
+    return acc;
+  }, []);
+
   return (
     <div className="comment-section">
+  <CommentFiterButton/>
       <Petal />
       <div className="comment-list">
         <AnimatePresence>
-          {comments.map((item, index) => (
+          {uniqueComments.map((item, index) => (
             <CommentItem key={item._id!} tray={item} index={index} />
           ))}
         </AnimatePresence>
