@@ -10,7 +10,6 @@ import dynamic from "next/dynamic";
 const Skeleton = dynamic(
   () => import("@/components/skeleton/skeleton.comment")
 );
-
 const Petal = dynamic(() => import("@/components/petal"));
 
 const CommentList = () => {
@@ -42,12 +41,20 @@ const CommentList = () => {
     };
   }, [hasMore, loadMoreTrays]);
 
+  // Filter out duplicate comments by ID
+  const uniqueComments = comments.reduce<TrayType[]>((acc, comment) => {
+    if (!acc.some((item) => item._id === comment._id)) {
+      acc.push(comment);
+    }
+    return acc;
+  }, []);
+
   return (
     <div className="comment-section">
       <Petal />
       <div className="comment-list">
         <AnimatePresence>
-          {comments.map((item, index) => (
+          {uniqueComments.map((item, index) => (
             <CommentItem key={item._id!} tray={item} index={index} />
           ))}
         </AnimatePresence>

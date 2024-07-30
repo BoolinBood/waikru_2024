@@ -16,6 +16,10 @@ body {
     bottom: 0;
     z-index: 10;
 
+    @media (min-width: 360px) {
+        height: 70vh;
+    }
+
     @media (min-width: 370px) {
         height: 65vh;
     }
@@ -24,6 +28,10 @@ body {
       height: 72vh;
     }
 
+    @media (min-width: $breakpoint-md) {
+      height: 70vh;
+    }
+    
     @media (min-width: $breakpoint-xl) and (orientation: landscape) {
       height: 55vh;
     }  
@@ -109,7 +117,7 @@ body {
     z-index: 3000;
 
     h1 {
-      font-size: clamp(32px, 4vw, 52px);
+      font-size: clamp(32px, 6vw, 78px);
       z-index: 1000 !important;
     }
 
@@ -132,30 +140,27 @@ body {
       width: 110%;
 
       @media (min-width: $breakpoint-xl) {
-        bottom: 0;
+        bottom: 8.5%;
         width: 105%;
-      }
-
-      @media (min-width: $breakpoint-xl)  and (min-height: 800px) {
-        width: 100%;
       }
       
       @media (min-width: $breakpoint-xxl) {
-        bottom: 0;
+        bottom: -3%;
         width: 105%;
       }
     }
 
     .-waves {
       position: absolute;
-      bottom: 70px;
+      bottom: 18%;
       width: 110%;
       left: -2.5rem;
       z-index: 2;
 
       @media (min-width: $breakpoint-xl) {
-        bottom: 15px;
-        width: 100%;
+        bottom: 10px;
+        left: -2rem;
+        width: 120%;
       }
 
       @media (min-width: $breakpoint-xxl) {
@@ -179,13 +184,15 @@ body {
         bottom: 100px;
       }
 
+      @media (min-width: $breakpoint-xl)  and (max-height: 800px) {
+        width: 100%;
+        bottom: 18%;
+      }
+
       @media (min-width: $breakpoint-xxl) {
         bottom: 50px;
       }
 
-      @media (min-width: $breakpoint-xl)  and (min-height: 800px) {
-        width: 100%;
-      }
     }
 
     .-clouds {
@@ -239,7 +246,7 @@ body {
         z-index: 1;
 
         @media (min-width: $breakpoint-xs) {
-          top: 80px;
+          top: 85px;
           right: -10px;
         }
       }
