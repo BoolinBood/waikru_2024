@@ -1,18 +1,17 @@
-"use client";
-
 import React, { useEffect, useRef } from "react";
 import CommentItem from "./comment.item";
 import CommentFloatButton from "./comment.button";
 import { useAppContext } from "@/context/AppContext";
 import { AnimatePresence } from "framer-motion";
 import dynamic from "next/dynamic";
+import CommentFilterButton from "./comment.dropdown";
 
 const Skeleton = dynamic(
   () => import("@/components/skeleton/skeleton.comment")
 );
 const Petal = dynamic(() => import("@/components/petal"));
 
-const CommentList = () => {
+const CommentList: React.FC = () => {
   const ref = useRef<HTMLDivElement>(null);
   const { trays: comments, loadMoreTrays, hasMore } = useAppContext();
 
@@ -30,48 +29,48 @@ const CommentList = () => {
       }
     );
 
-    if (ref.current) {
-      observer.observe(ref.current);
+    const currentRef = ref.current;
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, [hasMore, loadMoreTrays]);
 
   // Filter out duplicate comments by ID
-  const uniqueComments = comments.reduce<TrayType[]>((acc, comment) => {
-    if (!acc.some((item) => item._id === comment._id)) {
-      acc.push(comment);
-    }
-    return acc;
-  }, []);
+  const uniqueComments = Array.from(
+    new Map(comments.map((comment) => [comment._id, comment])).values()
+  );
 
   return (
     <div className="comment-section">
-      <Petal />
-      <div className="comment-list">
-        <AnimatePresence>
-          {uniqueComments.map((item, index) => (
-            <CommentItem key={item._id!} tray={item} index={index} />
-          ))}
-        </AnimatePresence>
-        <div ref={ref} className="none"></div>
-      </div>
+      <div className="-wrap">
+        <CommentFilterButton />
 
-      {/* Load more comments */}
-      {hasMore && (
+        <Petal />
         <div className="comment-list">
-          {Array.from({ length: 5 }).map((_, index) => (
-            <Skeleton key={`skeleton-${index}`} />
-          ))}
+          <AnimatePresence>
+            {uniqueComments.map((item, index) => (
+              <CommentItem key={item._id!} tray={item} index={index} />
+            ))}
+          </AnimatePresence>
+          <div ref={ref} className="none"></div>
         </div>
-      )}
-
-      <div className="-btn">
-        <CommentFloatButton />
+        {/* Load more comments */}
+        {hasMore && (
+          <div className="comment-list">
+            {Array.from({ length: 5 }).map((_, index) => (
+              <Skeleton key={`skeleton-${index}`} />
+            ))}
+          </div>
+        )}
+        <div className="-btn">
+          <CommentFloatButton />
+        </div>
       </div>
     </div>
   );

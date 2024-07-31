@@ -29,11 +29,13 @@
 
 .comment-list {
     display: grid;
+    position: relative;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     
     max-width: 1024px;
     gap: 2.5rem;
     padding: 20px 10px;
+
 
     @media (min-width: $breakpoint-md) {
         grid-template-columns: repeat(3, minmax(0, 1fr))
@@ -305,3 +307,146 @@
       }
     }
   }
+
+  .comment-filter {
+    margin-left: auto;
+    top: 0;
+    z-index: 1000;
+    font-family: Inter;
+
+    font-size: 12px;
+    font-weight: 400;
+    position: relative;
+    width: 50%;
+
+    &.sticky {
+      top: 0;
+      
+      animation: fadeIn 0.5s ease-in-out;
+      position: sticky;
+      position: -webkit-sticky; /* Safari */
+
+      button {  
+        border-color: #FFF;
+        background-color: #352854;
+        border-radius: 28px;
+
+        h1, svg{
+          color: #FFF;
+        }
+      }
+    }
+
+    @media (min-width: $breakpoint-md) {
+      width: 20%;
+      .sticky {
+        width: 100%;
+        padding: 10px;
+      }
+
+      h1, label {
+        font-size: 16px !important;
+      }
+
+      svg {
+        width: 25px;
+        height: 25px;
+      }
+    }
+
+    button {
+      display: flex;
+      align-items: center;
+      color: #352854;
+      border: 1px solid #352854;
+      padding: 5px 20px;
+      border-radius: 36px;
+      margin-left: auto;
+      margin-right: 5%;
+
+      cursor: pointer;
+  
+      h1 {
+        margin-right: 4px;
+        font-size: clamp(8px, 12px, 20px);
+      }
+    }
+  }
+  
+    .-dropdown-menu {
+      position: absolute;
+      top: 100%;
+      right: 5%;
+      width: 6.5rem;
+      background: transparent;
+      border-radius: 8px;
+      box-shadow: 5.765px 6.813px 2.62px 0px rgba(0, 0, 0, 0.25);
+      z-index: 1000;
+
+      margin-top: 5px;
+  
+      label {
+        position: relative;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        font-size: clamp(8px, 12px, 20px);
+        padding: 10px;
+        transition: background-color 0.3s ease;
+
+        background-color: #FFF;
+        
+        input {
+          opacity: 0;
+          width: 0;
+          height: 0;
+        }
+  
+        .-checkmark {
+          display: inline-block;
+          width: 30px;
+          height: 30px;
+
+          margin-right: 10px;
+          position: relative;
+  
+          svg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+            
+            width: 20px;
+            height: 20px;
+          }
+        }
+  
+        input:checked + .-checkmark svg {
+          display: block;
+        }
+  
+        &.-checked {
+          background-color: #674F96; /* Background color for checked label */
+          color: white;
+        }
+      }
+
+      label:nth-child(1) {
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+      }
+
+      label:nth-child(2) {
+        border-top: 1px #CCD1D2 solid;
+        border-bottom: 1px #CCD1D2 solid;
+      }
+
+      label:nth-child(3) {
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+      }
+    }
+  
+  

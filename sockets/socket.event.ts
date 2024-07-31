@@ -11,14 +11,18 @@ const setupSocketEvents = (io: Server) => {
       isConnected: true,
       dbConnected: true,
     });
-    socket.on("get_trays", async (page: number = 1) => {
+
+    socket.on("get_trays", async (page: number = 1, dept: string[] = []) => {
       try {
         const skip = (page - 1) * itemsPerPage;
-        const trays = await TrayModel.find()
+        const query = Array.isArray(dept) && dept.length > 0 ? { dept } : {};
+
+        const trays = await TrayModel.find(query)
           .sort({ _id: -1 })
           .skip(skip)
           .limit(itemsPerPage);
-        const totalCount = await TrayModel.countDocuments();
+
+        const totalCount = await TrayModel.countDocuments(query);
         socket.emit("tray_update", { trays, totalCount });
       } catch (error) {
         console.error("Error fetching trays:", error);
@@ -28,6 +32,9 @@ const setupSocketEvents = (io: Server) => {
 
     socket.on("save_tray", async (data: TrayType, callback) => {
       try {
+        if (data.message.includes("ควย") || data.message.includes("เหี้ย")) {
+          throw new Error("Message contains inappropriate language");
+        }
         const newTray = new TrayModel(data);
         await newTray.save();
         const savedTray = await TrayModel.findById(newTray._id);
@@ -35,10 +42,16 @@ const setupSocketEvents = (io: Server) => {
         const totalCount = await TrayModel.countDocuments();
         io.emit("update_total_count", totalCount);
 
-        if (callback) callback();
-      } catch (error) {
-        console.error("Error saving tray:", error);
-        socket.emit("save_error", { message: "Error saving tray" });
+        if (callback) callback({ success: true });
+      } catch (error: any) {
+        socket.emit("save_error", {
+          message: error.message || "Error saving tray",
+        });
+        if (callback)
+          callback({
+            success: false,
+            error: error.message || "Error saving tray",
+          });
       }
     });
 
