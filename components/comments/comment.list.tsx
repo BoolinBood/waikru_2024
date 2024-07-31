@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import CommentItem from "./comment.item";
 import CommentFloatButton from "./comment.button";
 import { useAppContext } from "@/context/AppContext";

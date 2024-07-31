@@ -2,7 +2,7 @@
 
 import { getFlowerPath } from "@/utils/flower.utils";
 import Image from "next/image";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { useModal } from "@/context/ModalContext";
 import { MotionDiv } from "../motion.div";
 import { truncateString } from "@/utils/string.utils";

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { CgClose, CgChevronLeft } from "react-icons/cg";
 import { Inter } from "next/font/google";
 import { getFlowerName, getFlowerPath } from "@/utils/flower.utils";

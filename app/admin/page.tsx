@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { useInView } from "framer-motion";
-import React, { useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Spinner } from "@/components/ui/spinner";
 import { useAppContext } from "@/context/AppContext";
 

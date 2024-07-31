@@ -1,5 +1,4 @@
 import Image from "next/image";
-import React from "react";
 
 const images = [
   "/assets/petal/desktop/1.svg",
