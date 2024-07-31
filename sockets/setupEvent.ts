@@ -30,6 +30,16 @@ const setupSocketEvents = (io: Server) => {
       }
     });
 
+    socket.on("get_all_trays", async () => {
+      try {
+        const trays = await TrayModel.find().sort({ _id: -1 });
+        socket.emit("tray_update", trays);
+      } catch (error) {
+        console.error("Error fetching trays:", error);
+        socket.emit("fetch_error", { message: "Error fetching trays" });
+      }
+    })
+
     socket.on("save_tray", async (data: TrayType, callback) => {
       try {
         if (checkDirtyWords(data.message)) {
