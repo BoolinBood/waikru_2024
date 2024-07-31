@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { memo } from "react";
 
 const images = [
   "/assets/petal/desktop/1.svg",
@@ -31,4 +32,4 @@ const Petal = () => {
   );
 };
 
-export default React.memo(Petal);
+export default memo(Petal);

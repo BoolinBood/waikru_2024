@@ -175,6 +175,14 @@
           height: 100%;
           z-index: 900;
 
+          @media (min-width: $breakpoint-md) {
+              top: 15%;
+          }
+
+          @media (min-width: $breakpoint-xl) {
+            top: 0;
+          }
+
           @media (min-width: $breakpoint-xxl) {
               top: 15%;
               width: 50%;
@@ -279,17 +287,19 @@
           }
 
           @media (min-width: $breakpoint-xl) {
-              width: 500px;
+              width: 300px;
           }
 
           @media (min-width: $breakpoint-xl) and (orientation: landscape) {
-            width: 275px;
+            width: 20%;
             left: 2rem;
           }
 
           @media (min-width: $breakpoint-xxl) {
             width: 375px;
             left: 2rem;
+
+            border: 4px solid green;
          }
 
          @media (min-width: $breakpoint-xxl) and (max-height: $breakpoint-xl){

@@ -14,7 +14,9 @@ const setupSocketEvents = (io: Server) => {
 
     socket.on("get_trays", async (page: number = 1, dept: string[] = []) => {
       try {
+        page = Math.max(1, page);
         const skip = (page - 1) * itemsPerPage;
+
         const query = Array.isArray(dept) && dept.length > 0 ? { dept } : {};
 
         const trays = await TrayModel.find(query)
