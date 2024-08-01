@@ -241,7 +241,7 @@
   
     .-flower {
       margin: 0 auto;
-      margin-bottom: 100px;
+      margin-bottom: 120px;
 
       width: 100px;
       height: 100px;
@@ -277,8 +277,9 @@
       .-flower {
             width: 150px;
             height: 150px;
-            margin-bottom: 25%;
+            margin-bottom: 40%;
       }
+      
       .-name{
           font-size: 24px;
       }
@@ -289,6 +290,12 @@
   
     @media (min-width: $breakpoint-xl) {
       width: 720px;
+
+      .-flower {
+            width: 200px;
+            height: 200px;
+            margin-bottom: 30%;
+      }
       .-name{
           font-size: 28px;
       }
