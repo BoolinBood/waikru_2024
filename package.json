@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch ./sockets/socket.server.ts",
-    "build": "next build",
+    "build": "next build && tsc",
     "start": "NODE_ENV=production tsx ./sockets/socket.server.ts",
     "lint": "next lint"
   },
