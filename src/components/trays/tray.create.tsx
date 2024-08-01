@@ -1,10 +1,10 @@
 import { useState, useCallback } from "react";
 import { CgClose, CgChevronLeft } from "react-icons/cg";
 import { Inter } from "next/font/google";
-import { getFlowerName, getFlowerPath } from "@/utils/flower.utils";
+import { getFlowerName, getFlowerPath } from "@/src/utils/flower.utils";
 import Image from "next/image";
-import { useModal } from "@/context/ModalContext";
-import { useAppContext } from "@/context/AppContext";
+import { useModal } from "@/src/context/ModalContext";
+import { useAppContext } from "@/src/context/AppContext";
 import Button from "../ui/button";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";

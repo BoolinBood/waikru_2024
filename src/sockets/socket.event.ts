@@ -1,6 +1,6 @@
 "use server";
 import { Server } from "socket.io";
-import TrayModel from "@/app/models/TrayModel";
+import TrayModel from "@/src/models/TrayModel";
 
 const itemsPerPage = 4;
 

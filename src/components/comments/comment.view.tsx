@@ -1,4 +1,4 @@
-import { getFlowerPath } from "@/utils/flower.utils";
+import { getFlowerPath } from "@/src/utils/flower.utils";
 import Image from "next/image";
 
 interface IProps {

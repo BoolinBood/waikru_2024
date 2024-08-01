@@ -1,15 +1,15 @@
 import { useEffect, useRef } from "react";
 import CommentItem from "./comment.item";
 import CommentFloatButton from "./comment.button";
-import { useAppContext } from "@/context/AppContext";
+import { useAppContext } from "@/src/context/AppContext";
 import { AnimatePresence } from "framer-motion";
 import dynamic from "next/dynamic";
 import CommentFilterButton from "./comment.dropdown";
 
 const Skeleton = dynamic(
-  () => import("@/components/skeleton/skeleton.comment")
+  () => import("@/src/components/skeleton/skeleton.comment")
 );
-const Petal = dynamic(() => import("@/components/petal"));
+const Petal = dynamic(() => import("@/src/components/petal"));
 
 const CommentList: React.FC = () => {
   const ref = useRef<HTMLDivElement>(null);

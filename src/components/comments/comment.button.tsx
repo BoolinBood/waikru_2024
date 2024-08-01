@@ -1,7 +1,7 @@
 "use client";
 import { AiOutlinePlus } from "react-icons/ai";
 import Button from "../ui/button";
-import { useModal } from "@/context/ModalContext";
+import { useModal } from "@/src/context/ModalContext";
 
 const CommentFloatButton = () => {
   const { setModalState } = useModal();

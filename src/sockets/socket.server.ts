@@ -3,7 +3,7 @@ dotenv.config();
 import { createServer } from "http";
 import next from "next";
 import { Server } from "socket.io";
-import connectToMongoDB from "@/utils/db.utils";
+import connectToMongoDB from "@/src/utils/db.utils";
 import setupSocketEvents from "./socket.event";
 
 const dev = process.env.NODE_ENV !== "production";

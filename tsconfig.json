@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -15,7 +19,24 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"],
+      "@/*": [
+        "./*"
+      ],
+      "@/src/models": [
+        "src/models/*"
+      ],
+      "@/src/utils/*": [
+        "src/utils/*"
+      ],
+      "@/src/types/*": [
+        "src/types/*"
+      ],
+      "@/src/sockets/*": [
+        "src/sockets/*"
+      ],
+      "@/src/components/*": [
+        "src/components/*"
+      ]
     },
     "plugins": [
       {
@@ -23,6 +44,14 @@
       }
     ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "sockets/socket.server.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "sockets/socket.server.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

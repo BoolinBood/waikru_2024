@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useModal } from "@/context/ModalContext";
+import { useModal } from "@/src/context/ModalContext";
 import { AnimatePresence } from "framer-motion";
 
 // Dynamically import components for lazy loading

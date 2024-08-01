@@ -4,10 +4,14 @@ import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 
-import { getFlowerName, getFlowerPath, getFlowers } from "@/utils/flower.utils";
+import {
+  getFlowerName,
+  getFlowerPath,
+  getFlowers,
+} from "@/src/utils/flower.utils";
 import Button from "../ui/button";
 import Image from "next/image";
-import { useModal } from "@/context/ModalContext";
+import { useModal } from "@/src/context/ModalContext";
 
 import "swiper/css";
 import "swiper/css/pagination";
