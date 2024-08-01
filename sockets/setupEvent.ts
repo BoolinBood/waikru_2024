@@ -12,23 +12,29 @@ const setupSocketEvents = (io: Server) => {
       isConnected: true,
       dbConnected: true,
     });
-    socket.on("get_trays", async (page: number = 1, dept: Dept[] | null = null) => {
-      try {
-        const skip = (page - 1) * itemsPerPage;
-        let query = dept ? { dept } : {};
-    
-        const trays = await TrayModel.find(query)
-          .sort({ _id: -1 })
-          .skip(skip)
-          .limit(itemsPerPage);
-    
-        const totalCount = await TrayModel.countDocuments(query);
-        socket.emit("tray_update", { trays, totalCount });
-      } catch (error) {
-        console.error("Error fetching trays:", error);
-        socket.emit("fetch_error", { message: "Error fetching trays" });
+    socket.on(
+      "get_trays",
+      async (page: number = 1, dept: Dept[] | null = null) => {
+        try {
+          const skip = (page - 1) * itemsPerPage;
+          let query = dept ? { dept } : {};
+
+          const trays = await TrayModel.find(query)
+            .sort({ _id: -1 })
+            .skip(skip)
+            .limit(itemsPerPage);
+
+          const totalCount = await TrayModel.countDocuments(query);
+          socket.emit("tray_update", {
+            trays: trays.length > 0 ? trays : [],
+            totalCount,
+          });
+        } catch (error) {
+          console.error("Error fetching trays:", error);
+          socket.emit("fetch_error", { message: "Error fetching trays" });
+        }
       }
-    });
+    );
 
     socket.on("get_all_trays", async () => {
       try {
@@ -38,7 +44,7 @@ const setupSocketEvents = (io: Server) => {
         console.error("Error fetching trays:", error);
         socket.emit("fetch_error", { message: "Error fetching trays" });
       }
-    })
+    });
 
     socket.on("save_tray", async (data: TrayType, callback) => {
       try {
