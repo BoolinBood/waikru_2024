@@ -42,11 +42,14 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
       setDbConnected(status.dbConnected);
     }
 
-    function onTrayUpdate(data: { trays: TrayType[]; totalCount: number }) {
+    function onTrayUpdate(data: { trays: TrayType[], totalCount: number }) {
       if (Array.isArray(data.trays)) {
-        setTrays((prevTrays) => [...prevTrays, ...data.trays]);
-        setTotalCount(data.totalCount);
-        setHasMore(trays.length < data.totalCount);
+        setTrays(prevTrays => {
+          const newTrays = [...prevTrays, ...data.trays];
+          setTotalCount(data.totalCount);
+          setHasMore(newTrays.length < data.totalCount);
+          return newTrays;
+        });
       } else {
         setTrays([]);
         setTotalCount(0);
