@@ -3,8 +3,7 @@
 import { ReactNode } from "react";
 import Backdrop from "../ui/backdrop";
 import { AiOutlineClose } from "react-icons/ai";
-import { useModal } from "@/context/ModalContext";
-import { motion } from "framer-motion";
+import { useModal } from "@/src/context/ModalContext";
 import { MotionDiv } from "../motion.div";
 
 interface IProps {

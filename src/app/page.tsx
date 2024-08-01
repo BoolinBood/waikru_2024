@@ -1,17 +1,17 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import Loading from "@/components/loading/loading";
+import Loading from "@/src/components/loading/loading";
 import { AnimatePresence } from "framer-motion";
-import { useSuspenseLoader } from "@/hooks/suspense.hook";
-import { MotionDiv } from "@/components/motion.div";
+import { useSuspenseLoader } from "@/src/hooks/suspense.hook";
+import { MotionDiv } from "@/src/components/motion.div";
 
 const HeroBanner = dynamic(
-  () => import("@/components/hero-banner/hero-banner"),
+  () => import("@/src/components/hero-banner/hero-banner"),
   { suspense: true }
 );
 const CommentList = dynamic(
-  () => import("@/components/comments/comment.list"),
+  () => import("@/src/components/comments/comment.list"),
   { suspense: true }
 );
 

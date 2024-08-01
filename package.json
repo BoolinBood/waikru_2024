@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "tsx watch ./sockets/socket.server.ts",
+    "dev": "tsx watch ./src/sockets/socket.server.ts",
     "build": "next build && tsc",
-    "start": "NODE_ENV=production tsx ./sockets/socket.server.ts",
+    "start": "NODE_ENV=production tsx ./src/sockets/socket.server.ts",
     "lint": "next lint"
   },
   "dependencies": {

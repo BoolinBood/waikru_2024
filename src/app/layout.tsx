@@ -1,16 +1,14 @@
 import type { Metadata } from "next";
 import { AppProvider } from "../context/AppContext";
 import { ModalProvider } from "../context/ModalContext";
-import { Suspense } from "react";
 import { Inter } from "next/font/google";
 
-import Loading from "@/components/loading/loading";
-import ModalWrapper from "@/components/modals/modal.wrapper";
+import ModalWrapper from "@/src/components/modals/modal.wrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
-import "@/styles/index.scss";
-import "@/styles/globals.css";
+import "@/src/styles/index.scss";
+import "@/src/styles/globals.css";
 
 export const metadata: Metadata = {
   title: "SIT Waikru | SIT ไหว้ครู",

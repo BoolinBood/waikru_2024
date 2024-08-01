@@ -2,8 +2,8 @@
 
 import { useInView } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
-import { Spinner } from "@/components/ui/spinner";
-import { useAppContext } from "@/context/AppContext";
+import { Spinner } from "@/src/components/ui/spinner";
+import { useAppContext } from "@/src/context/AppContext";
 
 const AdminPage = () => {
   const { trays, loadMoreTrays, hasMore, deleteTray } = useAppContext();

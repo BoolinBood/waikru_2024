@@ -1,11 +1,11 @@
 "use client";
 
-import { getFlowerPath } from "@/utils/flower.utils";
+import { getFlowerPath } from "@/src/utils/flower.utils";
 import Image from "next/image";
 import { useMemo } from "react";
-import { useModal } from "@/context/ModalContext";
+import { useModal } from "@/src/context/ModalContext";
 import { MotionDiv } from "../motion.div";
-import { truncateString } from "@/utils/string.utils";
+import { truncateString } from "@/src/utils/string.utils";
 
 interface ICommentItem {
   index: number;
