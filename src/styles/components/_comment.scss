@@ -1,473 +1,471 @@
-
-
 .comment-section {
-    overflow-y: auto; 
-    overflow-x: hidden; 
+  overflow-y: auto; 
+  overflow-x: hidden; 
 
-    width: 100%;
-    height: 100%;
-    border-top-left-radius: 28px;
-    border-top-right-radius: 28px;
-    padding: 1rem;
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 28px;
+  border-top-right-radius: 28px;
+  padding: 1rem;
 
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
- 
-    background: linear-gradient(180deg, #D1AFDD 0%, #A67BB7 100%);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-    .-btn {
-        position: fixed;
-        top: 90%;
-        left: 50%;
-        width: 100%;
+  background: linear-gradient(180deg, #D1AFDD 0%, #A67BB7 100%);
 
-        transform: translate(-50%, -50%);
-        animation: float 2s ease-in-out infinite;
+  .-btn {
+      position: fixed;
+      top: 90%;
+      left: 50%;
+      width: 100%;
 
-        button {
-          margin: 0 auto;
-        }
-    }
+      transform: translate(-50%, -50%);
+      animation: float 2s ease-in-out infinite;
+
+      button {
+        margin: 0 auto;
+      }
+  }
 
 }
 
 .comment-list {
-    display: grid;
-    position: relative;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  display: grid;
+  position: relative;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  
+  max-width: 1024px;
+  gap: 2.5rem;
+  padding: 20px 10px;
+
+  margin-bottom: 10rem;
+
+  @media (min-width: $breakpoint-md) {
+      margin-bottom: 0;
+      grid-template-columns: repeat(3, minmax(0, 1fr))
+  }
+
+  @media (min-width: $breakpoint-xxl) {
+      grid-template-columns: repeat(3, minmax(0, 1fr))
+  }
+
+  @media (min-width: $breakpoint-xxxl) {
+      max-width: 1600px;
+      gap: 3.5rem;
+      grid-template-columns: repeat(4, minmax(0, 1fr))
+  }
+
+  &::-webkit-scrollbar {
+      width: 5px;
+  }
     
-    max-width: 1024px;
-    gap: 2.5rem;
-    padding: 20px 10px;
-
-
-    @media (min-width: $breakpoint-md) {
-        grid-template-columns: repeat(3, minmax(0, 1fr))
-    }
-
-    @media (min-width: $breakpoint-xxl) {
-        grid-template-columns: repeat(3, minmax(0, 1fr))
-    }
-
-    @media (min-width: $breakpoint-xxxl) {
-        max-width: 1600px;
-        gap: 3.5rem;
-        grid-template-columns: repeat(4, minmax(0, 1fr))
-    }
-
-    &::-webkit-scrollbar {
-        width: 5px;
-    }
-      
-      
-    &::-webkit-scrollbar-thumb {
-        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    }
+    
+  &::-webkit-scrollbar-thumb {
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
 }
 
 .comment {
-    width: 150px;
-    height: 85px;
-    padding: 16px;
+  width: 150px;
+  height: 85px;
+  padding: 16px;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
-    position: relative;
+  position: relative;
 
-    border-radius: 28px;
-    background: #FFF;
-    box-shadow: 0px 3.689px 0px 0px #A297C0;
-
-
-    @media (min-width: $breakpoint-md) {
-        padding: 20px;
-        width: 200px;
-        height: 100px;
-    }
-
-    @media (min-width: $breakpoint-xl) {
-        width: 250px;
-        height: 150px;
-    }
+  border-radius: 28px;
+  background: #FFF;
+  box-shadow: 0px 3.689px 0px 0px #A297C0;
 
 
-    @media (min-width: $breakpoint-xxl) {
-        width: 300px;
-        height: 187px;
-        border-radius: 60px;
-        padding: 30px;
-    } 
-
-    .-tag {
-        position: absolute;
-        top: 0px;
-        left: 16px;
-
-        span {
-            border-radius: 9px;
-            padding: 2px 4px;
-
-            color: white;
-            font-weight: 700;
-            font-family: "Inter";
-            font-size: clamp(5px, 10px, 15px);
-        }
-
-        & .-IT {
-            background-color: #FC6C8D;
-        }
-
-        & .-CS {
-            background-color: #A297C0;
-        }
-
-        & .-DSI {
-            background-color: #8DB0C4;
-        }
-
-        @media (min-width: $breakpoint-xxl) {
-            top: 10px;
-            left: 30px;
-
-            span {
-                padding: 4px 8px;
-                font-size: clamp(8px, 12px, 16px);
-            }
-            
-        }
-    }
-      
-
-    .-message {
-        width: 90%;
-        margin-top: 11px;
-        text-align: start;
-        color: #000;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        white-space: normal;
-        font-family: Inter;
-        font-size: 10px;
-        font-weight: 400;
-        text-wrap: wrap;
-
-        @media (min-width: $breakpoint-md) {
-            font-size: 12px;
-        }
-
-        @media (min-width: $breakpoint-xl) {
-            font-size: 16px;
-        }
-
-        @media (min-width: $breakpoint-xxl) {
-            font-size: 20px;
-        }
-    }
-    
-    .-author {
-        position: absolute;
-        bottom: 10px;
-        right: 15px;
-        color: #000;
-
-        text-align: right;
-        font-family: Inter;
-        font-size: 8px;
-        font-weight: 700;
-        text-wrap: wrap;
-        
-        @media (min-width: $breakpoint-md) {
-            font-size: 10px;
-        }
-
-        @media (min-width: $breakpoint-xl) {
-            font-size: 13px;
-        }
-
-        @media (min-width: $breakpoint-xxl) {
-            bottom: 10%;
-            right: 10%;
-            font-size: 16px;
-        }
-    }
-
-    .-tray {
-        position: absolute;
-        bottom: -1.5rem;
-        left: -1rem;
-
-        width: 37px;
-        height: 80px;
-
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transform: rotate(-25deg);
-        }
-
-        @media (min-width: $breakpoint-md) {
-            width: 50px;
-            height: 85px;
-            left: -1.5rem;
-        }
-
-        @media (min-width: $breakpoint-xl) {
-            width: 60px;
-            height: 120px;
-        }
-
-        @media (min-width: $breakpoint-xxl) {
-            width: 80px;
-            height: 150px;
-        }
-
-        @media (min-width: $breakpoint-xxxl) {
-            left: -2rem;
-        }
-        
-    }
-}
-.comment-view {
-    background: white;
-    width: 300px;
-    height: auto;
-    padding: 40px;
-    box-sizing: border-box;
-    flex-shrink: 0;
-    border-radius: 45px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-
-    // display: flex;
-    // flex-direction: column;
-    // justify-content: center;
-  
-    .-flower {
-      margin: 0 auto;
-      margin-bottom: 120px;
-
-      width: 100px;
+  @media (min-width: $breakpoint-md) {
+      padding: 20px;
+      width: 200px;
       height: 100px;
-  
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+  }
+
+  @media (min-width: $breakpoint-xl) {
+      width: 250px;
+      height: 150px;
+  }
+
+
+  @media (min-width: $breakpoint-xxl) {
+      width: 300px;
+      height: 187px;
+      border-radius: 60px;
+      padding: 30px;
+  } 
+
+  .-tag {
+      position: absolute;
+      top: 0px;
+      left: 16px;
+
+      span {
+          border-radius: 9px;
+          padding: 2px 4px;
+
+          color: white;
+          font-weight: 700;
+          font-family: "Inter";
+          font-size: clamp(5px, 10px, 15px);
       }
 
-      svg {
-        width: 100%;
-        height: 100%;
-
-        fill: #352854 !important;
-        color: unset !important;
+      & .-IT {
+          background-color: #FC6C8D;
       }
-    }
-  
-    .-name {
-      color: #000;
-      text-align: center;
-      font-family: PT Sans, "PT Sans";
-      font-size: 18px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: normal;
-    }
-  
-    .-message {
-      margin-top: 10px;
-      white-space: pre-wrap;
-      word-wrap: break-word;
+
+      & .-CS {
+          background-color: #A297C0;
+      }
+
+      & .-DSI {
+          background-color: #8DB0C4;
+      }
+
+      @media (min-width: $breakpoint-xxl) {
+          top: 10px;
+          left: 30px;
+
+          span {
+              padding: 4px 8px;
+              font-size: clamp(8px, 12px, 16px);
+          }
+          
+      }
+  }
+    
+
+  .-message {
+      width: 90%;
+      margin-top: 11px;
       text-align: start;
-    }
-  
-    @media (min-width: $breakpoint-md) {
-      width: 500px;
+      color: #000;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      white-space: normal;
+      font-family: Inter;
+      font-size: 10px;
+      font-weight: 400;
+      text-wrap: wrap;
 
-      .-flower {
-            width: 150px;
-            height: 150px;
-            margin-bottom: 40%;
+      @media (min-width: $breakpoint-md) {
+          font-size: 12px;
       }
-      
-      .-name{
-          font-size: 24px;
-      }
-      .-message{
+
+      @media (min-width: $breakpoint-xl) {
           font-size: 16px;
       }
-    }
-  
-    @media (min-width: $breakpoint-xl) {
-      width: 720px;
 
-      .-flower {
-            width: 200px;
-            height: 200px;
-            margin-bottom: 30%;
+      @media (min-width: $breakpoint-xxl) {
+          font-size: 20px;
       }
-      .-name{
-          font-size: 28px;
-      }
-      .-message{
-          font-size: 24px;
-      }
-    }
+  }
   
-    @media (min-width: $breakpoint-xxl) {
-      width: 800px;
-      .-name{
-          font-size: 32px;
+  .-author {
+      position: absolute;
+      bottom: 10px;
+      right: 15px;
+      color: #000;
+
+      text-align: right;
+      font-family: Inter;
+      font-size: 8px;
+      font-weight: 700;
+      text-wrap: wrap;
+      
+      @media (min-width: $breakpoint-md) {
+          font-size: 10px;
       }
-      .-message{
-          font-size: 28px;
+
+      @media (min-width: $breakpoint-xl) {
+          font-size: 13px;
+      }
+
+      @media (min-width: $breakpoint-xxl) {
+          bottom: 10%;
+          right: 10%;
+          font-size: 16px;
+      }
+  }
+
+  .-tray {
+      position: absolute;
+      bottom: -1.5rem;
+      left: -1rem;
+
+      width: 37px;
+      height: 80px;
+
+      img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transform: rotate(-25deg);
+      }
+
+      @media (min-width: $breakpoint-md) {
+          width: 50px;
+          height: 85px;
+          left: -1.5rem;
+      }
+
+      @media (min-width: $breakpoint-xl) {
+          width: 60px;
+          height: 120px;
+      }
+
+      @media (min-width: $breakpoint-xxl) {
+          width: 80px;
+          height: 150px;
+      }
+
+      @media (min-width: $breakpoint-xxxl) {
+          left: -2rem;
+      }
+      
+  }
+}
+.comment-view {
+  background: white;
+  width: 300px;
+  height: auto;
+  padding: 40px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  border-radius: 45px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: center;
+
+  .-flower {
+    margin: 0 auto;
+    margin-bottom: 120px;
+
+    width: 100px;
+    height: 100px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+
+      fill: #352854 !important;
+      color: unset !important;
+    }
+  }
+
+  .-name {
+    color: #000;
+    text-align: center;
+    font-family: PT Sans, "PT Sans";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+
+  .-message {
+    margin-top: 10px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    text-align: start;
+  }
+
+  @media (min-width: $breakpoint-md) {
+    width: 500px;
+
+    .-flower {
+          width: 150px;
+          height: 150px;
+          margin-bottom: 40%;
+    }
+    
+    .-name{
+        font-size: 24px;
+    }
+    .-message{
+        font-size: 16px;
+    }
+  }
+
+  @media (min-width: $breakpoint-xl) {
+    width: 720px;
+
+    .-flower {
+          width: 200px;
+          height: 200px;
+          margin-bottom: 30%;
+    }
+    .-name{
+        font-size: 28px;
+    }
+    .-message{
+        font-size: 24px;
+    }
+  }
+
+  @media (min-width: $breakpoint-xxl) {
+    width: 800px;
+    .-name{
+        font-size: 32px;
+    }
+    .-message{
+        font-size: 28px;
+    }
+  }
+}
+
+.comment-filter {
+  margin-left: auto;
+  top: 0;
+  z-index: 1000;
+  font-family: Inter;
+
+  font-size: 12px;
+  font-weight: 400;
+  position: relative;
+  width: 50%;
+
+  &.sticky {
+    top: 0;
+    
+    animation: fadeIn 0.5s ease-in-out;
+    position: sticky;
+    position: -webkit-sticky; /* Safari */
+
+    button {  
+      border: none;
+      background-color: #352854;
+      border-radius: 28px;
+
+      h1, svg{
+        color: #FFF;
       }
     }
   }
 
-  .comment-filter {
+  @media (min-width: $breakpoint-md) {
+    width: 20%;
+    .sticky {
+      width: 100%;
+      padding: 10px;
+    }
+
+    h1, label {
+      font-size: 16px !important;
+    }
+
+    svg {
+      width: 25px;
+      height: 25px;
+    }
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    color: #352854;
+    border: 1px solid #352854;
+    padding: 5px 20px;
+    border-radius: 36px;
     margin-left: auto;
-    top: 0;
+    margin-right: 5%;
+
+    cursor: pointer;
+
+    h1 {
+      margin-right: 4px;
+      font-size: clamp(8px, 12px, 20px);
+    }
+  }
+}
+
+  .-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 5%;
+    width: 6.5rem;
+    background: transparent;
+    border-radius: 8px;
+    box-shadow: 5.765px 6.813px 2.62px 0px rgba(0, 0, 0, 0.25);
     z-index: 1000;
-    font-family: Inter;
 
-    font-size: 12px;
-    font-weight: 400;
-    position: relative;
-    width: 50%;
+    margin-top: 5px;
 
-    &.sticky {
-      top: 0;
-      
-      animation: fadeIn 0.5s ease-in-out;
-      position: sticky;
-      position: -webkit-sticky; /* Safari */
-
-      button {  
-        border-color: #FFF;
-        background-color: #352854;
-        border-radius: 28px;
-
-        h1, svg{
-          color: #FFF;
-        }
-      }
-    }
-
-    @media (min-width: $breakpoint-md) {
-      width: 20%;
-      .sticky {
-        width: 100%;
-        padding: 10px;
-      }
-
-      h1, label {
-        font-size: 16px !important;
-      }
-
-      svg {
-        width: 25px;
-        height: 25px;
-      }
-    }
-
-    button {
+    label {
+      position: relative;
       display: flex;
       align-items: center;
-      color: #352854;
-      border: 1px solid #352854;
-      padding: 5px 20px;
-      border-radius: 36px;
-      margin-left: auto;
-      margin-right: 5%;
-
       cursor: pointer;
-  
-      h1 {
-        margin-right: 4px;
-        font-size: clamp(8px, 12px, 20px);
+
+      font-size: clamp(8px, 12px, 20px);
+      padding: 10px;
+      transition: background-color 0.3s ease;
+
+      background-color: #FFF;
+      
+      input {
+        opacity: 0;
+        width: 0;
+        height: 0;
       }
+
+      .-checkmark {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+
+        margin-right: 10px;
+        position: relative;
+
+        svg {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          display: none;
+          
+          width: 20px;
+          height: 20px;
+        }
+      }
+
+      input:checked + .-checkmark svg {
+        display: block;
+      }
+
+      &.-checked {
+        background-color: #674F96; /* Background color for checked label */
+        color: white;
+      }
+    }
+
+    label:nth-child(1) {
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+    }
+
+    label:nth-child(2) {
+      border-top: 1px #CCD1D2 solid;
+      border-bottom: 1px #CCD1D2 solid;
+    }
+
+    label:nth-child(3) {
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
     }
   }
-  
-    .-dropdown-menu {
-      position: absolute;
-      top: 100%;
-      right: 5%;
-      width: 6.5rem;
-      background: transparent;
-      border-radius: 8px;
-      box-shadow: 5.765px 6.813px 2.62px 0px rgba(0, 0, 0, 0.25);
-      z-index: 1000;
-
-      margin-top: 5px;
-  
-      label {
-        position: relative;
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-
-        font-size: clamp(8px, 12px, 20px);
-        padding: 10px;
-        transition: background-color 0.3s ease;
-
-        background-color: #FFF;
-        
-        input {
-          opacity: 0;
-          width: 0;
-          height: 0;
-        }
-  
-        .-checkmark {
-          display: inline-block;
-          width: 30px;
-          height: 30px;
-
-          margin-right: 10px;
-          position: relative;
-  
-          svg {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            display: none;
-            
-            width: 20px;
-            height: 20px;
-          }
-        }
-  
-        input:checked + .-checkmark svg {
-          display: block;
-        }
-  
-        &.-checked {
-          background-color: #674F96; /* Background color for checked label */
-          color: white;
-        }
-      }
-
-      label:nth-child(1) {
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-      }
-
-      label:nth-child(2) {
-        border-top: 1px #CCD1D2 solid;
-        border-bottom: 1px #CCD1D2 solid;
-      }
-
-      label:nth-child(3) {
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
-      }
-    }
-  
-  

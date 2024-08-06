@@ -46,7 +46,7 @@ const SmallLoading = () => {
           {/* <div className="-spinner"></div> */}
           <h1>
             SIT{" "}
-            <span className="-spinner">
+            <span className="-spinner mb-2">
               <Spinner />
             </span>
             Waikru
