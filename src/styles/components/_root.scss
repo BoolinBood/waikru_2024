@@ -45,13 +45,13 @@ body {
     }
 
     @media (min-width: $breakpoint-xxl) and (orientation: landscape) {
-      height: 50vh;
+      height: 60vh;
     }
     
 
-    @media (min-width: $breakpoint-xxxl) {
-      height: 65vh
-    }
+    // @media (min-width: $breakpoint-xxxl) {
+    //   height: 50vh
+    // }
 
     // @media (min-width: 1921px) {
     //   height: 65vh;
@@ -81,6 +81,9 @@ body {
     max-height: 62vh;
   }
   
+  @media (min-width: $breakpoint-xxl) and (orientation: landscape) {
+    height: 53vh;
+  }
 
   
 

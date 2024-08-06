@@ -30,7 +30,10 @@
             cursor: pointer;
             box-shadow: 0px 0px 0px 2.5px #fff, 0px 0px 0px 5px #F4B744, 0px 0px 0px 10px white, 0px 0px 0px 10.5px #F4B744;
             background: white;
-            color: #F4B744;
+
+            h1 {
+                color: #F4B744;
+            }
         }
     }
 

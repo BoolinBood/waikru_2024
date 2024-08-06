@@ -16,6 +16,15 @@
     }
   }
     
+  @keyframes transformY { 
+    0% {
+      transform: translateY(50px);
+    } 
+    100% {
+      transform: translateY(0);
+    }
+  }
+
   @keyframes bounceX {
     0%, 100% {
       transform: translateX(0);
@@ -187,8 +196,8 @@
 
   .hero-banner {
     .-mountains {
-        animation: bounceY 0.7s ease-in
-        , fadeIn 0.7s ease-in;
+        animation: fadeIn 0.7s ease-in,
+        transformY 0.8s ease-in-out 0.2s;
     }
 
     // .-waves {
@@ -197,8 +206,9 @@
     // }
 
     .-flowers {
-        animation: bounceY 0.8s ease-in-out 0.2s
-        , fadeIn 0.8s ease-in-out;
+      //bounceY 0.8s ease-in-out 0.2s
+        animation: fadeIn 0.8s ease-in-out,
+        transformY 0.8s ease-in-out 0.2s;
     }
 
     .-clouds {
@@ -212,4 +222,5 @@
             , fadeIn 0.5s ease-in-out;
         }
     }
+    
   }

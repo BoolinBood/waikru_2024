@@ -1,38 +1,44 @@
 "use client";
 
-import { useInView } from "framer-motion";
-import { useState, useEffect, useRef } from "react";
-import { Spinner } from "@/src/components/ui/spinner";
 import { useAppContext } from "@/src/context/AppContext";
+import { socket } from "@/src/sockets/socket.client";
+import { useState } from "react";
+
+import React, { useEffect } from "react";
 
 const AdminPage = () => {
-  const { trays, loadMoreTrays, hasMore, deleteTray } = useAppContext();
-  const ref = useRef(null);
-  const isInView = useInView(ref);
-  const [searchTerm, setSearchTerm] = useState("");
+  const { deleteTray } = useAppContext();
+  const [trays, setTrays] = useState<TrayType[]>([]);
 
   useEffect(() => {
-    if (isInView && hasMore) {
-      loadMoreTrays();
-    }
-  }, [isInView, hasMore]);
+    socket.emit("get_all_trays");
+    socket.on("tray_update", (updatedTrays) => {
+      if (Array.isArray(updatedTrays)) {
+        setTrays(updatedTrays);
+      } else {
+        console.error("Received non-array data for trays:", updatedTrays);
+      }
+    });
+    return () => {
+      socket.off("tray_update");
+    };
+  }, []);
 
-  const filteredTrays = trays.filter((tray) =>
-    tray.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const handleDeleteTray = async (id: string) => {
+    try {
+      deleteTray(id);
+      socket.emit("get_all_trays");
+    } catch (error) {
+      console.error("Error deleting tray:", error);
+    }
+  };
+
   return (
     <div className="w-full h-screen bg-gray-200 p-8">
       <h1 className="text-2xl font-semibold">Role: Admin</h1>
-      <input
-        type="text"
-        placeholder="Search by Name"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="mt-4 p-2 border rounded"
-      />
+
       <h1 className="text-lg text-orange-600 font-bold mt-4">
-        Amount: {filteredTrays.length}{" "}
-        {filteredTrays.length === 1 ? "tray" : "trays"}
+        Amount: {trays.length} {trays.length === 1 ? "tray" : "trays"}
       </h1>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-2">
         <table className="w-full text-sm text-left rtl:text-right text-white">
@@ -56,7 +62,7 @@ const AdminPage = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredTrays.map((tray: TrayType, i) => (
+            {trays.map((tray: TrayType, i) => (
               <tr
                 className={`${i % 2 !== 0 ? "bg-slate-600" : "bg-slate-800"}`}
                 key={tray._id}
@@ -70,7 +76,7 @@ const AdminPage = () => {
                 <td className="px-6 py-4">
                   <button
                     className="font-medium text-red-500 hover:underline"
-                    onClick={() => deleteTray(tray._id as string)}
+                    onClick={() => handleDeleteTray(tray._id as string)}
                   >
                     Delete
                   </button>
@@ -80,11 +86,6 @@ const AdminPage = () => {
           </tbody>
         </table>
       </div>
-      {hasMore && (
-        <div ref={ref} className="flex justify-center mt-5">
-          <Spinner />
-        </div>
-      )}
     </div>
   );
 };

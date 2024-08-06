@@ -33,15 +33,30 @@ const setupSocketEvents = (io: Server) => {
       }
     });
 
+    socket.on("get_all_trays", async () => {
+      try {
+        const trays = await TrayModel.find().sort({ _id: -1 });
+        socket.emit("tray_update", trays);
+      } catch (error) {
+        console.error("Error fetching trays:", error);
+        socket.emit("fetch_error", { message: "Error fetching trays" });
+      }
+    });
+
     socket.on("save_tray", async (data: TrayType, callback) => {
       if (checkBadWords(data.message)) {
-        callback?.({ success: false, error: "Message cannot contain 'ควย'" });
-        socket.emit("save_error", { message: "Message cannot contain 'ควย'" });
+        callback?.({
+          success: false,
+          error: "Message cannot contain bad words.",
+        });
+        socket.emit("save_error", {
+          message: "Message cannot contain bad words.",
+        });
         return;
       }
-      
+
       setTimeout(() => callback?.({ success: true, preliminary: true }), 1000);
-    
+
       setTimeout(async () => {
         try {
           const newTray = await TrayModel.create(data);
@@ -49,8 +64,12 @@ const setupSocketEvents = (io: Server) => {
           io.emit("new_tray", savedTray);
           io.emit("update_total_count", await TrayModel.countDocuments());
         } catch (error: any) {
-          socket.emit("save_error", { message: error.message || "Error saving tray" });
-          socket.emit("save_failure", { error: error.message || "Error saving tray" });
+          socket.emit("save_error", {
+            message: error.message || "Error saving tray",
+          });
+          socket.emit("save_failure", {
+            error: error.message || "Error saving tray",
+          });
         }
       }, 2000);
     });
