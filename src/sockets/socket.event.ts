@@ -1,6 +1,7 @@
 "use server";
 import { Server } from "socket.io";
 import TrayModel from "@/src/models/TrayModel";
+import { checkBadWords } from "../utils/badWords.utils";
 
 const itemsPerPage = 4;
 
@@ -33,28 +34,25 @@ const setupSocketEvents = (io: Server) => {
     });
 
     socket.on("save_tray", async (data: TrayType, callback) => {
-      try {
-        if (data.message.includes("ควย") || data.message.includes("เหี้ย")) {
-          throw new Error("Message contains inappropriate language");
-        }
-        const newTray = new TrayModel(data);
-        await newTray.save();
-        const savedTray = await TrayModel.findById(newTray._id);
-        io.emit("new_tray", savedTray);
-        const totalCount = await TrayModel.countDocuments();
-        io.emit("update_total_count", totalCount);
-
-        if (callback) callback({ success: true });
-      } catch (error: any) {
-        socket.emit("save_error", {
-          message: error.message || "Error saving tray",
-        });
-        if (callback)
-          callback({
-            success: false,
-            error: error.message || "Error saving tray",
-          });
+      if (checkBadWords(data.message)) {
+        callback?.({ success: false, error: "Message cannot contain 'ควย'" });
+        socket.emit("save_error", { message: "Message cannot contain 'ควย'" });
+        return;
       }
+      
+      setTimeout(() => callback?.({ success: true, preliminary: true }), 1000);
+    
+      setTimeout(async () => {
+        try {
+          const newTray = await TrayModel.create(data);
+          const savedTray = await TrayModel.findById(newTray._id);
+          io.emit("new_tray", savedTray);
+          io.emit("update_total_count", await TrayModel.countDocuments());
+        } catch (error: any) {
+          socket.emit("save_error", { message: error.message || "Error saving tray" });
+          socket.emit("save_failure", { error: error.message || "Error saving tray" });
+        }
+      }, 2000);
     });
 
     socket.on("delete_tray", async (id: string) => {

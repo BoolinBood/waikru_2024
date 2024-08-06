@@ -17,13 +17,13 @@ const TrayForm = () => {
       return;
     }
     setIsLoading(true);
-    // saveTray(name, message, flower, dept, () => {
-    //   setIsLoading(false);
-    //   setName("");
-    //   setMessage("");
-    //   setFlower("");
-    setDept("");
-    // });
+    saveTray(name, message, flower, dept, () => {
+      setIsLoading(false);
+      setName("");
+      setMessage("");
+      setFlower("");
+      setDept("");
+    });
   };
 
   return (

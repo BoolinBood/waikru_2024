@@ -44,11 +44,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
 
     function onTrayUpdate(data: { trays: TrayType[], totalCount: number }) {
       if (Array.isArray(data.trays)) {
-<<<<<<< HEAD:context/AppContext.tsx
-        setTrays(prevTrays => {
-=======
         setTrays((prevTrays) => {
->>>>>>> origin/pre-deploy:src/context/AppContext.tsx
           const newTrays = [...prevTrays, ...data.trays];
           setTotalCount(data.totalCount);
           setHasMore(newTrays.length < data.totalCount);

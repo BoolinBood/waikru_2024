@@ -70,20 +70,19 @@ const CreateTray: React.FC<Props> = ({ selectedFlower }) => {
   const onSubmit: SubmitHandler<CreateTrayInputs> = useCallback(
     (data) => {
       setLoading(true);
-
       setModalState("none");
-
-      setTimeout(() => {
-        setModalState("success");
-      }, 500);
-
-      setTimeout(() => {
-        saveTray(data.name, data.message, selectedFlower, data.tag, () => {
-          setLoading(false);
-        });
-
-        setModalState("none");
-      }, 2000);
+  
+      saveTray(data.name, data.message, selectedFlower, data.tag, (result) => {
+        setLoading(false);
+        if (result.success) {
+          setModalState("success");
+          setTimeout(() => {
+            setModalState("none");
+          }, 2000);
+        } else {
+          setModalState("error");
+        }
+      });
     },
     [selectedFlower, saveTray, setModalState]
   );

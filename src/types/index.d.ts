@@ -54,6 +54,6 @@ declare type TrayPaginatedType = {
 };
 
 declare type resultMessage = {
-  success: string;
+  success: boolean;
   error?: string;
 };
