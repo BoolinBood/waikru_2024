@@ -1,196 +1,196 @@
-.error {
-  padding: 5px;
-  border-radius: 5.363px;
-  border: 0.67px solid #e4e4e4;
-  background: #fff;
-  box-shadow: 0px 0px 8.045px 0px rgba(0, 0, 0, 0.05);
-  display: flex;
-  flex-direction: column; 
-  width: 100%;
+// .error {
+//   padding: 5px;
+//   border-radius: 5.363px;
+//   border: 0.67px solid #e4e4e4;
+//   background: #fff;
+//   box-shadow: 0px 0px 8.045px 0px rgba(0, 0, 0, 0.05);
+//   display: flex;
+//   flex-direction: column; 
+//   width: 100%;
 
-  .-box {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+//   .-box {
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//   }
 
-  .box-toper,
-  .cross {
-    display: flex;
-    align-items: center; 
-    justify-content: center; 
-    gap: 12px;
-  }
+//   .box-toper,
+//   .cross {
+//     display: flex;
+//     align-items: center; 
+//     justify-content: center; 
+//     gap: 12px;
+//   }
 
-  .upload-failed {
-    color: #000;
-    font-weight: 500;
-    align-self: flex-start; 
-  }
+//   .upload-failed {
+//     color: #000;
+//     font-weight: 500;
+//     align-self: flex-start; 
+//   }
 
-  .-text {
-    color: #565656;
-    font-size: 14px;
-    align-self: center; 
-    margin-top: 20px;
-  }
+//   .-text {
+//     color: #565656;
+//     font-size: 14px;
+//     align-self: center; 
+//     margin-top: 20px;
+//   }
 
-  .btn {
-    display: flex;
-    justify-content: center;
-    align-self: center;
-    margin-top: 14px;
-    background: #f30c0c;
-    border-radius: 5.363px;
-    color: white;
-    font-weight: 600;
-    width: 12em;
-  }
-  // Media Queries for responsiveness
-  @media (max-width: $breakpoint-xs) { // iPhone XR width
-    width: 80%;
-    .upload-failed {
-      font-size: 14px;
-    }
+//   .btn {
+//     display: flex;
+//     justify-content: center;
+//     align-self: center;
+//     margin-top: 14px;
+//     background: #f30c0c;
+//     border-radius: 5.363px;
+//     color: white;
+//     font-weight: 600;
+//     width: 12em;
+//   }
+//   // Media Queries for responsiveness
+//   @media (max-width: $breakpoint-xs) { // iPhone XR width
+//     width: 80%;
+//     .upload-failed {
+//       font-size: 14px;
+//     }
 
-    .cross {
-      width: 20px;
-      height: 20px;
-    }
-    .-text {
-      font-size: 12px;
-      margin-top: 15px;
-    }
+//     .cross {
+//       width: 20px;
+//       height: 20px;
+//     }
+//     .-text {
+//       font-size: 12px;
+//       margin-top: 15px;
+//     }
 
-    .btn {
-      width: 10em;
-      margin-top: 10px;
-    }
-  }
+//     .btn {
+//       width: 10em;
+//       margin-top: 10px;
+//     }
+//   }
 
-  @media (min-width:$breakpoint-sm)  { // Tablets
-    width: 20em;
-    .upload-failed {
-      font-size: 16px;
-    }
+//   @media (min-width:$breakpoint-sm)  { // Tablets
+//     width: 20em;
+//     .upload-failed {
+//       font-size: 16px;
+//     }
 
-    .cross {
-      width: 24px;
-      height: 24px;
-    }
-    .-text {
-      font-size: 14px;
-      margin-top: 16px;
-    }
+//     .cross {
+//       width: 24px;
+//       height: 24px;
+//     }
+//     .-text {
+//       font-size: 14px;
+//       margin-top: 16px;
+//     }
 
-    .btn {
-      width: 11em;
-      margin-top: 12px;
-    }
-  }
+//     .btn {
+//       width: 11em;
+//       margin-top: 12px;
+//     }
+//   }
 
-  @media (min-width: $breakpoint-md) { // Small Desktops
-    width: 22em;
-    .upload-failed {
-      font-size: 18px;
-    }
+//   @media (min-width: $breakpoint-md) { // Small Desktops
+//     width: 22em;
+//     .upload-failed {
+//       font-size: 18px;
+//     }
 
-    .cross {
-      width: 28px;
-      height: 28px;
-    }
-    .-text {
-      font-size: 16px;
-      margin-top: 10px;
-    }
+//     .cross {
+//       width: 28px;
+//       height: 28px;
+//     }
+//     .-text {
+//       font-size: 16px;
+//       margin-top: 10px;
+//     }
 
-    .btn {
-      width: 12em;
-      margin-top: 14px;
-    }
-  }
+//     .btn {
+//       width: 12em;
+//       margin-top: 14px;
+//     }
+//   }
 
-  @media (min-width: $breakpoint-lg) { // Large Desktops
-    width: 24em;
-    .upload-failed {
-      font-size: 20px;
-    }
+//   @media (min-width: $breakpoint-lg) { // Large Desktops
+//     width: 24em;
+//     .upload-failed {
+//       font-size: 20px;
+//     }
 
-    .cross {
-      width: 32px;
-      height: 32px;
-    }
-    .-text {
-      font-size: 18px;
-      margin-top: 15px;
-    }
+//     .cross {
+//       width: 32px;
+//       height: 32px;
+//     }
+//     .-text {
+//       font-size: 18px;
+//       margin-top: 15px;
+//     }
 
-    .btn {
-      width: 14em;
-      margin-top: 18px;
-    }
-  }
-  @media (min-width: $breakpoint-xl) { // Large Desktops
-    width: 26em;
-    .upload-failed {
-      font-size: 22px;
-    }
+//     .btn {
+//       width: 14em;
+//       margin-top: 18px;
+//     }
+//   }
+//   @media (min-width: $breakpoint-xl) { // Large Desktops
+//     width: 26em;
+//     .upload-failed {
+//       font-size: 22px;
+//     }
 
-    .cross {
-      width: 36px;
-      height: 36px;
-    }
-    .-text {
-      font-size: 20px;
-      margin-top: 18px;
-    }
+//     .cross {
+//       width: 36px;
+//       height: 36px;
+//     }
+//     .-text {
+//       font-size: 20px;
+//       margin-top: 18px;
+//     }
 
-    .btn {
-      width: 16em;
-      height: 2em;
-      margin-top: 20px;
-      align-items: center;
-    }
-  }
-  @media (min-width: $breakpoint-xxl) { // Large Desktops
-    width: 28em;
-    .upload-failed {
-      font-size: 24px;
-    }
+//     .btn {
+//       width: 16em;
+//       height: 2em;
+//       margin-top: 20px;
+//       align-items: center;
+//     }
+//   }
+//   @media (min-width: $breakpoint-xxl) { // Large Desktops
+//     width: 28em;
+//     .upload-failed {
+//       font-size: 24px;
+//     }
 
-    .cross {
-      width: 40px;
-      height: 40px;
-    }
-    .-text {
-      font-size: 20px;
-      margin-top: 16px;
-    }
+//     .cross {
+//       width: 40px;
+//       height: 40px;
+//     }
+//     .-text {
+//       font-size: 20px;
+//       margin-top: 16px;
+//     }
 
-    .btn {
-      width: 18em;
-      margin-top: 22px;
-    }
-  }
-  @media (min-width: $breakpoint-xxxl) { // Large Desktops
-    width: 30em;
-    .upload-failed {
-      font-size: 26px;
-    }
+//     .btn {
+//       width: 18em;
+//       margin-top: 22px;
+//     }
+//   }
+//   @media (min-width: $breakpoint-xxxl) { // Large Desktops
+//     width: 30em;
+//     .upload-failed {
+//       font-size: 26px;
+//     }
 
-    .cross {
-      width: 44px;
-      height: 44px;
-    }
-    .-text {
-      font-size: 22px;
-      margin-top: 15px;
-    }
+//     .cross {
+//       width: 44px;
+//       height: 44px;
+//     }
+//     .-text {
+//       font-size: 22px;
+//       margin-top: 15px;
+//     }
 
-    .btn {
-      width: 18em;
-      height: 2em;
-      margin-top: 24px;
-    }
-  }
-}
+//     .btn {
+//       width: 18em;
+//       height: 2em;
+//       margin-top: 24px;
+//     }
+//   }
+// }

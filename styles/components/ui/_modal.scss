@@ -10,7 +10,7 @@
 
   .-close {
     position: absolute;
-    top: 5%;
+    top: 16%;
     right: 10%;
     cursor: pointer;
     z-index: 2000;
@@ -20,6 +20,7 @@
       height: 24px;
 
       @media (min-width: $breakpoint-md) {
+        top: 5%;
         width: 32px;
         height: 32px;
       }
