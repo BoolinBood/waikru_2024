@@ -44,8 +44,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
 
     function onTrayUpdate(data: { trays: TrayType[], totalCount: number }) {
       if (Array.isArray(data.trays)) {
+        const filteredTrays = data.trays.filter((tray) =>
+          currentDept.length === 0 || currentDept.includes(tray.dept)
+        );
         setTrays((prevTrays) => {
-          const newTrays = [...prevTrays, ...data.trays];
+          const newTrays = [...prevTrays, ...filteredTrays];
           setTotalCount(data.totalCount);
           setHasMore(newTrays.length < data.totalCount);
           return newTrays;
@@ -62,7 +65,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
     }
 
     function onNewTray(newTray: TrayType) {
-      setTrays((prevTrays) => [newTray, ...prevTrays]);
+      if (currentDept.length === 0 || currentDept.includes(newTray.dept)) {
+        setTrays((prevTrays) => [newTray, ...prevTrays]);
+      }
     }
 
     function onUpdateTotalCount(count: number) {
