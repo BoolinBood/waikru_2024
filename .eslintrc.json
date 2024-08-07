@@ -1,0 +1,14 @@
+{
+  "extends": "next/core-web-vitals",
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }]
+      },
+      "linterOptions": {
+        "reportUnusedDisableDirectives": true
+      }
+    }
+  ]
+}

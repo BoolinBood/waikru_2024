@@ -16,7 +16,7 @@ const badWords = [
   "cunt",
   "dick",
   "huadoor",
-  "cancer",
+  "cancercancer",
 ];
 
 filterBadWords.addWords(...badWords);

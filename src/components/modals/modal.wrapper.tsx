@@ -41,7 +41,11 @@ const ModalWrapper = () => {
     <AnimatePresence mode="wait" initial={true}>
       {modalState !== "none" && (
         <Modal
-          closeButton={modalState !== "success" && modalState !== "createTray"}
+          closeButton={
+            modalState !== "success" &&
+            modalState !== "createTray" &&
+            modalState !== "error"
+          }
         >
           {renderModalContent()}
         </Modal>

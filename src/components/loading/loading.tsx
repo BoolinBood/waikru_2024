@@ -14,11 +14,11 @@ const LargeLoading = dynamic(() => import("./loading.lg"), {
 const Loading = () => {
   const isTablet = useMediaQuery({ query: "(min-width: 768px)" });
 
-  return (
-    <div className="loading">
-      {!isTablet ? <SmallLoading /> : <LargeLoading />}
-    </div>
-  );
+  if (isTablet) {
+    return <LargeLoading />;
+  }
+
+  return <SmallLoading />;
 };
 
 export default Loading;

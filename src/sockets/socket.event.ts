@@ -45,10 +45,12 @@ const setupSocketEvents = (io: Server) => {
 
     socket.on("save_tray", async (data: TrayType, callback) => {
       if (checkBadWords(data.message)) {
-        callback?.({
-          success: false,
-          error: "Message cannot contain bad words.",
-        });
+        setTimeout(() => {
+          callback?.({
+            success: false,
+            error: "Message cannot contain bad words.",
+          });
+        }, 1000);
         socket.emit("save_error", {
           message: "Message cannot contain bad words.",
         });

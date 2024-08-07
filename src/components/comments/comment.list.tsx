@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useRef } from "react";
 import CommentItem from "./comment.item";
 import CommentFloatButton from "./comment.button";

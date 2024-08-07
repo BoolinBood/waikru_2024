@@ -1,28 +1,44 @@
-import { Inter } from "next/font/google";
-import { CgClose } from "react-icons/cg";
-
-const inter = Inter({ subsets: ["latin"], weight: ["400", "700"] });
+import { useCallback } from "react";
+import { useModal } from "../context/ModalContext";
 
 const Error = () => {
+  const { setModalState } = useModal();
+
+  const handleClose = useCallback(() => {
+    setModalState("none");
+  }, []);
+
+  const handleTryAgain = useCallback(() => {
+    setModalState("selectTray");
+  }, []);
+
   return (
-    <div className="m-6 p-3 min-w-[200px] max-w-[400px] bg-white rounded-xl flex">
-      <img src="/assets/error/alert-error.svg" alt="" width={48} height={48} />
-      <div>
-        <h1 className={`${inter.className} font-bold text-xl tracking-wide`}>
-          Upload failed
-        </h1>
+    <div className="m-6 p-3 min-w-[200px] max-w-[400px] bg-white rounded-xl flex flex-col ">
+      <div
+        className=" gap-2 flex justify-start items-center hover:cursor-pointer"
+        onClick={handleClose}
+      >
+        <img
+          src="/assets/error/alert-error.svg"
+          alt=""
+          width={48}
+          height={48}
+        />
+        <h1 className={`font-bold text-xl tracking-wide`}>Upload failed</h1>
+      </div>
+      <div className="text-center">
         <div className="text-gray-400 mt-2">
           Something went wrong. Please try sending your response again
         </div>
-        <button
-          type="button"
-          className="mt-4 w-full font-bold text-white py-3 bg-[#FF3D63] rounded-md"
-        >
-          Try again
-        </button>
-      </div>
-      <div>
-        <CgClose size={24} />
+        <div>
+          <button
+            type="button"
+            className="flex justify-center items-center mt-4 w-full font-bold text-white py-3 bg-[#FF3D63] rounded-md"
+            onClick={handleTryAgain}
+          >
+            Try again
+          </button>
+        </div>
       </div>
     </div>
   );

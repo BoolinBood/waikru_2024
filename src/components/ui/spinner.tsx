@@ -1,5 +1,3 @@
-"use server";
-
 export const Spinner: React.FC = () => (
   <div
     className="lds-spinner"

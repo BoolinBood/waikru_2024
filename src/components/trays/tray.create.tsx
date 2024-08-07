@@ -21,6 +21,9 @@ enum Faculty {
   DSI = "DSI",
 }
 
+// Inter fonts
+const inter = Inter({ subsets: ["latin"], weight: ["400", "700"] });
+
 // Schema validation with Zod
 const CreateTraySchema = z.object({
   name: z
@@ -35,8 +38,6 @@ const CreateTraySchema = z.object({
 });
 
 type CreateTrayInputs = z.infer<typeof CreateTraySchema>;
-
-const inter = Inter({ subsets: ["latin"], weight: ["400", "700"] });
 
 const CreateTray: React.FC<Props> = ({ selectedFlower }) => {
   const { setModalState } = useModal();
@@ -73,14 +74,14 @@ const CreateTray: React.FC<Props> = ({ selectedFlower }) => {
       setModalState("none");
 
       saveTray(data.name, data.message, selectedFlower, data.tag, (result) => {
-        setLoading(false);
-
         if (result.success) {
+          setLoading(false);
           setModalState("success");
           setTimeout(() => {
             setModalState("none");
           }, 2000);
         } else {
+          setLoading(false);
           setModalState("error");
         }
       });
@@ -176,11 +177,6 @@ const CreateTray: React.FC<Props> = ({ selectedFlower }) => {
           <Button htmlType="submit" disabled={loading}>
             <div className="flex items-center">
               <h1>Submit</h1>
-              {loading && (
-                <div className="ml-[8px]">
-                  <LoadingSpinner />
-                </div>
-              )}
             </div>
           </Button>
         </div>

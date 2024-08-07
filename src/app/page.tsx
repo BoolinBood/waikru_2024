@@ -1,19 +1,18 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import Loading from "@/src/components/loading/loading";
 import { AnimatePresence } from "framer-motion";
-import { useSuspenseLoader } from "@/src/hooks/suspense.hook";
 import { MotionDiv } from "@/src/components/motion.div";
+import { useSuspenseLoader } from "../hooks/suspense.hook";
 
 const HeroBanner = dynamic(
-  () => import("@/src/components/hero-banner/hero-banner"),
-  { suspense: true }
+  () => import("@/src/components/hero-banner/hero-banner")
 );
 const CommentList = dynamic(
-  () => import("@/src/components/comments/comment.list"),
-  { suspense: true }
+  () => import("@/src/components/comments/comment.list")
 );
+
+const Loading = dynamic(() => import("@/src/components/loading/loading"));
 
 const motionProps = {
   initial: { opacity: 0, y: -100 },
@@ -22,7 +21,7 @@ const motionProps = {
 };
 
 export default function Home() {
-  const loading = useSuspenseLoader(2500);
+  const loading = useSuspenseLoader(2000);
 
   return (
     <AnimatePresence mode="wait">
@@ -32,7 +31,7 @@ export default function Home() {
         </MotionDiv>
       ) : (
         <MotionDiv key="content" {...motionProps} className="root">
-          <HeroBanner />
+          <HeroBanner key="hero-banner" />
           <MotionDiv
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0, transition: { duration: 0.7 } }}
