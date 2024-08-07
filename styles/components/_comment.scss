@@ -1,12 +1,12 @@
 .comment-section {
-    overflow-y: auto; 
-    overflow-x: hidden; 
+  overflow-y: auto;
+  overflow-x: hidden;
 
-    width: 100%;
-    height: 100%;
-    border-top-left-radius: 28px;
-    border-top-right-radius: 28px;
-    padding: 1rem;
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 28px;
+  border-top-right-radius: 28px;
+  padding: 1rem;
 
   position: relative;
   display: flex;
@@ -29,30 +29,128 @@
   gap: 2.5rem;
   padding: 20px 10px;
 
-    @media (min-width: $breakpoint-xxl) {
-        grid-template-columns: repeat(3, minmax(0, 1fr))
-    }
+  @media (min-width: $breakpoint-md) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 
-    &::-webkit-scrollbar {
-        width: 5px;
-    }
-      
-      
-    &::-webkit-scrollbar-thumb {
-        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    }
+  @media (min-width: $breakpoint-xxl) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+}
+.petal {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: absolute;
+  top: 0;
+  @media (min-width: $breakpoint-sm) {
+    width: 50%;
+  }
+  @media (min-width: $breakpoint-md) {
+    gap: 3rem;
+    width: 60%;
+  }
+  @media (min-width: $breakpoint-lg) {
+    gap: 5rem;
+    width: 70%;
+  }
+  @media (min-width: $breakpoint-xl) {
+    width: 80%;
+  }
+  @media (min-width: $breakpoint-xxl) {
+    width: 90%;
+  }
+  @media (min-width: $breakpoint-xxl) {
+    width: 100%;
+  }
 }
 
+.petal img {
+  animation: fall 7s linear infinite;
+  width: 30px;
+  height: 30px;
+  -webkit-animation: fall 7s linear infinite;
+
+  @media (min-width: $breakpoint-md) {
+    width: 40px;
+    height: 40px;
+  }
+
+  @media (min-width: $breakpoint-xl) {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(80vh);
+    opacity: 0;
+  }
+}
+.petal img:nth-child(1) {
+  animation-delay: 2s;
+}
+.petal img:nth-child(2) {
+  animation-delay: 1s;
+}
+.petal img:nth-child(3) {
+  animation-delay: 3s;
+}
+.petal img:nth-child(4) {
+  animation-delay: 4s;
+}
+.petal img:nth-child(5) {
+  animation-delay: 2s;
+}
+.petal img:nth-child(6) {
+  animation-delay: 1s;
+}
+.petal img:nth-child(7) {
+  animation-delay: 2s;
+}
+.petal img:nth-child(8) {
+  animation-delay: 3s;
+}
+.petal img:nth-child(9) {
+  animation-delay: 4s;
+}
+.petal img:nth-child(10) {
+  animation-delay: 3s;
+}
+// .petal img:nth-child(11) {
+//   animation-delay: 2s;
+// }
+// .petal img:nth-child(12) {
+//   animation-delay: 1s;
+// }
 .comment {
-    width: 150px;
-    height: 85px;
-    padding: 16px;
+  width: 150px;
+  height: 85px;
+  padding: 16px;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
-    position: relative;
+  position: relative;
 
   border-radius: 28px;
   background: #fff;
@@ -76,7 +174,47 @@
     padding: 30px;
   }
 
+  .-tag {
+    position: absolute;
+    top: 0px;
+    left: 16px;
+
+    span {
+      border-radius: 9px;
+      padding: 2px 4px;
+
+      color: white;
+      font-weight: 700;
+      font-family: "Inter";
+      font-size: clamp(5px, 10px, 15px);
+    }
+
+    & .-IT {
+      background-color: #fc6c8d;
+    }
+
+    & .-CS {
+      background-color: #a297c0;
+    }
+
+    & .-DSI {
+      background-color: #8db0c4;
+    }
+
+    @media (min-width: $breakpoint-xxl) {
+      top: 10px;
+      left: 30px;
+
+      span {
+        padding: 4px 8px;
+        font-size: clamp(8px, 12px, 16px);
+      }
+    }
+  }
+
   .-message {
+    margin-top: 11px;
+    text-align: start;
     color: #000;
 
     font-family: Inter;
@@ -92,72 +230,7 @@
     }
 
     @media (min-width: $breakpoint-xxl) {
-        width: 320px;
-        height: 187px;
-        border-radius: 60px;
-        padding: 30px;
-    } 
-
-    .-tag {
-        position: absolute;
-        top: 0px;
-        left: 16px;
-
-        span {
-            border-radius: 9px;
-            padding: 2px 4px;
-
-            color: white;
-            font-weight: 700;
-            font-family: "Inter";
-            font-size: clamp(5px, 10px, 15px);
-        }
-
-        & .-IT {
-            background-color: #FC6C8D;
-        }
-
-        & .-CS {
-            background-color: #A297C0;
-        }
-
-        & .-DSI {
-            background-color: #8DB0C4;
-        }
-
-        @media (min-width: $breakpoint-xxl) {
-            top: 10px;
-            left: 30px;
-
-            span {
-                padding: 4px 8px;
-                font-size: clamp(8px, 12px, 16px);
-            }
-            
-        }
-    }
-      
-
-    .-message {
-        margin-top: 11px;
-        text-align: start;
-        color: #000;
-
-        font-family: Inter;
-        font-size: 10px;
-        font-weight: 400;
-
-        @media (min-width: $breakpoint-md) {
-            font-size: 12px;
-        }
-
-        @media (min-width: $breakpoint-xl) {
-            font-size: 16px;
-        }
-
-        @media (min-width: $breakpoint-xxl) {
-            font-size: 20px;
-        }
+      font-size: 20px;
     }
   }
 
@@ -174,34 +247,8 @@
       font-size: 10px;
     }
 
-    .-tray {
-        position: absolute;
-        bottom: -1.5rem;
-        left: -1rem;
-
-        width: 37px;
-        height: 63px;
-
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transform: rotate(-25deg);
-        }
-
-        @media (min-width: $breakpoint-md) {
-            width: 50px;
-            height: 85px;
-        }
-
-        @media (min-width: $breakpoint-xxl) {
-            width: 80px;
-            height: 136px;
-        }
-
-        @media (min-width: $breakpoint-xxl) {
-            left: -2rem;
-        }
+    @media (min-width: $breakpoint-xl) {
+      font-size: 13px;
     }
 
     @media (min-width: $breakpoint-xxl) {
@@ -233,87 +280,114 @@
       width: 80px;
       height: 136px;
     }
+
+    @media (min-width: $breakpoint-xxl) {
+      left: -2rem;
+    }
   }
 }
 .comment-view {
-    background: white;
-    width: 90%;
-    height: auto;
-    padding: 40px;
-    box-sizing: border-box;
-    flex-shrink: 0;
-    border-radius: 45px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background: white;
+  width: 90%;
+  height: auto;
+  padding: 40px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  border-radius: 45px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .-flower {
     display: flex;
     justify-content: center;
-  
-    .-flower {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 20px;
-  
-      img {
-        object-fit: cover;
-        border-radius: 10px;
-        max-width: 100%;
-        height: auto;
-      }
-    }
-  
-    .-name {
-      color: #000;
-      text-align: center;
-      font-family: PT Sans, "PT Sans";
-      font-size: 18px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: normal;
-    }
-  
-    .-message {
-      margin: 16px;
-      white-space: pre-wrap;
-      word-wrap: break-word;
-      text-align: start;
-    }
-  
-    @media (min-width: $breakpoint-md) {
-      width: 500px;
-      .img{
-          max-width: 100%;
-      }
-      .-name{
-          font-size: 24px;
-      }
-      .-message{
-          font-size: 16px;
-      }
-    }
-  
-    @media (min-width: $breakpoint-xl) {
-      width: 720px;
-      .img{
-          max-width: 100%;
-      }
-      .-name{
-          font-size: 28px;
-      }
-      .-message{
-          font-size: 24px;
-      }
-    }
-  
-    @media (min-width: $breakpoint-xxl) {
-      width: 800px;
-      .img{
-          max-width: 100%;
-      }
-      .-name{
-          font-size: 32px;
-      }
-      .-message{
-          font-size: 28px;
-      }
+    align-items: center;
+    margin-bottom: 20px;
+
+    img {
+      object-fit: cover;
+      border-radius: 10px;
+      max-width: 100%;
+      height: auto;
     }
   }
+
+  .-name {
+    color: #000;
+    text-align: center;
+    font-family: PT Sans, "PT Sans";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+
+  .-message {
+    margin: 16px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    text-align: start;
+  }
+
+  @media (min-width: $breakpoint-md) {
+    width: 500px;
+    .img {
+      max-width: 100%;
+    }
+    .-name {
+      font-size: 24px;
+    }
+    .-message {
+      font-size: 16px;
+    }
+  }
+
+  @media (min-width: $breakpoint-xl) {
+    width: 720px;
+    .img {
+      max-width: 100%;
+    }
+    .-name {
+      font-size: 28px;
+    }
+    .-message {
+      font-size: 24px;
+    }
+  }
+
+  @media (min-width: $breakpoint-xxl) {
+    width: 800px;
+    .img {
+      max-width: 100%;
+    }
+    .-name {
+      font-size: 32px;
+    }
+    .-message {
+      font-size: 28px;
+    }
+  }
+  span {
+    border-radius: 9px;
+    padding: 2px 4px;
+    width: 10%;
+    text-align: center;
+    color: white;
+    font-weight: 700;
+    font-family: "Inter";
+    font-size: clamp(5px, 12px, 16px);
+  }
+
+  & .-IT {
+    background-color: #fc6c8d;
+  }
+
+  & .-CS {
+    background-color: #a297c0;
+  }
+
+  & .-DSI {
+    background-color: #8db0c4;
+  }
+}

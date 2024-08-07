@@ -9,6 +9,7 @@ interface IProps {
 const CommentView: React.FC<IProps> = ({ tray }) => {
   return (
     <div className="comment-view">
+       <span className={`-${tray.dept}`}>{tray.dept}</span>
       <div className="-box">
         <div className="-flower">
           <Image
