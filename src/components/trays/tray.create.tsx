@@ -160,7 +160,7 @@ const CreateTray: React.FC<Props> = ({ selectedFlower }) => {
         </div>
 
         {/* Textarea section */}
-        <textarea
+         <textarea
           placeholder="Write your message here"
           className="h-[148px] p-2 mt-4 rounded-md w-full outline outline-[2px] outline-slate-300 resize-none"
           {...register("message")}
