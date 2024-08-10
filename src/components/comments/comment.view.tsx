@@ -12,7 +12,6 @@ const CommentView: React.FC<IProps> = ({ tray }) => {
 
   const handleImageLoad = () => {
     setIsLoading(false);
-    console.log("Image loaded");
   };
 
   return (

@@ -8,6 +8,9 @@ import {
   getFlowerName,
   getFlowerPath,
   getFlowers,
+  largeFlowers,
+  mediumFlowers,
+  smallFlowers,
 } from "@/src/utils/flower.utils";
 import Button from "../ui/button";
 import Image from "next/image";
@@ -31,6 +34,20 @@ const SelectTray = () => {
     }, 500);
   };
 
+  const renderClass = (flower: FlowerType) => {
+    if (smallFlowers.includes(flower)) {
+      return "-decrease-sm";
+    }
+    if (mediumFlowers.includes(flower)) {
+      return "-decrease-md";
+    }
+    if (largeFlowers.includes(flower)) {
+      return "-decrease-lg";
+    }
+
+    return "";
+  };
+
   return (
     <div className="select-tray">
       <Swiper
@@ -41,8 +58,8 @@ const SelectTray = () => {
         loop={true}
         pagination={{ clickable: true }}
         scrollbar={{ draggable: true }}
-        onSlideChange={(swiper) => {     
-          const flower = flowers[swiper.realIndex] as FlowerType;    
+        onSlideChange={(swiper) => {
+          const flower = flowers[swiper.realIndex] as FlowerType;
           setTray(flower);
         }}
       >
@@ -53,10 +70,10 @@ const SelectTray = () => {
             <div className="-image">
               <Image
                 src={getFlowerPath(flower)}
+                className={renderClass(flower as FlowerType)}
                 alt={flower}
-                width={200}
-                height={200}
-                loading="lazy"
+                width={100}
+                height={100}
               />
             </div>
           </SwiperSlide>
