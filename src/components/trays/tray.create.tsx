@@ -47,6 +47,8 @@ const CreateTray: React.FC<Props> = ({ selectedFlower }) => {
     register,
     handleSubmit,
     setValue,
+    setError,
+    clearErrors,
     formState: { errors },
   } = useForm<CreateTrayInputs>({
     resolver: zodResolver(CreateTraySchema),
@@ -67,6 +69,21 @@ const CreateTray: React.FC<Props> = ({ selectedFlower }) => {
   const handleClose = useCallback(() => {
     setModalState("none");
   }, [setModalState]);
+
+  const handleMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const value = e.target.value;
+    console.log(`Message Length: ${value.length}`); // Log the length of the message
+
+    if (value.length > 140) {
+      setError("message", {
+        type: "manual",
+        message: "Message cannot exceed 140 characters",
+      });
+    } else {
+      clearErrors("message");
+    }
+    setValue("message", value, { shouldValidate: true }); // Update form value and trigger validation
+  };
 
   const onSubmit: SubmitHandler<CreateTrayInputs> = useCallback(
     (data) => {
@@ -160,10 +177,11 @@ const CreateTray: React.FC<Props> = ({ selectedFlower }) => {
         </div>
 
         {/* Textarea section */}
-         <textarea
+        <textarea
           placeholder="Write your message here"
           className="h-[148px] p-2 mt-4 rounded-md w-full outline outline-[2px] outline-slate-300 resize-none"
           {...register("message")}
+          onChange={handleMessageChange}
         />
         {errors.message && (
           <p className="text-red-500">{errors.message.message}</p>
