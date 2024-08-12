@@ -29,6 +29,23 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
-
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    restart: unless-stopped
+    
+  vpn:
+    image: hwdsl2/ipsec-vpn-server
+    environment:
+      - VPN_IPSEC_PSK=K4rW9nKp0XtZyL4ZX5g7E5fP7aN3M8t6o4F2Q3iA7eC0B8uR6h9A5d0F3G7L8p1Z
+      - VPN_USER=username
+      - VPN_PASSWORD=password
+    ports:
+      - "500:500/udp"
+      - "4500:4500/udp"
+    restart: unless-stopped
 volumes:
   mongo-data:
