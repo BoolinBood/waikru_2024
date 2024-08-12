@@ -1,35 +1,42 @@
-# Install the depedenices in a separate stage
-FROM node:20-alpine AS deps
+# Use Bun to manage dependencies and build the app
+FROM bun:latest AS deps
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
+WORKDIR /app
 
-# Install dependencies
-RUN npm install
+# Copy package.json and bun.lockb
+COPY package.json bun.lockb ./
 
-# Build the app in a separate stage
-FROM node:20-alpine AS builder
+# Install dependencies with Bun
+RUN bun install
+
+# Build the app
+FROM bun:latest AS builder
+
+WORKDIR /app
 
 COPY . .
 
-COPY --from=deps ./node_modules /node_modules
+# Copy dependencies from the deps stage
+COPY --from=deps /app/node_modules ./node_modules
 
-RUN npm run build
+# Build the application with Bun
+RUN bun run build
 
 # Create the final image
 FROM node:20-alpine
 
+WORKDIR /app
+
 # Copy only the necessary files from the builder stage
-COPY --from=builder /package*.json ./
-COPY --from=builder /.next ./.next
-COPY --from=builder /public ./public
-COPY --from=builder /next.config.mjs ./
-COPY --from=builder /node_modules ./node_modules
-COPY --from=builder /src ./src
-COPY --from=builder /tsconfig.json ./tsconfig.json
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/next.config.mjs ./
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/src ./src
+COPY --from=builder /app/tsconfig.json ./tsconfig.json
 
 # Expose the port on which the app will run
 EXPOSE 3000
 
 # Start the application
-CMD ["npm", "start"]
+CMD ["node", "server.js"]
