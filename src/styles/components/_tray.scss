@@ -1,0 +1,98 @@
+.select-tray {
+    border-radius: 34px;
+    width: 300px;
+    background-color: white;
+
+
+    @media (min-width: $breakpoint-md) {
+        width: 400px;
+    }
+
+    @media (min-width: $breakpoint-xl) {
+        width: 600px;
+    }
+
+    @media (min-width: $breakpoint-xxl) {
+        width: 800px;
+
+        .swiper-button-next, .swiper-button-prev {
+            display: block !important;
+            margin: 8px;
+            color: #000;
+            
+        }
+    }
+
+    .swiper-slide {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 8px;
+
+        padding: 3.5rem 5rem 3rem 5rem;
+
+    }
+
+    .swiper-button-next, .swiper-button-prev {
+        display: none;
+    }
+
+    .-title {
+        text-align: center;
+        color: #000;
+        font-family: Inter;
+        font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+        font-weight: 700;
+    }
+
+    .-image {
+        position: relative;
+        width: 134px;
+        height: 227px;
+
+        margin: auto;
+        border-radius: 12px;
+
+        img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+
+            margin: 0 auto;
+    
+            &.-decrease-sm {
+                width: 90%;
+            }
+
+            &.-decrease-md {
+                width: 85%;
+            }
+
+            &.-decrease-lg {
+                width: 80%;
+            }
+
+            &.-increase {
+                width: 105%;
+            }
+        }
+    }
+
+    .-btn {
+        display: grid;
+        place-items: center;
+        
+        margin: 1rem 0;
+    }
+
+    .swiper-pagination-bullet {
+        opacity: 1;
+        background: #726764 !important;
+    }
+
+    .swiper-pagination-bullet-active {
+        background: #CBC0BC !important;
+        box-shadow: 0px 2.972px 2.972px 0px rgba(0, 0, 0, 0.25) inset !important;
+    }
+
+}

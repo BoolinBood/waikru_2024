@@ -1,10 +1,15 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
+
     "esModuleInterop": true,
     "module": "ESNext",
     "moduleResolution": "Node",
@@ -13,15 +18,41 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./*"
+      ],
+      "@/src/models": [
+        "src/models/*"
+      ],
+      "@/src/utils/*": [
+        "src/utils/*"
+      ],
+      "@/src/types/*": [
+        "src/types/*"
+      ],
+      "@/src/sockets/*": [
+        "src/sockets/*"
+      ],
+      "@/src/components/*": [
+        "src/components/*"
+      ]
+    },
     "plugins": [
       {
         "name": "next"
       }
-    ],
-    "paths": {
-      "@/*": ["./*"]
-    }
+    ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "server.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    // "sockets/socket.server.ts,"
+ "src/sockets/socket.server.ts", "src/sockets/socket.event.ts"  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
