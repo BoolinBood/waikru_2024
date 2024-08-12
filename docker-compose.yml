@@ -8,6 +8,7 @@ services:
     volumes:
       - ./vpn-st.ovpn:/etc/openvpn/vpn-st.ovpn
     command: "-f /etc/openvpn/vpn-st.ovpn"
+
     networks:
       - vpn_network
     restart: unless-stopped
@@ -19,7 +20,7 @@ services:
     environment:
       - NODE_ENV=production
       - MONGODB_URI=mongodb://mongo:27017/mydatabase
-      - NEXT_PUBLIC_SOCKET_URL=http://10.4.56.60:80
+      - NEXT_PUBLIC_SOCKET_URL=http://web:3000 # Updated to use service name
     depends_on:
       - mongo
       - vpn
@@ -27,7 +28,7 @@ services:
       - vpn_network
     restart: unless-stopped
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:80 || exit 1"]
+      test: ["CMD-SHELL", "curl -f http://localhost:3000 || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 5
@@ -42,7 +43,7 @@ services:
       - vpn_network
     restart: unless-stopped
     healthcheck:
-      test: ["CMD-SHELL", 'mongo --eval ''db.adminCommand("ping")'' || exit 1']
+      test: ["CMD-SHELL", 'mongo --eval "db.adminCommand(\"ping\")" || exit 1']
       interval: 30s
       timeout: 10s
       retries: 5

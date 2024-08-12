@@ -7,8 +7,8 @@ import connectToMongoDB from "@/src/utils/db.utils";
 import setupSocketEvents from "./socket.event";
 
 const isDevelopment = process.env.NODE_ENV !== "production";
-const hostname = isDevelopment ? "localhost" : "10.4.56.60";
-const port = isDevelopment ? 3000 : 80;
+const hostname = isDevelopment ? "0.0.0.0" : "10.4.56.60";
+const port = 3000;
 
 // Initialize Express app
 const app = next({ dev: isDevelopment });
