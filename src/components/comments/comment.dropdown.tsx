@@ -37,15 +37,12 @@ const CommentFilterButton: React.FC = () => {
     [dropdownOpen]
   );
 
-  const handleScroll = useCallback(
-    debounce(() => {
-      const commentSection = document.querySelector(
-        ".comment-section"
-      ) as HTMLElement;
-      setIsSticky(commentSection?.scrollTop > 200);
-    }, 100),
-    []
-  );
+  const handleScroll = debounce(() => {
+    const commentSection = document.querySelector(
+      ".comment-section"
+    ) as HTMLElement;
+    setIsSticky(commentSection?.scrollTop > 200);
+  }, 100);
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);

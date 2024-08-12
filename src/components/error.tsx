@@ -1,16 +1,17 @@
 import { useCallback } from "react";
 import { useModal } from "../context/ModalContext";
+import Image from "next/image";
 
 const Error = () => {
   const { setModalState } = useModal();
 
   const handleClose = useCallback(() => {
     setModalState("none");
-  }, []);
+  }, [setModalState]);
 
   const handleTryAgain = useCallback(() => {
     setModalState("selectTray");
-  }, []);
+  }, [setModalState]);
 
   return (
     <div className="m-6 p-3 min-w-[200px] max-w-[400px] bg-white rounded-xl flex flex-col ">
@@ -18,9 +19,9 @@ const Error = () => {
         className=" gap-2 flex justify-start items-center hover:cursor-pointer"
         onClick={handleClose}
       >
-        <img
+        <Image
           src="/assets/error/alert-error.svg"
-          alt=""
+          alt="error"
           width={48}
           height={48}
         />

@@ -50,8 +50,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "sockets/socket.server.ts"
-  ],
+    // "sockets/socket.server.ts,"
+ "src/sockets/socket.server.ts", "src/sockets/socket.event.ts"  ],
   "exclude": [
     "node_modules"
   ]

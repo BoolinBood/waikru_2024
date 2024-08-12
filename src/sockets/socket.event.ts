@@ -1,4 +1,3 @@
-"use server";
 import { Server } from "socket.io";
 import TrayModel from "@/src/models/TrayModel";
 import { checkBadWords } from "../utils/badWords.utils";

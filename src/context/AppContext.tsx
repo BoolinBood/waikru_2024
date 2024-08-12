@@ -42,10 +42,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
       setDbConnected(status.dbConnected);
     }
 
-    function onTrayUpdate(data: { trays: TrayType[], totalCount: number }) {
+    function onTrayUpdate(data: { trays: TrayType[]; totalCount: number }) {
       if (Array.isArray(data.trays)) {
-        const filteredTrays = data.trays.filter((tray) =>
-          currentDept.length === 0 || currentDept.includes(tray.dept)
+        const filteredTrays = data.trays.filter(
+          (tray) => currentDept.length === 0 || currentDept.includes(tray.dept)
         );
         setTrays((prevTrays) => {
           const newTrays = [...prevTrays, ...filteredTrays];
@@ -102,7 +102,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
       socket.off("update_total_count", onUpdateTotalCount);
       socket.off("save_error", onSaveError);
     };
-  }, [currentDept]);
+  }, [currentDept, trays.length]);
 
   const saveTray = (
     name: string,

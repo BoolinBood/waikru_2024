@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "tsx watch ./src/sockets/socket.server.ts",
     "build": "next build && tsc",
-    "start": "NODE_ENV=production tsx ./src/sockets/socket.server.ts",
+    "start": "NODE_ENV=production tsx ./src/sockets/socket.server.ts && next start",
     "lint": "next lint"
   },
   "dependencies": {
@@ -23,6 +23,7 @@
     "react-hook-form": "^7.52.1",
     "react-icons": "^5.2.1",
     "react-responsive": "^10.0.0",
+    "sharp": "^0.33.4",
     "socket.io": "^4.7.5",
     "socket.io-client": "^4.7.5",
     "swiper": "^11.1.8",

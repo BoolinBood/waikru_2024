@@ -6,10 +6,12 @@ import { Server } from "socket.io";
 import connectToMongoDB from "@/src/utils/db.utils";
 import setupSocketEvents from "./socket.event";
 
-const dev = process.env.NODE_ENV !== "production";
+const isDevelopment = process.env.NODE_ENV !== "production";
 const hostname = "localhost";
-const port = 3000;
-const app = next({ dev });
+const port = process.env.NEXT_PUBLIC_SOCKET_PORT || 3000;
+
+// Initialize Express app
+const app = next({ dev: isDevelopment });
 const handler = app.getRequestHandler();
 
 connectToMongoDB()
@@ -35,7 +37,7 @@ const startServer = async () => {
       console.log(`> Ready on http://${hostname}:${port}`);
     });
 
-    httpServer.once("error", (err: NodeJS.ErrnoException) => {
+    httpServer.once("error", (err) => {
       console.error(err);
       process.exit(1);
     });
