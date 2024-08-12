@@ -29,7 +29,7 @@ COPY --from=builder /src ./src
 COPY --from=builder /tsconfig.json ./tsconfig.json
 
 # Expose the port on which the app will run
-EXPOSE 80
+EXPOSE 3000
 
 # Start the application
 CMD ["npm", "start"]
