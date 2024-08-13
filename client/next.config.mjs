@@ -25,6 +25,7 @@ const __dirname = path.dirname(__filename);
 // export default nextConfig;
 
 const nextConfig = {
+  output: "standalone",
   async headers() {
     return [
       {

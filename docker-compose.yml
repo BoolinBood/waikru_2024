@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   api:
-    build: 
+    build:
       context: ./api
       dockerfile: Dockerfile
     ports:
@@ -18,7 +18,7 @@ services:
       timeout: 10s
       retries: 5
   web:
-    build: 
+    build:
       context: ./client
       dockerfile: Dockerfile
     ports:
