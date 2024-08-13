@@ -26,6 +26,7 @@ const setupSocketEvents = (io: Server) => {
           .limit(itemsPerPage);
 
         const totalCount = await TrayModel.countDocuments(query);
+
         socket.emit("tray_update", { trays, totalCount });
       } catch (error) {
         console.error("Error fetching trays:", error);

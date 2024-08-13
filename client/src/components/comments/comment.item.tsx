@@ -6,6 +6,7 @@ import { useMemo } from "react";
 import { useModal } from "@/src/context/ModalContext";
 import { MotionDiv } from "../motion.div";
 import { truncateString } from "@/src/utils/string.utils";
+import { useMediaQuery } from "react-responsive";
 
 interface ICommentItem {
   index: number;
@@ -28,6 +29,7 @@ const getRandomAnimationValues = (index: number) => {
 const CommentItem: React.FC<ICommentItem> = ({ index, tray }) => {
   const { name, message, flower, dept } = tray;
   const { setSelectedTray, setModalState } = useModal();
+  const isTablet = useMediaQuery({ query: "(min-width: 768px)" });
 
   const handleClick = () => {
     setSelectedTray(tray);
@@ -66,7 +68,7 @@ const CommentItem: React.FC<ICommentItem> = ({ index, tray }) => {
           <span className={`-${dept}`}>{dept}</span>
         </div>
         <div className="-message">
-          <p>{truncateString(message, 50, "...")}</p>
+          <p>{truncateString(message, isTablet ? 48 : 28, "...")}</p>
         </div>
         <div className="-author">
           <p>{truncateString(name, 20, "...")}</p>

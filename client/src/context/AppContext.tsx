@@ -49,6 +49,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
         );
         setTrays((prevTrays) => {
           const newTrays = [...prevTrays, ...filteredTrays];
+
           setTotalCount(data.totalCount);
           setHasMore(newTrays.length < data.totalCount);
           return newTrays;
@@ -102,7 +103,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
       socket.off("update_total_count", onUpdateTotalCount);
       socket.off("save_error", onSaveError);
     };
-  }, [currentDept, trays.length]);
+  }, [currentDept]);
 
   const saveTray = (
     name: string,
