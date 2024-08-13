@@ -2,11 +2,11 @@ version: "3.8"
 services:
   vpn:
     image: dperson/openvpn-client
-    container_name: vpn_client
     cap_add:
       - NET_ADMIN
     volumes:
       - ./vpn-st.ovpn:/etc/openvpn/vpn-st.ovpn
+      - ./vpn-st_ca.crt:/etc/openvpn/vpn-st_ca.crt
     command: "-f /etc/openvpn/vpn-st.ovpn"
 
     networks:
