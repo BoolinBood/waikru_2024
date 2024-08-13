@@ -1,14 +1,30 @@
 version: "3.8"
 services:
-  web:
-    build: .
+  api:
+    build: 
+      context: ./api
+      dockerfile: Dockerfile
     ports:
-      - "3000:3000"
-    networks:
-      - reverse
+      - "4000:4000"
     environment:
       - NODE_ENV=production
-      - MONGODB_URI=mongodb://mongo:27017/mydatabase
+      - MONGO_URL=mongodb://mongo:27017/mydatabase
+    depends_on:
+      - mongo
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:4000 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+  web:
+    build: 
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
       - NEXT_PUBLIC_SOCKET_URL=http://web:3000 # Updated to use service name
     depends_on:
       - mongo
@@ -32,17 +48,6 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
-  nginx:
-    image: nginx:latest
-    ports:
-      - "80:80"
-    networks:
-      - reverse
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-    depends_on:
-      - web
-    restart: unless-stopped
 networks:
   reverse:
     driver: bridge
