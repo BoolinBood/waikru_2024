@@ -25,7 +25,7 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=production
-      - NEXT_PUBLIC_SOCKET_URL=http://web:4000 # Updated to use service name
+      - NEXT_PUBLIC_SOCKET_URL=http://10.4.56.60:4000 # Updated to use service name
     depends_on:
       - mongo
     restart: unless-stopped
