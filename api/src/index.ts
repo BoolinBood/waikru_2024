@@ -10,7 +10,8 @@ import setupSocketEvents from "./sockets/socket.event";
 dotenv.config();
 
 const isDevelopment = process.env.NODE_ENV !== "production";
-const hostname = isDevelopment ? "0.0.0.0" : "10.4.56.60";
+const hostname = isDevelopment ? "0.0.0.0" : "0.0.0.0";
+//10.4.56.60
 const port = process.env.PORT || 4000;
 
 // Initialize Express app
@@ -43,12 +44,5 @@ const startServer = async () => {
   }
 };
 
-connectToMongoDB()
-  .then((isConnected) => {
-    console.log("MongoDB connected:", isConnected);
-  })
-  .catch((err) => {
-    console.error("Error connecting to MongoDB:", err);
-  });
-
+connectToMongoDB();
 startServer();

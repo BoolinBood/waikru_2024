@@ -14,8 +14,10 @@ if (!mongoUrl) {
 const connectToMongoDB = async (): Promise<boolean> => {
   try {
     await mongoose.connect(mongoUrl);
+    console.log("MongoDB connected: true");
     return true;
   } catch (err) {
+    console.error("Error connecting to MongoDB:", err);
     return false;
   }
 };
