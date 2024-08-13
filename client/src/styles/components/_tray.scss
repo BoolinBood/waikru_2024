@@ -8,18 +8,13 @@
         width: 400px;
     }
 
-    @media (min-width: $breakpoint-xl) {
-        width: 600px;
-    }
-
     @media (min-width: $breakpoint-xxl) {
-        width: 800px;
+        width: 600px;
 
         .swiper-button-next, .swiper-button-prev {
             display: block !important;
             margin: 8px;
             color: #000;
-            
         }
     }
 
