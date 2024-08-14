@@ -30,7 +30,11 @@ export default function Home() {
           <Loading />
         </MotionDiv>
       ) : (
-        <MotionDiv key="content" {...motionProps} className="root">
+        <MotionDiv
+          key="content"
+          {...motionProps}
+          className="root overflow-hidden"
+        >
           <HeroBanner key="hero-banner" />
           <MotionDiv
             initial={{ opacity: 0, y: -30 }}
