@@ -1,10 +1,10 @@
 import dynamic from "next/dynamic";
 import React from "react";
 
-const AdminPage = dynamic(() => import("@/src/components/admin/AdminPage"));
+const BadWordPage = dynamic(() => import("@/src/components/admin/BadwordPage"));
 
 const page = () => {
-  return <AdminPage />;
+  return <BadWordPage />;
 };
 
 export default page;
