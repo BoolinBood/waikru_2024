@@ -61,7 +61,7 @@ const AdminPage = () => {
   };
 
   return (
-    <div className="w-full h-screen bg-gray-200 p-8">
+    <div className="w-full h-screen bg-gray-200 p-8 overflow-scroll">
       <div className="border-green-400 border-2 p-4">
         <h1 className="mt-2">Read only Section</h1>
         <button
@@ -106,7 +106,7 @@ const AdminPage = () => {
         <h1 className="text-lg text-orange-600 font-bold mt-4">
           Amount: {trays.length} {trays.length === 1 ? "tray" : "trays"}
         </h1>
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-2">
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-2 overflow-scroll">
           <table className="w-full text-sm text-left rtl:text-right text-white">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
               <tr>
