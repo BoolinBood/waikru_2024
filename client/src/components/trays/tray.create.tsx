@@ -96,7 +96,7 @@ const CreateTray: React.FC<Props> = ({ selectedFlower }) => {
     if (value.length > 200) {
       setError("message", {
         type: "manual",
-        message: "Message cannot exceed 140 characters",
+        message: "Message cannot exceed 200 characters",
       });
     } else {
       clearErrors("message");
