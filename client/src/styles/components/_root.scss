@@ -129,12 +129,13 @@ body {
     p {
       font-size: clamp(14px, 1vw, 24x);
       z-index: 1000 !important;
+      width: 90%;
     }
 
     @media (min-width: $breakpoint-xs) {
-      top: 30%;
+      top: 25%;;
     }
-    
+
     @media (min-width: $breakpoint-xl) {
       top: 40%;
     }
