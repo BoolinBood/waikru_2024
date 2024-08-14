@@ -29,6 +29,7 @@ const AdminPage = () => {
   const handleDeleteTray = useCallback(
     (id: string) => {
       deleteTray(id);
+      socket.emit("get_all_trays");
     },
     [deleteTray]
   );
