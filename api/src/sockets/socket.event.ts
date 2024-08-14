@@ -57,8 +57,6 @@ const setupSocketEvents = (io: Server) => {
     });
 
     socket.on("save_tray", async (data: TrayType, callback) => {
-      console.log("Saving trays", data);
-
       if (checkBadWords(data.message)) {
         setTimeout(() => {
           callback?.({

@@ -27,7 +27,7 @@ enum IDegree {
 }
 
 // Inter fonts
-const inter = Inter({ subsets: ["latin"], weight: ["400", "700"] });
+const inter = Inter({ subsets: ["latin"], weight: ["700"] });
 
 // Schema validation with Zod
 const CreateTraySchema = z.object({
@@ -109,7 +109,6 @@ const CreateTray: React.FC<Props> = ({ selectedFlower }) => {
       setLoading(true);
       setModalState("none");
 
-      console.log(data);
       saveTray(
         data.name,
         data.message,
@@ -195,6 +194,9 @@ const CreateTray: React.FC<Props> = ({ selectedFlower }) => {
                     ? "bg-[#A297C0]"
                     : "bg-[#8DB0C4]"
                 }`}
+                style={{
+                  fontFamily: inter.style.fontFamily,
+                }}
                 onClick={() => handleSelectTag(tag)}
               >
                 <h1>{tag}</h1>
