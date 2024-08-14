@@ -212,7 +212,7 @@ const CreateTray: React.FC<Props> = ({ selectedFlower }) => {
                 className={`rounded-full px-3 py-[4px] text-xs text-white font-bold ${
                   selectedDegree === degree ? "opacity-100" : "opacity-40"
                 } ${
-                  degree === IDegree.ALUMNI ? "bg-[#FC6C8D]" : "bg-[#A297C0]"
+                  degree === IDegree.ALUMNI ? "bg-[#86AB89]" : "bg-[#FF9276]"
                 }`}
                 onClick={() => handleSelectDegree(degree)}
               >
