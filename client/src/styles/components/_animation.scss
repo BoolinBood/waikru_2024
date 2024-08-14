@@ -79,6 +79,7 @@
     justify-content: space-around;
     position: absolute;
     top: 0;
+    left: 0;
     
     @media (min-width: $breakpoint-sm) {
       width: 50%;
@@ -111,16 +112,16 @@
     }
   
     100% {
-      transform: translateY(80vh);
+      transform: translateY(40vh);
       opacity: 0;
     }
   }
   
   .petal img {
-    animation: fall 8s linear infinite;
+    animation: fall 4s linear infinite;
 
   }
- 
+
   .petal img:nth-child(1) {
     animation-delay: 2s;
   }

@@ -7,7 +7,7 @@ import { useState } from "react";
 import React, { useEffect } from "react";
 
 const AdminPage = () => {
-  const { deleteTray } = useAppContext();
+  const { deleteTray, isReadOnly } = useAppContext();
   const [trays, setTrays] = useState<TrayType[]>([]);
 
   useEffect(() => {
@@ -19,6 +19,7 @@ const AdminPage = () => {
         console.error("Received non-array data for trays:", updatedTrays);
       }
     });
+
     return () => {
       socket.off("tray_update");
     };
@@ -33,8 +34,20 @@ const AdminPage = () => {
     }
   };
 
+  const toggleReadOnly = () => {
+    socket.emit("toggle_read_only", !isReadOnly);
+  };
+
   return (
     <div className="w-full h-screen bg-gray-200 p-8">
+      <button
+        onClick={toggleReadOnly}
+        className={`mt-4 px-4 py-2 rounded ${
+          !isReadOnly ? "bg-green-500" : "bg-red-500"
+        } text-white`}
+      >
+        Click to {isReadOnly ? "disable" : "enable"} Read-Only Mode
+      </button>
       <h1 className="text-2xl font-semibold">Role: Admin</h1>
 
       <h1 className="text-lg text-orange-600 font-bold mt-4">

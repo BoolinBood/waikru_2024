@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import SettingsModel from "../models/setting.model";
 
 dotenv.config();
 
@@ -18,6 +19,20 @@ const connectToMongoDB = async (): Promise<boolean> => {
     return true;
   } catch (err) {
     console.error("Error connecting to MongoDB:", err);
+    return false;
+  }
+};
+
+export const loadStatus = async () => {
+  try {
+    const status = await SettingsModel.findOne();
+
+    if (status) {
+      console.log("Read-only status loaded:", status.isReadOnly);
+      return status.isReadOnly;
+    }
+  } catch (error) {
+    console.log("Error loading status:", error);
     return false;
   }
 };

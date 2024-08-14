@@ -1,7 +1,7 @@
 .comment-section {
-  overflow-y: auto; 
-  overflow-x: hidden; 
 
+  overflow-y: auto; 
+  overflow-x: hidden;
   width: 100%;
   height: 100%;
   border-top-left-radius: 28px;
@@ -29,12 +29,14 @@
       }
   }
 
+
 }
 
 .comment-list {
   display: grid;
   position: relative;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+
   
   max-width: 1024px;
   gap: 2.5rem;

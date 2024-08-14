@@ -14,7 +14,12 @@ const Petal = dynamic(() => import("@/src/components/petal"));
 
 const CommentList: React.FC = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const { trays: comments, loadMoreTrays, hasMore } = useAppContext();
+  const {
+    trays: comments,
+    loadMoreTrays,
+    hasMore,
+    isReadOnly,
+  } = useAppContext();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -71,9 +76,11 @@ const CommentList: React.FC = () => {
             ))}
           </div>
         )}
-        <div className="-btn">
-          <CommentFloatButton />
-        </div>
+        {!isReadOnly && (
+          <div className="-btn">
+            <CommentFloatButton />
+          </div>
+        )}
       </div>
     </div>
   );

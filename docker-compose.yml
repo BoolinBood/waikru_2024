@@ -28,6 +28,7 @@ services:
       - NEXT_PUBLIC_SOCKET_URL=http://10.4.56.60:4000 # Updated to use service name
     depends_on:
       - mongo
+      - api
     restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost:3000 || exit 1"]

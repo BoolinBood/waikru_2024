@@ -1,7 +1,7 @@
 "use client";
 
-import { socket } from "@/src/sockets/socket.client";
 import { createContext, useContext, useState, useEffect } from "react";
+import { socket } from "@/src/sockets/socket.client";
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
@@ -17,6 +17,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   const [hasMore, setHasMore] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [currentDept, setCurrentDept] = useState<Dept[]>([]);
+  const [isReadOnly, setIsReadOnly] = useState<boolean>(false);
 
   useEffect(() => {
     function onConnect() {
@@ -49,7 +50,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
         );
         setTrays((prevTrays) => {
           const newTrays = [...prevTrays, ...filteredTrays];
-
           setTotalCount(data.totalCount);
           setHasMore(newTrays.length < data.totalCount);
           return newTrays;
@@ -68,8 +68,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
     function onNewTray(newTray: TrayType) {
       const isDeptMatch =
         currentDept.length === 0 || currentDept.includes(newTray.dept);
-      // const isDegreeMatch = !currentDegree || currentDegree === newTray.degree;
-
       if (isDeptMatch) {
         setTrays((prevTrays) => [newTray, ...prevTrays]);
       }
@@ -84,6 +82,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
       setTrays((prevTrays) => prevTrays.filter((tray) => tray._id !== id));
     }
 
+    function onReadOnlyStatus(status: boolean) {
+      setIsReadOnly(status);
+    }
+
     if (socket.connected) {
       socket.emit("get_trays", 1, currentDept);
     }
@@ -96,6 +98,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
     socket.on("new_tray", onNewTray);
     socket.on("update_total_count", onUpdateTotalCount);
     socket.on("save_error", onSaveError);
+    socket.on("read_only_status", onReadOnlyStatus);
 
     return () => {
       socket.off("connect", onConnect);
@@ -106,6 +109,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
       socket.off("new_tray", onNewTray);
       socket.off("update_total_count", onUpdateTotalCount);
       socket.off("save_error", onSaveError);
+      socket.off("read_only_status", onReadOnlyStatus);
     };
   }, [currentDept]);
 
@@ -117,6 +121,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
     degree?: Degree,
     callback?: (result: resultMessage) => void
   ) => {
+    if (isReadOnly) {
+      setError("Database is currently in read-only mode.");
+      if (callback)
+        callback({ success: false, error: "Database is in read-only mode" });
+      return;
+    }
+
     socket.emit(
       "save_tray",
       { name, message, flower, dept, degree },
@@ -132,6 +143,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   const deleteTray = (id: string) => {
+    if (isReadOnly) {
+      setError("Database is currently in read-only mode.");
+      return;
+    }
     socket.emit("delete_tray", id);
   };
 
@@ -164,21 +179,17 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
         isConnected,
         dbConnected,
         transport,
-
         trays,
         saveTray,
         deleteTray,
-
         loadMoreTrays,
         hasMore,
-
         error,
         setError,
-
         currentDept,
         setCurrentDept,
-
         handleChangeTag,
+        isReadOnly,
       }}
     >
       {children}

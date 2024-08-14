@@ -35,6 +35,8 @@ declare type AppContextType = {
   ) => void;
   deleteTray: (id: string) => void;
   loadMoreTrays: () => void;
+
+  isReadOnly: boolean;
   hasMore: boolean;
 
   error: string | null;

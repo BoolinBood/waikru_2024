@@ -1,12 +1,19 @@
-import { Server } from "socket.io";
-
+import { Server, Socket } from "socket.io";
 import { checkBadWords } from "../utils/badWords.utils";
 import TrayModel from "../models/tray.model";
+import SettingsModel from "../models/setting.model";
+import { loadStatus } from "../utils/db.utils";
 
 const itemsPerPage = 4;
 
+let isReadOnly = false;
+
 const setupSocketEvents = (io: Server) => {
-  io.on("connection", (socket) => {
+  setTimeout(async () => {
+    isReadOnly = (await loadStatus()) as boolean;
+  }, 1000);
+
+  io.on("connection", (socket: Socket) => {
     console.log(`A client connected with ID: ${socket.id}`);
 
     socket.emit("server_status", {
@@ -14,30 +21,26 @@ const setupSocketEvents = (io: Server) => {
       dbConnected: true,
     });
 
+    socket.emit("read_only_status", isReadOnly);
+
     socket.on(
       "get_trays",
       async (page: number = 1, dept: string[] = [], degree: string[] = []) => {
         try {
           page = Math.max(1, page);
           const skip = (page - 1) * itemsPerPage;
-
           const query: any = {};
-
           if (dept.length) {
             query.dept = { $in: dept };
           }
-
           if (degree.length) {
             query.degree = { $in: degree };
           }
-
           const trays = await TrayModel.find(query)
             .sort({ _id: -1 })
             .skip(skip)
             .limit(itemsPerPage);
-
           const totalCount = await TrayModel.countDocuments(query);
-
           socket.emit("tray_update", { trays, totalCount });
         } catch (error) {
           console.error("Error fetching trays:", error);
@@ -57,6 +60,11 @@ const setupSocketEvents = (io: Server) => {
     });
 
     socket.on("save_tray", async (data: TrayType, callback) => {
+      if (isReadOnly) {
+        callback?.({ success: false, error: "Database is in read-only mode" });
+        return;
+      }
+
       if (checkBadWords(data.message)) {
         setTimeout(() => {
           callback?.({
@@ -76,7 +84,6 @@ const setupSocketEvents = (io: Server) => {
         try {
           const newTray = await TrayModel.create(data);
           const savedTray = await TrayModel.findById(newTray._id);
-
           io.emit("new_tray", savedTray);
           io.emit("update_total_count", await TrayModel.countDocuments());
         } catch (error: any) {
@@ -91,6 +98,13 @@ const setupSocketEvents = (io: Server) => {
     });
 
     socket.on("delete_tray", async (id: string) => {
+      if (isReadOnly) {
+        socket.emit("delete_error", {
+          message: "Database is in read-only mode",
+        });
+        return;
+      }
+
       try {
         await TrayModel.deleteOne({ _id: id });
         io.emit("tray_deleted", id);
@@ -99,6 +113,25 @@ const setupSocketEvents = (io: Server) => {
         socket.emit("delete_error", { message: "Error deleting tray" });
       }
     });
+
+    socket.on("toggle_read_only", async (readOnlyStatus: boolean) => {
+      try {
+        isReadOnly = readOnlyStatus;
+        await SettingsModel.findOneAndUpdate(
+          {},
+          { isReadOnly },
+          { upsert: true }
+        );
+        io.emit("read_only_status", isReadOnly);
+        socket.emit("toggle_success", { success: true, isReadOnly });
+      } catch (error) {
+        console.error("Error toggling read-only status:", error);
+        socket.emit("toggle_error", {
+          message: "Error toggling read-only status",
+        });
+      }
+    });
+
     socket.on("disconnect", () => {
       console.log("A client disconnected");
     });
