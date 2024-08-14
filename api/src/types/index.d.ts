@@ -9,7 +9,7 @@ declare type TrayType = {
 
 declare type Dept = "IT" | "CS" | "DSI" | "";
 
-declare type Degree = "OLD_RIGHT" | "MASTER_DEGREE" | "";
+declare type Degree = "ALUMNI" | "MASTER_DEGREE" | "";
 
 declare type FlowerType =
   | "ixora"

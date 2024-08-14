@@ -22,7 +22,7 @@ enum IFaculty {
 }
 
 enum IDegree {
-  OLD_RIGHT = "OLD_RIGHT",
+  ALUMNI = "ALUMNI",
   MASTER_DEGREE = "MASTER_DEGREE",
 }
 
@@ -210,7 +210,7 @@ const CreateTray: React.FC<Props> = ({ selectedFlower }) => {
                 className={`rounded-full px-3 py-[4px] text-xs text-white font-bold ${
                   selectedDegree === degree ? "opacity-100" : "opacity-40"
                 } ${
-                  degree === IDegree.OLD_RIGHT ? "bg-[#FC6C8D]" : "bg-[#A297C0]"
+                  degree === IDegree.ALUMNI ? "bg-[#FC6C8D]" : "bg-[#A297C0]"
                 }`}
                 onClick={() => handleSelectDegree(degree)}
               >

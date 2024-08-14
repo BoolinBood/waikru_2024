@@ -12,8 +12,8 @@ export function truncateString(
 
 export function getFormatDegree(degree: Degree): string {
   switch (degree) {
-    case "OLD_RIGHT":
-      return "Old Right";
+    case "ALUMNI":
+      return "Alumni";
     case "MASTER_DEGREE":
       return "Master Degree";
     default:

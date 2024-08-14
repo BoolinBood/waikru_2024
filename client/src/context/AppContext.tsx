@@ -17,9 +17,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   const [hasMore, setHasMore] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [currentDept, setCurrentDept] = useState<Dept[]>([]);
-  const [currentDegree, setCurrentDegree] = useState<Degree | undefined>(
-    undefined
-  );
 
   useEffect(() => {
     function onConnect() {
@@ -71,9 +68,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
     function onNewTray(newTray: TrayType) {
       const isDeptMatch =
         currentDept.length === 0 || currentDept.includes(newTray.dept);
-      const isDegreeMatch = !currentDegree || currentDegree === newTray.degree;
+      // const isDegreeMatch = !currentDegree || currentDegree === newTray.degree;
 
-      if (isDeptMatch && isDegreeMatch) {
+      if (isDeptMatch) {
         setTrays((prevTrays) => [newTray, ...prevTrays]);
       }
     }
@@ -146,14 +143,14 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   };
 
-  const handleChangeTag = (dept: Dept, degree: Degree) => {
+  const handleChangeTag = (dept: Dept) => {
     setCurrentDept((prevDepts) => {
       const updatedDepts = prevDepts.includes(dept)
         ? prevDepts.filter((d) => d !== dept)
         : [...prevDepts, dept];
 
-      socket.emit("get_trays", 1, updatedDepts, degree);
-      
+      socket.emit("get_trays", 1, updatedDepts);
+
       setCurrentPage(1);
       setTrays([]);
       setHasMore(true);
@@ -180,9 +177,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
 
         currentDept,
         setCurrentDept,
-
-        currentDegree,
-        setCurrentDegree,
 
         handleChangeTag,
       }}

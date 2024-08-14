@@ -5,22 +5,21 @@ import { IoMdCheckmark } from "react-icons/io";
 import debounce from "lodash/debounce";
 
 const DEPARTMENTS = ["IT", "CS", "DSI"] as const;
-const DEGREES = ["OLD_RIGHT", "MASTER_DEGREE"] as const;
 
 type Dept = (typeof DEPARTMENTS)[number];
 
 const CommentFilterButton: React.FC = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
-  const { currentDept, currentDegree, handleChangeTag } = useAppContext();
+  const { currentDept, handleChangeTag } = useAppContext();
 
   const selectedDepts =
     currentDept.length && currentDept.length < 3
       ? currentDept.join(", ")
       : "All";
 
-  const handleDeptChange = (dept: Dept, degree?: Degree) => {
-    handleChangeTag(dept, degree);
+  const handleDeptChange = (dept: Dept) => {
+    handleChangeTag(dept);
   };
 
   const toggleDropdown = () => setDropdownOpen((prev) => !prev);
@@ -76,8 +75,8 @@ const CommentFilterButton: React.FC = () => {
                 type="checkbox"
                 value={dept}
                 checked={currentDept.includes(dept)}
-                onChange={({ target: { value, checked } }) =>
-                  handleDeptChange(value as Dept, currentDegree)
+                onChange={({ target: { value } }) =>
+                  handleDeptChange(value as Dept)
                 }
               />
               <span className="-checkmark">
