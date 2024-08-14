@@ -4,9 +4,12 @@ declare type TrayType = {
   message: string;
   flower: FlowerType;
   dept: Dept;
+  degree: Degree;
 };
 
-declare type Dept = "IT" | "CS" | "DSI" | "";
+declare type Dept = "IT" | "CS" | "DSI";
+
+declare type Degree = "OLD_RIGHT" | "MASTER_DEGREE";
 
 declare type FlowerType =
   | "ixora"
@@ -27,6 +30,7 @@ declare type AppContextType = {
     message: string,
     flower: FlowerType,
     dept: Dept,
+    degree?: Degree,
     callback?: (result: resultMessage) => void
   ) => void;
   deleteTray: (id: string) => void;
@@ -36,7 +40,9 @@ declare type AppContextType = {
   setError: (error: string | null) => void;
   currentDept: Dept[];
   setCurrentDept: (dept: Dept[]) => void;
-  changeDept: (newDept: Dept, checked: boolean) => void;
+  currentDegree: Degree | undefined;
+  setCurrentDegree: (degree: Degree) => void;
+  handleChangeTag: (newDept: Dept, degree) => void;
 };
 
 declare module "node:http" {

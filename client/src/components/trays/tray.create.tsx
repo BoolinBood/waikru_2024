@@ -9,16 +9,21 @@ import Button from "../ui/button";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { LoadingSpinner } from "../ui/spinner";
+import { getFormatDegree } from "@/src/utils/string.utils";
 
 interface Props {
   selectedFlower: FlowerType;
 }
 
-enum Faculty {
+enum IFaculty {
   IT = "IT",
   CS = "CS",
   DSI = "DSI",
+}
+
+enum IDegree {
+  OLD_RIGHT = "OLD_RIGHT",
+  MASTER_DEGREE = "MASTER_DEGREE",
 }
 
 // Inter fonts
@@ -33,13 +38,19 @@ const CreateTraySchema = z.object({
   message: z
     .string()
     .min(8, "Message must be at least 8 characters")
-    .max(140, "Message must be at most 140 characters"),
-  tag: z.nativeEnum(Faculty),
+    .max(200, "Message must be at most 200 characters"),
+  tag: z.nativeEnum(IFaculty),
+  degree: z.nativeEnum(IDegree).optional(),
 });
 
 type CreateTrayInputs = z.infer<typeof CreateTraySchema>;
 
 const CreateTray: React.FC<Props> = ({ selectedFlower }) => {
+  const [selectedTag, setSelectedTag] = useState<IFaculty>(IFaculty.IT);
+  const [selectedDegree, setSelectedDegree] = useState<IDegree | undefined>(
+    undefined
+  );
+  const [loading, setLoading] = useState(false);
   const { setModalState } = useModal();
   const { saveTray } = useAppContext();
 
@@ -47,6 +58,7 @@ const CreateTray: React.FC<Props> = ({ selectedFlower }) => {
     register,
     handleSubmit,
     setValue,
+
     setError,
     clearErrors,
     formState: { errors },
@@ -54,12 +66,20 @@ const CreateTray: React.FC<Props> = ({ selectedFlower }) => {
     resolver: zodResolver(CreateTraySchema),
   });
 
-  const [selectedTag, setSelectedTag] = useState<Faculty>(Faculty.IT);
-  const [loading, setLoading] = useState(false);
-
-  const handleTagClick = (tag: Faculty) => {
+  const handleSelectTag = (tag: IFaculty) => {
     setSelectedTag(tag);
     setValue("tag", tag);
+  };
+
+  const handleSelectDegree = (degree: IDegree) => {
+    if (selectedDegree === degree) {
+      setValue("degree", undefined);
+      setSelectedDegree(undefined);
+      return;
+    }
+
+    setValue("degree", degree);
+    setSelectedDegree(degree);
   };
 
   const handleBack = useCallback(() => {
@@ -73,7 +93,7 @@ const CreateTray: React.FC<Props> = ({ selectedFlower }) => {
   const handleMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
 
-    if (value.length > 140) {
+    if (value.length > 200) {
       setError("message", {
         type: "manual",
         message: "Message cannot exceed 140 characters",
@@ -89,18 +109,26 @@ const CreateTray: React.FC<Props> = ({ selectedFlower }) => {
       setLoading(true);
       setModalState("none");
 
-      saveTray(data.name, data.message, selectedFlower, data.tag, (result) => {
-        if (result.success) {
-          setLoading(false);
-          setModalState("success");
-          setTimeout(() => {
-            setModalState("none");
-          }, 2000);
-        } else {
-          setLoading(false);
-          setModalState("error");
+      console.log(data);
+      saveTray(
+        data.name,
+        data.message,
+        selectedFlower,
+        data.tag,
+        data.degree,
+        (result) => {
+          if (result.success) {
+            setLoading(false);
+            setModalState("success");
+            setTimeout(() => {
+              setModalState("none");
+            }, 2000);
+          } else {
+            setLoading(false);
+            setModalState("error");
+          }
         }
-      });
+      );
     },
     [selectedFlower, saveTray, setModalState]
   );
@@ -154,22 +182,39 @@ const CreateTray: React.FC<Props> = ({ selectedFlower }) => {
         <div className="self-start">
           <div className="mb-2">Tag</div>
           <div className="flex gap-2">
-            {Object.values(Faculty).map((tag) => (
+            {Object.values(IFaculty).map((tag) => (
               <button
                 type="button"
                 key={tag}
                 className={`rounded-full px-3 py-[4px] text-xs text-white font-bold ${
                   selectedTag === tag ? "opacity-100" : "opacity-40"
                 } ${
-                  tag === Faculty.IT
+                  tag === "IT"
                     ? "bg-[#FC6C8D]"
-                    : tag === Faculty.CS
+                    : tag === "CS"
                     ? "bg-[#A297C0]"
                     : "bg-[#8DB0C4]"
                 }`}
-                onClick={() => handleTagClick(tag as Faculty)}
+                onClick={() => handleSelectTag(tag)}
               >
                 <h1>{tag}</h1>
+              </button>
+            ))}
+          </div>
+
+          <div className="flex gap-2 mt-2">
+            {Object.values(IDegree).map((degree) => (
+              <button
+                type="button"
+                key={degree}
+                className={`rounded-full px-3 py-[4px] text-xs text-white font-bold ${
+                  selectedDegree === degree ? "opacity-100" : "opacity-40"
+                } ${
+                  degree === IDegree.OLD_RIGHT ? "bg-[#FC6C8D]" : "bg-[#A297C0]"
+                }`}
+                onClick={() => handleSelectDegree(degree)}
+              >
+                <h1>{getFormatDegree(degree)}</h1>
               </button>
             ))}
           </div>
@@ -177,8 +222,8 @@ const CreateTray: React.FC<Props> = ({ selectedFlower }) => {
 
         {/* Textarea section */}
         <textarea
-          placeholder="Write your message here"
-          className="h-[148px] p-2 mt-4 rounded-md w-full outline outline-[2px] outline-slate-300 resize-none"
+          placeholder="Dear professor, I would like to express my gratitude for your guidance..."
+          className="h-[148px] p-2 mt-4 rounded-md w-full outline outline-[2px] outline-slate-300 resize-none placeholder:text-sm"
           {...register("message")}
           onChange={handleMessageChange}
         />

@@ -17,6 +17,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   const [hasMore, setHasMore] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [currentDept, setCurrentDept] = useState<Dept[]>([]);
+  const [currentDegree, setCurrentDegree] = useState<Degree | undefined>(
+    undefined
+  );
 
   useEffect(() => {
     function onConnect() {
@@ -66,7 +69,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
     }
 
     function onNewTray(newTray: TrayType) {
-      if (currentDept.length === 0 || currentDept.includes(newTray.dept)) {
+      const isDeptMatch =
+        currentDept.length === 0 || currentDept.includes(newTray.dept);
+      const isDegreeMatch = !currentDegree || currentDegree === newTray.degree;
+
+      if (isDeptMatch && isDegreeMatch) {
         setTrays((prevTrays) => [newTray, ...prevTrays]);
       }
     }
@@ -110,11 +117,12 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
     message: string,
     flower: FlowerType,
     dept: Dept,
+    degree?: Degree,
     callback?: (result: resultMessage) => void
   ) => {
     socket.emit(
       "save_tray",
-      { name, message, flower, dept },
+      { name, message, flower, dept, degree },
       (result: resultMessage) => {
         if (!result.success) {
           setError(result.error || "Unknown error occurred");
@@ -138,15 +146,17 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   };
 
-  const changeDept = (dept: Dept, checked: boolean) => {
+  const handleChangeTag = (dept: Dept, degree: Degree) => {
     setCurrentDept((prevDepts) => {
-      const updatedDepts = checked
-        ? [...prevDepts, dept]
-        : prevDepts.filter((d) => d !== dept);
-      socket.emit("get_trays", 1, updatedDepts);
-      setCurrentPage(1); // Reset to first page
-      setTrays([]); // Clear existing trays
-      setHasMore(true); // Reset hasMore
+      const updatedDepts = prevDepts.includes(dept)
+        ? prevDepts.filter((d) => d !== dept)
+        : [...prevDepts, dept];
+
+      socket.emit("get_trays", 1, updatedDepts, degree);
+      
+      setCurrentPage(1);
+      setTrays([]);
+      setHasMore(true);
       return updatedDepts;
     });
   };
@@ -157,16 +167,24 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
         isConnected,
         dbConnected,
         transport,
+
         trays,
         saveTray,
         deleteTray,
+
         loadMoreTrays,
         hasMore,
+
         error,
         setError,
-        setCurrentDept,
+
         currentDept,
-        changeDept,
+        setCurrentDept,
+
+        currentDegree,
+        setCurrentDegree,
+
+        handleChangeTag,
       }}
     >
       {children}

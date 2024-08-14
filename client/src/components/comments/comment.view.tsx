@@ -1,13 +1,15 @@
-import { getFlowerPath } from "@/src/utils/flower.utils";
 import Image from "next/image";
 import { useState } from "react";
 import { LoadingSpinner } from "../ui/spinner";
+import { getFormatDegree } from "@/src/utils/string.utils";
+import { getFlowerPath } from "@/src/utils/flower.utils";
 
 interface IProps {
   tray: TrayType;
 }
 
-const CommentView: React.FC<IProps> = ({ tray }) => {
+const CommentView = ({ tray }: IProps) => {
+  const { flower, name, message, dept, degree } = tray;
   const [isLoading, setIsLoading] = useState(true);
 
   const handleImageLoad = () => {
@@ -23,17 +25,24 @@ const CommentView: React.FC<IProps> = ({ tray }) => {
         >
           {isLoading && <LoadingSpinner />}
           <Image
-            src={getFlowerPath(tray.flower)}
+            src={getFlowerPath(flower)}
             alt="flower"
-            layout="responsive"
-            width={300}
-            height={300}
-            loading="lazy"
+            fill
+            quality={100}
+            priority
             onLoad={handleImageLoad}
           />
         </div>
-        <h1 className="-name">{tray.name} </h1>
-        <p className="-message">{tray.message}</p>
+
+        <div className="-name">
+          {name}
+          <div className="-tag">
+            <span className={`-${dept}`}>{dept}</span>
+            <span className={`-${degree}`}>{getFormatDegree(degree)}</span>
+          </div>
+        </div>
+
+        <p className="-message">{message}</p>
       </div>
     </div>
   );

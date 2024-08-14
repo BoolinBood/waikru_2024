@@ -14,6 +14,21 @@ const badWords = [
   "dick",
   "huadoor",
   "cancercancer",
+  "ควย",
+  "ไอ้หี้ย",
+  "เหี้ย",
+  "สัด",
+  "สัส",
+  "เย็ด",
+  "ข่มขืน",
+  "หี",
+  "หน้าหมา",
+  "ชาติหมา",
+  "nigga",
+  "nigger",
+  "faggot",
+  "n4gger",
+  "siclmyduck",
 ];
 
 export function checkBadWords(text: string) {

@@ -20,6 +20,20 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
+const renderClass = (flower: FlowerType) => {
+  if (smallFlowers.includes(flower)) {
+    return "-decrease-sm";
+  }
+  if (mediumFlowers.includes(flower)) {
+    return "-decrease-md";
+  }
+  if (largeFlowers.includes(flower)) {
+    return "-decrease-lg";
+  }
+
+  return "";
+};
+
 const SelectTray = () => {
   const flowers = getFlowers();
   const { setSelectedFlower, setModalState } = useModal();
@@ -32,20 +46,6 @@ const SelectTray = () => {
       setSelectedFlower(tray);
       setModalState("createTray");
     }, 500);
-  };
-
-  const renderClass = (flower: FlowerType) => {
-    if (smallFlowers.includes(flower)) {
-      return "-decrease-sm";
-    }
-    if (mediumFlowers.includes(flower)) {
-      return "-decrease-md";
-    }
-    if (largeFlowers.includes(flower)) {
-      return "-decrease-lg";
-    }
-
-    return "";
   };
 
   return (

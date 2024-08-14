@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useMemo } from "react";
 import { useModal } from "@/src/context/ModalContext";
 import { MotionDiv } from "../motion.div";
-import { truncateString } from "@/src/utils/string.utils";
+import { getFormatDegree, truncateString } from "@/src/utils/string.utils";
 import { useMediaQuery } from "react-responsive";
 
 interface ICommentItem {
@@ -27,7 +27,7 @@ const getRandomAnimationValues = (index: number) => {
 };
 
 const CommentItem: React.FC<ICommentItem> = ({ index, tray }) => {
-  const { name, message, flower, dept } = tray;
+  const { name, message, flower, dept, degree } = tray;
   const { setSelectedTray, setModalState } = useModal();
   const isTablet = useMediaQuery({ query: "(min-width: 768px)" });
 
@@ -66,6 +66,7 @@ const CommentItem: React.FC<ICommentItem> = ({ index, tray }) => {
       >
         <div className="-tag">
           <span className={`-${dept}`}>{dept}</span>
+          <span className={`-${degree}`}>{getFormatDegree(degree)}</span>
         </div>
         <div className="-message">
           <p>{truncateString(message, isTablet ? 48 : 28, "...")}</p>

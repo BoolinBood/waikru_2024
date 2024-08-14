@@ -8,31 +8,43 @@ const itemsPerPage = 4;
 const setupSocketEvents = (io: Server) => {
   io.on("connection", (socket) => {
     console.log(`A client connected with ID: ${socket.id}`);
+
     socket.emit("server_status", {
       isConnected: true,
       dbConnected: true,
     });
 
-    socket.on("get_trays", async (page: number = 1, dept: string[] = []) => {
-      try {
-        page = Math.max(1, page);
-        const skip = (page - 1) * itemsPerPage;
+    socket.on(
+      "get_trays",
+      async (page: number = 1, dept: string[] = [], degree: string[] = []) => {
+        try {
+          page = Math.max(1, page);
+          const skip = (page - 1) * itemsPerPage;
 
-        const query = Array.isArray(dept) && dept.length > 0 ? { dept } : {};
+          const query: any = {};
 
-        const trays = await TrayModel.find(query)
-          .sort({ _id: -1 })
-          .skip(skip)
-          .limit(itemsPerPage);
+          if (dept.length) {
+            query.dept = { $in: dept };
+          }
 
-        const totalCount = await TrayModel.countDocuments(query);
+          if (degree.length) {
+            query.degree = { $in: degree };
+          }
 
-        socket.emit("tray_update", { trays, totalCount });
-      } catch (error) {
-        console.error("Error fetching trays:", error);
-        socket.emit("fetch_error", { message: "Error fetching trays" });
+          const trays = await TrayModel.find(query)
+            .sort({ _id: -1 })
+            .skip(skip)
+            .limit(itemsPerPage);
+
+          const totalCount = await TrayModel.countDocuments(query);
+
+          socket.emit("tray_update", { trays, totalCount });
+        } catch (error) {
+          console.error("Error fetching trays:", error);
+          socket.emit("fetch_error", { message: "Error fetching trays" });
+        }
       }
-    });
+    );
 
     socket.on("get_all_trays", async () => {
       try {
@@ -45,6 +57,8 @@ const setupSocketEvents = (io: Server) => {
     });
 
     socket.on("save_tray", async (data: TrayType, callback) => {
+      console.log("Saving trays", data);
+
       if (checkBadWords(data.message)) {
         setTimeout(() => {
           callback?.({
@@ -64,6 +78,7 @@ const setupSocketEvents = (io: Server) => {
         try {
           const newTray = await TrayModel.create(data);
           const savedTray = await TrayModel.findById(newTray._id);
+
           io.emit("new_tray", savedTray);
           io.emit("update_total_count", await TrayModel.countDocuments());
         } catch (error: any) {

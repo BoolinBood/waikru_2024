@@ -9,3 +9,14 @@ export function truncateString(
   }
   return str;
 }
+
+export function getFormatDegree(degree: Degree): string {
+  switch (degree) {
+    case "OLD_RIGHT":
+      return "Old Right";
+    case "MASTER_DEGREE":
+      return "Master Degree";
+    default:
+      return "";
+  }
+}

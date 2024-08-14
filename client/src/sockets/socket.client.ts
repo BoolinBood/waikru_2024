@@ -6,6 +6,7 @@ const socketUri =
     ? `https://sit-waikru.sit.kmutt.ac.th`
     : `http://localhost:4000`;
 
-export const socket = io(socketUri, {
-  path: "/api/socket.io",
-});
+const options =
+  process.env.NODE_ENV === "production" ? { path: "/api/socket.io" } : {};
+  
+export const socket = io(socketUri, options);

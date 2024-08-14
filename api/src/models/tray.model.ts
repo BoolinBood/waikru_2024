@@ -5,6 +5,7 @@ const trayModelSchema = new mongoose.Schema<TrayType>({
   message: { type: String, required: true },
   flower: { type: String, required: true },
   dept: { type: String, required: true },
+  degree: { type: String, required: false },
 });
 
 const TrayModel =
