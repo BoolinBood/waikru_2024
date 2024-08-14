@@ -10,8 +10,8 @@ import setupSocketEvents from "./sockets/socket.event";
 dotenv.config();
 
 const isDevelopment = process.env.NODE_ENV !== "production";
-const hostname = isDevelopment ? "0.0.0.0" : "0.0.0.0";
-//10.4.56.60
+const hostname = isDevelopment ? "0.0.0.0" : "10.4.56.60";
+
 const port = process.env.PORT || 4000;
 
 // Initialize Express app
