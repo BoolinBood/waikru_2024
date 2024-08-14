@@ -38,6 +38,7 @@ declare type AppContextType = {
 
   isReadOnly: boolean;
   hasMore: boolean;
+  badWords: string[];
 
   error: string | null;
   setError: (error: string | null) => void;

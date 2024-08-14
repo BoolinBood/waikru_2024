@@ -1,4 +1,4 @@
-const badWords = [
+export const badWords = [
   "kuy",
   "ihere",
   "isus",
@@ -31,6 +31,26 @@ const badWords = [
   "siclmyduck",
 ];
 
+export function addBadword(text: string) {
+  if (!badWords.includes(text.toLowerCase())) {
+    badWords.push(text.toLowerCase());
+    return true;
+  }
+
+  return false;
+}
+
+export function addMoreBadword(texts: string[]) {
+  let totalAdded = 0;
+  for (const text of texts) {
+    if (addBadword(text)) {
+      totalAdded++;
+    }
+  }
+
+  return totalAdded;
+}
+
 export function checkBadWords(text: string) {
-  return badWords.some((word) => text.includes(word));
+  return badWords.some((word) => text.toLowerCase().includes(word));
 }

@@ -17,6 +17,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   const [hasMore, setHasMore] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [currentDept, setCurrentDept] = useState<Dept[]>([]);
+  const [badWords, setBadWords] = useState<string[]>([]);
   const [isReadOnly, setIsReadOnly] = useState<boolean>(false);
 
   useEffect(() => {
@@ -86,6 +87,12 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
       setIsReadOnly(status);
     }
 
+    function onBadWordsUpdate(badWords: string[]) {
+      setBadWords((prev) => {
+        return badWords;
+      });
+    }
+
     if (socket.connected) {
       socket.emit("get_trays", 1, currentDept);
     }
@@ -99,6 +106,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
     socket.on("update_total_count", onUpdateTotalCount);
     socket.on("save_error", onSaveError);
     socket.on("read_only_status", onReadOnlyStatus);
+    socket.on("bad_words_update", onBadWordsUpdate);
 
     return () => {
       socket.off("connect", onConnect);
@@ -110,6 +118,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
       socket.off("update_total_count", onUpdateTotalCount);
       socket.off("save_error", onSaveError);
       socket.off("read_only_status", onReadOnlyStatus);
+      socket.off("bad_words_update", onBadWordsUpdate);
     };
   }, [currentDept]);
 
@@ -183,13 +192,16 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
         saveTray,
         deleteTray,
         loadMoreTrays,
+
+        badWords,
         hasMore,
+        isReadOnly,
+
         error,
         setError,
         currentDept,
         setCurrentDept,
         handleChangeTag,
-        isReadOnly,
       }}
     >
       {children}

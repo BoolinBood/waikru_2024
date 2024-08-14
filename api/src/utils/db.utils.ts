@@ -37,4 +37,18 @@ export const loadStatus = async () => {
   }
 };
 
+export const loadBadwords = async () => {
+  try {
+    const status = await SettingsModel.findOne();
+
+    if (status) {
+      console.log("Badwords loaded:", status.badWords);
+      return status.badWords;
+    }
+  } catch (error) {
+    console.log("Error loading badwords:", error);
+    return [];
+  }
+};
+
 export default connectToMongoDB;

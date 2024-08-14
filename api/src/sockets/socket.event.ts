@@ -1,8 +1,13 @@
 import { Server, Socket } from "socket.io";
-import { checkBadWords } from "../utils/badWords.utils";
+import {
+  addBadword,
+  addMoreBadword,
+  badWords,
+  checkBadWords,
+} from "../utils/badWords.utils";
 import TrayModel from "../models/tray.model";
 import SettingsModel from "../models/setting.model";
-import { loadStatus } from "../utils/db.utils";
+import { loadBadwords, loadStatus } from "../utils/db.utils";
 
 const itemsPerPage = 4;
 
@@ -11,7 +16,8 @@ let isReadOnly = false;
 const setupSocketEvents = (io: Server) => {
   setTimeout(async () => {
     isReadOnly = (await loadStatus()) as boolean;
-  }, 1000);
+    addMoreBadword((await loadBadwords()) as string[]);
+  }, 100);
 
   io.on("connection", (socket: Socket) => {
     console.log(`A client connected with ID: ${socket.id}`);
@@ -22,6 +28,47 @@ const setupSocketEvents = (io: Server) => {
     });
 
     socket.emit("read_only_status", isReadOnly);
+    socket.emit("bad_words_update", badWords);
+
+    socket.on("add_bad_word", async (word: string) => {
+      if (isReadOnly) {
+        console.log("Database is in read-only mode");
+        return;
+      }
+
+      try {
+        await SettingsModel.findOneAndUpdate(
+          {},
+          { $push: { badWords: word } },
+          { upsert: true }
+        );
+        addBadword(word);
+      } catch (error) {
+        console.error("Error adding bad word:", error);
+      }
+    });
+
+    socket.on("delete_bad_word", async (word: string) => {
+      if (isReadOnly) {
+        console.log("Database is in read-only mode");
+        return;
+      }
+
+      try {
+        await SettingsModel.updateOne(
+          {},
+          { $pull: { badWords: word } },
+          { upsert: true }
+        );
+        const index = badWords.indexOf(word);
+        if (index > -1) {
+          badWords.splice(index, 1);
+        }
+        socket.emit("bad_words_update", badWords);
+      } catch (error) {
+        console.error("Error deleting bad word:", error);
+      }
+    });
 
     socket.on(
       "get_trays",
