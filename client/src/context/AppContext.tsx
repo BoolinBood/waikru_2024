@@ -8,9 +8,6 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [isConnected, setIsConnected] = useState<boolean>(false);
-  const [dbConnected, setDbConnected] = useState<boolean>(false);
-  const [transport, setTransport] = useState<string>("?");
   const [trays, setTrays] = useState<TrayType[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
@@ -22,26 +19,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     function onConnect() {
-      setIsConnected(true);
-      setTransport(socket.io.engine.transport.name);
-      socket.emit("get_trays", currentDept);
-      socket.io.engine.on("upgrade", (transport) => {
-        setTransport(transport.name);
-      });
-    }
+      console.log("Connected to server");
+      const trays = socket.emit("get_trays", currentDept);
 
-    function onDisconnect() {
-      setIsConnected(false);
-      setDbConnected(false);
-      setTransport("?");
-    }
-
-    function onServerStatus(status: {
-      isConnected: boolean;
-      dbConnected: boolean;
-    }) {
-      setIsConnected(status.isConnected);
-      setDbConnected(status.dbConnected);
+      console.log("trays", trays);
     }
 
     function onTrayUpdate(data: { trays: TrayType[]; totalCount: number }) {
@@ -98,8 +79,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
     }
 
     socket.on("connect", onConnect);
-    socket.on("disconnect", onDisconnect);
-    socket.on("server_status", onServerStatus);
     socket.on("tray_update", onTrayUpdate);
     socket.on("tray_deleted", onTrayDeleted);
     socket.on("new_tray", onNewTray);
@@ -110,8 +89,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
 
     return () => {
       socket.off("connect", onConnect);
-      socket.off("disconnect", onDisconnect);
-      socket.off("server_status", onServerStatus);
       socket.off("tray_update", onTrayUpdate);
       socket.off("tray_deleted", onTrayDeleted);
       socket.off("new_tray", onNewTray);
@@ -185,9 +162,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   return (
     <AppContext.Provider
       value={{
-        isConnected,
-        dbConnected,
-        transport,
         trays,
         saveTray,
         deleteTray,

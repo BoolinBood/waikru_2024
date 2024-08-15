@@ -31,7 +31,7 @@ export const badWords = [
   "siclmyduck",
 ];
 
-export function addBadword(text: string) {
+export function addBadWord(text: string) {
   if (!badWords.includes(text.toLowerCase())) {
     badWords.push(text.toLowerCase());
     return true;
@@ -43,7 +43,7 @@ export function addBadword(text: string) {
 export function addMoreBadword(texts: string[]) {
   let totalAdded = 0;
   for (const text of texts) {
-    if (addBadword(text)) {
+    if (addBadWord(text)) {
       totalAdded++;
     }
   }

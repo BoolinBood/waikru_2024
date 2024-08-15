@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useState } from "react";
-import { LoadingSpinner } from "../ui/spinner";
+import { LoadingSpinner } from "../spinner";
 import { getFormatDegree } from "@/src/utils/string.utils";
 import { getFlowerPath } from "@/src/utils/flower.utils";
 

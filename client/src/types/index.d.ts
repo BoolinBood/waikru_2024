@@ -21,9 +21,6 @@ declare type FlowerType =
   | "";
 
 declare type AppContextType = {
-  isConnected: boolean;
-  dbConnected: boolean;
-  transport: string;
   trays: TrayType[];
   saveTray: (
     name: string,

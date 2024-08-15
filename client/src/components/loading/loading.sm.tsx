@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Spinner } from "../ui/spinner";
+import { Spinner } from "../spinner";
 
 const SmallLoading = () => {
   return (

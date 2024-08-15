@@ -12,6 +12,7 @@
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
     "@next/bundle-analyzer": "^14.2.5",
+    "@tanstack/react-query": "^5.51.23",
     "bad-words": "^3.0.4",
     "framer-motion": "^11.3.8",
     "lodash": "^4.17.21",
@@ -28,6 +29,7 @@
   },
   "devDependencies": {
     "8": "^0.0.1",
+    "@tanstack/react-query-devtools": "^5.51.23",
     "@types/bad-words": "^3.0.3",
     "@types/lodash": "^4.17.7",
     "@types/node": "^20.14.11",

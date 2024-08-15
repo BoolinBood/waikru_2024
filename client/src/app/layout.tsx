@@ -9,6 +9,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 import "@/src/styles/index.scss";
 import "@/src/styles/globals.css";
+import ClientProviders from "../components/providers/client-provider";
 
 export const metadata: Metadata = {
   title: "SIT Waikru | SIT ไหว้ครู",
@@ -23,12 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <AppProvider>
-          <ModalProvider>
-            {children}
-            <ModalWrapper />
-          </ModalProvider>
-        </AppProvider>
+        <ClientProviders>{children}</ClientProviders>
       </body>
     </html>
   );
