@@ -97,7 +97,7 @@ export const fetchTraysByDeptAndPage = async (
       .skip(skip)
       .limit(itemsPerPage);
     const totalCount = await TrayModel.countDocuments(query);
-    // socket.emit("tray_update", { trays, totalCount });
+    socket.emit("tray_update", { trays, totalCount });
     return callback?.({ trays, totalCount });
   } catch (error) {
     console.error("Error fetching trays:", error);

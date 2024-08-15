@@ -25,14 +25,12 @@ const CommentList: React.FC = () => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && hasMore) {
-          setTimeout(() => {
-            loadMoreTrays();
-          }, 150);
+          loadMoreTrays();
         }
       },
       {
         root: null,
-        rootMargin: "-10px",
+        rootMargin: "100px",
         threshold: 0.1,
       }
     );

@@ -13,8 +13,6 @@ import {
   toggleReadOnly,
 } from "./socket.service";
 
-const itemsPerPage = 4;
-
 let isReadOnly = false;
 
 const setupSocketEvents = (io: Server) => {
